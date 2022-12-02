@@ -2,6 +2,12 @@
 # Group 14 IAC Coursework
 ##### Nik Lewis, Benedict Short, Ana Dimoska, Ahmed Elkouny
 
+Current worksplit:
+Ben - ALU and sign extend
+Ahmed - Control Unit and linking in top
+Ana - Memory and assembly code F1 program
+Nik - Control Unit and assembly code F1 program
+
 ---
 ### RULES: 
 * Make a new branch for every feature, i.e PC and ALU are on separate branches. Once a fully working CPU is achieved, we will make new branches for every version but for now stick to your own branch.
