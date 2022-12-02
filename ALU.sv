@@ -1,15 +1,20 @@
 module ALU #(
-    parameter DATAWIDTH = 32
+    parameter DATAWIDTH =   32, 
+    parameter shift_width = 5
 )(
     input logic [DATAWIDTH-1:0]         SrcA_i,
     input logic [DATAWIDTH-1:0]         SrcB_i,
     input logic [3:0]                   ALUctrl_i,
+    input logic [shift_width-1:0]       shift,
 
     output logic [DATAWIDTH-1:0]        ALUResult_o,
     output logic                        Zero_o
 );
 
-//add appropriate word
+assign begin
+    if (SrcA_i == SrcB_i) Zero_o = 1;
+    else Zero_o = 0;
+end
      
 always_comb begin
     case (ALUctrl_i)
@@ -45,8 +50,13 @@ always_comb begin
                     if (SrcA_i >= SrcB_i) ALUResult_o = 0;
                     else ALUResult_o = 1;
                 end
-    
         
+        //lsr
+        4'b0111 ALUResult_o = SrcA_i >> shift;
+
+        //lsl
+        4'b01000 ALUResult_o = SrcA_i << shift;
+    
         default: ALUResult_o = 0;
     endcase
     
