@@ -19,16 +19,16 @@ end;
 
 always_ff @(posedge clk_i) begin
     if (write_en_i==1 & AddrsCtrl_i==1) begin
-        ram_array[a_i] <= wd_i[31:24];
-        ram_array[a_i + 1] <= wd_i[23:16];
-        ram_array[a_i + 2] <= wd_i[15:8];
-        ram_array[a_i + 3] <= wd_i[7:0];
+        ram_array[a_i] = wd_i[31:24];
+        ram_array[a_i + 1] = wd_i[23:16];
+        ram_array[a_i + 2] = wd_i[15:8];
+        ram_array[a_i + 3] = wd_i[7:0];
         $display(ram_array[a_i + 3],ram_array[a_i + 2],ram_array[a_i + 1],ram_array[a_i + 0]);
         
     end
 
     if (write_en_i==1 & AddrsCtrl_i==0) begin
-        ram_array[a_i] <= wd_i[7:0]; 
+        ram_array[a_i] = wd_i[7:0]; 
         $display (ram_array[a_i]);
     end    
 end 

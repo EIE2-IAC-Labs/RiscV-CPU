@@ -18,9 +18,9 @@ int main(int argc,char **argv, char **env){
     top->write_en_i = 0;
     top->AddrsCtrl_i =1;
     top->a_i = 0;
-    top->wd_i= 286331153;
+    top->wd_i= 4294967295;
 
-    for (i=0; i<10; i++){ 
+    for (i=0; i<5; i++){ 
             
         for (clk=0; clk<2; clk++) {
                 tfp->dump (2*i+clk);
