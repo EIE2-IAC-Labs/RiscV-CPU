@@ -86,5 +86,5 @@ module control #(
             default: $display("BIG PROBLEM");
         endcase
     end
-
+    
 endmodule
