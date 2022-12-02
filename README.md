@@ -28,3 +28,5 @@ To start with the project am doing the follow:
 
 ALUctrl_i:
 ![Alt text](images/ALUctrl.png?raw=true "ALUctrl")
+
+Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
