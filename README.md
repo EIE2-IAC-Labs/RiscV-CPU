@@ -7,7 +7,16 @@ Ana - Memory and assembly code F1 program
 Nik - Control Unit and assembly code F1 program
 
 ---
-### CURRENTLY WORKING ON: added control from lab4, building on it
+### CURRENTLY WORKING ON:
+
+- [x] Create Basic Skeleton
+- [ ] Fill in R-Type Instructions
+- [ ] Fill in I-Type Load instructions
+- [ ] Fill in I-Type Bitwise instructions
+- [ ] Fill in S-Type instructions
+- [ ] Fill in B-Type instructions
+- [ ] Miscellaneous instructions at the bottom (probably not required but might do anyway. These might require more work.)
+
 ---
 
 ### Inputs:
