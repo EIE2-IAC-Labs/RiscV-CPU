@@ -35,54 +35,54 @@ int main(int argc, char **argv, char **env) {
     }
 
     //sub
-    if(simcyc == 4){
+    if(simcyc == 1){
       top->ALUctrl_i = 1;
     }
 
     //and
-    if(simcyc == 8){
+    if(simcyc == 2){
       top->ALUctrl_i = 2;
     }
 
     //or
-    if(simcyc == 12){
+    if(simcyc == 3){
       top->ALUctrl_i = 3;
     }
 
     //SLT
-    if(simcyc == 16){
+    if(simcyc == 4){
       top->ALUctrl_i = 5;
-    }
-    if(simcyc == 16){
+    }  //0
+    if(simcyc == 6){
       top->SrcB_i = 30;
       top->ALUctrl_i = 5;
-    }
-    if(simcyc == 16){
+    } //1
+    if(simcyc == 8){
       top->SrcB_i = -30;
       top->ALUctrl_i = 5;
-    }
-    if(simcyc == 16){
+    } // 1
+    if(simcyc == 10){
       top->SrcA_i = -20;
       top->ALUctrl_i = 5;
-    }
-    if(simcyc == 16){
+    } // 0
+    if(simcyc == 12){
       top->SrcA_i = -40;
       top->ALUctrl_i = 5;
-    }
-    if(simcyc == 16){
+    } //1
+    if(simcyc == 14){
       top->SrcA_i = -30;
       top->ALUctrl_i = 5;
-    }
+    } //0
     if(simcyc == 16){
       top->SrcA_i = 30;
       top->SrcA_i = 30;
       top->ALUctrl_i = 5;
-    }
+    } //0
 
     //todo test edge cases
 
     //ULT
-    if(simcyc == 20){
+    if(simcyc == 18){
       top->ALUctrl_i = 6;
     }
 
