@@ -42,7 +42,7 @@ always_comb begin
                 end
         //unsigned less than
         4'b0110: begin
-                    if ((SrcA_i - SrcB_i) > 0) ALUResult_o = 0;
+                    if (SrcA_i >= SrcB_i) ALUResult_o = 0;
                     else ALUResult_o = 1;
                 end
     

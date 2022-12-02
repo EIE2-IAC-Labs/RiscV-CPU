@@ -75,7 +75,7 @@ int main(int argc, char **argv, char **env) {
     } //0
     if(simcyc == 16){
       top->SrcA_i = 30;
-      top->SrcA_i = 30;
+      top->SrcB_i = 30;
       top->ALUctrl_i = 5;
     } //0
 
@@ -83,8 +83,18 @@ int main(int argc, char **argv, char **env) {
 
     //ULT
     if(simcyc == 18){
+      top->SrcA_i = 40;
       top->ALUctrl_i = 6;
-    }
+    } //0
+    if(simcyc == 20){
+      top->SrcA_i = 20;
+      top->ALUctrl_i = 6;
+    } //1
+    if(simcyc == 22){
+      top->SrcA_i = -30;
+      top->SrcB_i = -31;
+      top->ALUctrl_i = 6;
+    } //1
 
     // either simulation finished, or 'q' is pressed
     if (Verilated::gotFinish()) 
