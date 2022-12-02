@@ -14,28 +14,28 @@ module control #(
 
     always_comb begin
         case (opcode)
-            // 7'b0110011: // R-type instructions
-            //     case (instr_i[14:12]) // switch-casing funct3, as this determines the ops
-            //         3'b000:
-            //             if (instr_i[30]) begin // bit 5 of funct7
-            //                 // sub
-            //             end else begin
-            //                 // add
-            //             end    
-            //         3'b001: // sll
-            //         3'b010: // slt
-            //         3'b011: // sltu
-            //         3'b100: // xor
-            //         3'b101:
-            //             if (instr_i[30]) begin
-            //                 // shift right arithmetic
-            //             end else begin
-            //                 // shift right logical
-            //             end
-            //         3'b110: // or
-            //         3'b111: // and
-            //         default: ;
-            //     endcase
+            7'b0110011: // R-type instructions
+                case (instr_i[14:12]) // switch-casing funct3, as this determines the ops
+                    3'b000:
+                        if (instr_i[30]) begin // bit 5 of funct7
+                            ALUctrl_o = 4'b0001; // sub
+                        end else begin
+                            ALUctrl_o = 4'b0000; // add
+                        end    
+                    // 3'b001: // sll
+                    3'b010: ALU_ctrl_o = 4'b0101 // slt
+                    3'b011: ALU_ctrl_o = 4'b0110 // sltu
+                    // 3'b100: // xor
+                    // 3'b101:
+                    //     if (instr_i[30]) begin
+                    //         // shift right arithmetic
+                    //     end else begin
+                    //         // shift right logical
+                    //     end
+                    3'b110: ALUctrl_o = 4'b0011// or
+                    3'b111: ALUctrl_o = 4'b0010// and
+                    default: ;
+                endcase
             // 7'b0000011: // I-type load instructions
             //     case (instr_i[14:12])
             //         3'b000: // lb
@@ -62,6 +62,13 @@ module control #(
             //         3'b111: // andi
             //         default: ;
             //     endcase
+
+
+            ////////////////////////////////////////////
+            //////////////// ELKOUNY ///////////////////
+            ////////////////////////////////////////////
+            
+
             // 7'b0100011: // S-type instructions
             //     case (instr_i[14:12])
             //         3'b000: // sb, store byte
@@ -86,5 +93,5 @@ module control #(
             default: $display("BIG PROBLEM");
         endcase
     end
-    
+
 endmodule
