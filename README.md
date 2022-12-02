@@ -31,14 +31,14 @@ ALUctrl_i:
 
 Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
 
-| ALUctrl | operation |
-| --- | --- |
-| 0000 | add |
-| 0001 | sub |
-| 0010 | bitwise and |
-| 0011 | bitwise or |
-| 0101 | SLT |
-| 0110 | ULT |
+| ALUctrl | operation | Fully Tested? |
+| --- | --- | --- |
+| 0000 | add | [] |
+| 0001 | sub | [] |
+| 0010 | bitwise and | [] |
+| 0011 | bitwise or | [] |
+| 0101 | SLT | [] |
+| 0110 | ULT | [] |
 
 TO ADD:
 - []
