@@ -33,12 +33,12 @@ Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
 
 | ALUctrl | operation | Fully Tested? |
 | --- | --- | --- |
-| 0000 | add | [] |
-| 0001 | sub | [] |
-| 0010 | bitwise and | [] |
-| 0011 | bitwise or | [] |
-| 0101 | SLT | [] |
-| 0110 | ULT | [] |
+| 0000 | add | y |
+| 0001 | sub | y |
+| 0010 | bitwise and | y |
+| 0011 | bitwise or | y |
+| 0101 | SLT | y |
+| 0110 | ULT | y |
 
 TO ADD:
 - []
