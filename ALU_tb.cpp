@@ -1,6 +1,6 @@
 #include "verilated.h"
 #include "verilated_vcd_c.h"
-#include "VALU.h"
+#include "Vtop.h"
 
 //#include "vbuddy.cpp"     // include vbuddy code
 #define MAX_SIM_CYC 1000000
@@ -13,12 +13,12 @@ int main(int argc, char **argv, char **env) {
 
   Verilated::commandArgs(argc, argv);
   // init top verilog instance
-  VALU* top = new VALU;
+  Vtop* top = new Vtop;
   // init trace dump
   Verilated::traceEverOn(true);
   VerilatedVcdC* tfp = new VerilatedVcdC;
   top->trace (tfp, 99);
-  tfp->open ("ALU.vcd");
+  tfp->open ("ALU_test.vcd");
 
   // initialize simulation input 
   top->SrcA_i = 20;
