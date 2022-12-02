@@ -1,19 +1,20 @@
 # Group 14 IAC Coursework
 ##### Nik Lewis, Benedict Short, Ana Dimoska, Ahmed Elkouny
-- [ ]  ALU ctrl codes
+- [x]  ALU ctrl codes
 - [ ]  outline what operations we need for the first version of the CPU
-- [ ]  Come up with input, output
+- [x]  Come up with input, output
 - [ ]  come up with surround logic that drives the ALU
 
 
 To start with the project am doing the follow:
-- [ ] register file
+- [x] register file
 - [ ] mux going into SrcB
 - [ ] check that EXTEND works in all cases
 - [ ] check the part of the cycle where read/write occurs is correct for the register file
-- [ ] come up ALU control
-- [ ] Write testbench for Regfile, ALU, Extend for local testing
-
+- [x] come up ALU control
+- [x] Write testbench for ALU
+- [ ] Write testbench for Extend 
+- [ ] Write testbench for Register 
 
 ### Input
 
@@ -25,9 +26,6 @@ To start with the project am doing the follow:
 
 - ALUResult_o
 - Zero_o
-
-ALUctrl_i:
-![Alt text](images/ALUctrl.png?raw=true "ALUctrl")
 
 Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
 
@@ -41,4 +39,5 @@ Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
 | 0110 | ULT | y |
 
 TO ADD:
-- []
+- [] bitwise shift left
+- [] bitwise shift right
