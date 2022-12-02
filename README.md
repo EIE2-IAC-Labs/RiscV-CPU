@@ -37,7 +37,11 @@ Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
 | 0011 | bitwise or | y |
 | 0101 | SLT | y |
 | 0110 | ULT | y |
+| 0111 | LSR | y |
+| 1000 | LSL | y |
 
 TO ADD:
-- [ ] bitwise shift left
-- [ ] bitwise shift right
+- [x] bitwise shift left
+- [x] bitwise shift right
+- [x] Implement Zero_o logic
+- [ ] Check as to why there is no instructuon for 0100

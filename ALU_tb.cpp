@@ -23,6 +23,7 @@ int main(int argc, char **argv, char **env) {
   // initialize simulation input 
   top->SrcA_i = 20;
   top->SrcB_i = 10;
+  top->shift = 1;
   top->ALUctrl_i = 0;
 
   // run simulation for MAX_SIM_CYC clock cycles
@@ -95,6 +96,26 @@ int main(int argc, char **argv, char **env) {
       top->SrcB_i = -31;
       top->ALUctrl_i = 6;
     } //1
+
+
+    //Zero_o
+    if(simcyc == 24){
+      top->SrcA_i = -30;
+      top->SrcB_i = -30;
+    } //1
+
+
+    //lsl
+    if(simcyc == 26){
+      top->SrcA_i = 10;
+      top->ALUctrl_i = 7;
+    } //10
+
+    //lsr
+    if(simcyc == 28){
+      top->SrcA_i = 10;
+      top->ALUctrl_i = 8;
+    } //10
 
     // either simulation finished, or 'q' is pressed
     if (Verilated::gotFinish()) 

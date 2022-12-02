@@ -1,21 +1,21 @@
 module ALU #(
     parameter DATAWIDTH =   32, 
-    parameter shift_width = 5
+            SHIFT_WIDTH = 5
 )(
     input logic [DATAWIDTH-1:0]         SrcA_i,
     input logic [DATAWIDTH-1:0]         SrcB_i,
     input logic [3:0]                   ALUctrl_i,
-    input logic [shift_width-1:0]       shift,
+    input logic [SHIFT_WIDTH-1:0]       shift,
 
     output logic [DATAWIDTH-1:0]        ALUResult_o,
     output logic                        Zero_o
 );
 
-assign begin
-    if (SrcA_i == SrcB_i) Zero_o = 1;
+always_comb begin
+    if(SrcA_i == SrcB_i) Zero_o = 1;
     else Zero_o = 0;
 end
-     
+
 always_comb begin
     case (ALUctrl_i)
         //add
@@ -30,7 +30,6 @@ always_comb begin
         //bitwise or
         4'b0011: ALUResult_o = SrcA_i | SrcB_i;
 
-        //TODO WHY NO 4'b0100 ??
         //signed less than
         4'b0101: begin
                     if( SrcA_i == SrcB_i) ALUResult_o = 0;
@@ -52,10 +51,10 @@ always_comb begin
                 end
         
         //lsr
-        4'b0111 ALUResult_o = SrcA_i >> shift;
+        4'b0111: ALUResult_o = SrcA_i >> shift;
 
         //lsl
-        4'b01000 ALUResult_o = SrcA_i << shift;
+        4'b01000: ALUResult_o = SrcA_i << shift;
     
         default: ALUResult_o = 0;
     endcase
