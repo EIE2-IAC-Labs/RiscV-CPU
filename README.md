@@ -13,3 +13,18 @@ To start with the project am doing the follow:
 - [ ] check the part of the cycle where read/write occurs is correct for the register file
 - [ ] come up ALU control
 - [ ] Write testbench for Regfile, ALU, Extend for local testing
+
+
+### Input
+
+- SrcA_i
+- SrcB_i
+- ALUctrl_i
+
+### Output
+
+- ALUResult_o
+- Zero_o
+
+ALUctrl_i:
+![Alt text](images/ALUctrl.png?raw=true "ALUctrl")
