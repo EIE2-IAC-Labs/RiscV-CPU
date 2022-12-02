@@ -39,5 +39,5 @@ Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
 | 0110 | ULT | y |
 
 TO ADD:
-- [] bitwise shift left
-- [] bitwise shift right
+- [ ] bitwise shift left
+- [ ] bitwise shift right
