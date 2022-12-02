@@ -1,7 +1,7 @@
 module control #(
     parameter ADDRESS_WIDTH = 32
 ) (
-    input logic                         eq_i,           // flag for if A = B in ALU
+    input logic                         zero_i,         // flag for if zero result in ALU
     input logic [ADDRESS_WIDTH-1:0]     instr_i,        // input instruction
     output logic                        regWrite_en_o,  // Register write enable
     output logic [3:0]                  ALUctrl_o,      // determines alu op

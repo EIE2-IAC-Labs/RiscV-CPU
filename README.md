@@ -21,7 +21,7 @@ Nik - Control Unit and assembly code F1 program
 
 ### Inputs:
 
-* `eq_i` : the eq flag from the ALU, 1 bit
+* `zero_i` : the zero flag from the ALU, 1 bit
 * `instr_i` : 32-bit current instruction for decoding
 
 ### Outputs:
