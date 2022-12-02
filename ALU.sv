@@ -12,7 +12,7 @@ module ALU #(
 //add appropriate word
      
 always_comb begin
-    case (ALUctrl)
+    case (ALUctrl_i)
         //add
         4'b0000: ALUResult_o = SrcA_i + SrcB_i;
 
@@ -27,19 +27,23 @@ always_comb begin
 
         //TODO WHY NO 4'b0100 ??
         //signed less than
-        4'b0101: if ((SrcA_i [DATAWIDTH - 1] < SrcB_i [DATAWIDTH - 1])) ALUResult_o = 0;
-                else if ((SrcA_i [DATAWIDTH - 1] > SrcB_i [DATAWIDTH - 1])) ALUResult_o = 1;
-                else if (((SrcA_i [DATAWIDTH - 1] == 0'b0) and (SrcB_i [DATAWIDTH - 1] == 0'b0)) begin
-                    if ((SrcA_i [DATAWIDTH - 2:0] - SrcB_i [DATAWIDTH - 2:0]) > 0) ALUResult_o = 0;
+        4'b0101: begin
+                    if ((SrcA_i [DATAWIDTH - 1] < SrcB_i [DATAWIDTH - 1])) ALUResult_o = 0;
+                    else if ((SrcA_i [DATAWIDTH - 1] > SrcB_i [DATAWIDTH - 1])) ALUResult_o = 1;
+                    else if ((SrcA_i [DATAWIDTH - 1] == 0'b0) && (SrcB_i [DATAWIDTH - 1] == 0'b0)) begin
+                        if ((SrcA_i [DATAWIDTH - 2:0] - SrcB_i [DATAWIDTH - 2:0]) > 0) ALUResult_o = 0;
+                        else ALUResult_o = 1;
+                    end
+                    else if ((SrcA_i [DATAWIDTH - 1] == 0'b1) && (SrcB_i [DATAWIDTH - 1] == 0'b1)) begin
+                        if ((SrcA_i [DATAWIDTH - 2:0] - SrcB_i [DATAWIDTH - 2:0]) < 0) ALUResult_o = 0;
+                        else ALUResult_o = 1;
+                    end
+                end
+        //unsigned less than
+        4'b0110: begin
+                    if ((SrcA_i - SrcB_i) > 0) ALUResult_o = 0;
                     else ALUResult_o = 1;
                 end
-                else if (((SrcA_i [DATAWIDTH - 1] == 0'b1) and (SrcB_i [DATAWIDTH - 1] == 0'b1)) begin
-                    if ((SrcA_i [DATAWIDTH - 2:0] - SrcB_i [DATAWIDTH - 2:0]) < 0) ALUResult_o = 0;
-                    else ALUResult_o = 1;
-    
-        //unsigned less than
-        4'b0110: if ((SrcA_i - SrcB_i) > 0) ALUResult_o = 0;
-                else ALUResult_o = 1;
     
         
         default: ALUResult_o = 0;
