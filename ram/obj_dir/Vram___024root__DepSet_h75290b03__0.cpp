@@ -24,15 +24,14 @@ VL_INLINE_OPT void Vram___024root___sequent__TOP__0(Vram___024root* vlSelf) {
                                                + vlSelf->a_i))] 
             = (0xffU & vlSelf->wd_i);
         VL_WRITEF("%3#%3#%3#%3#\n",8,vlSelf->ram__DOT__ram_array
-                  [(0xfffU & ((IData)(3U) + vlSelf->a_i))],
+                  [(0xfffU & vlSelf->a_i)],8,vlSelf->ram__DOT__ram_array
+                  [(0xfffU & ((IData)(1U) + vlSelf->a_i))],
                   8,vlSelf->ram__DOT__ram_array[(0xfffU 
                                                  & ((IData)(2U) 
                                                     + vlSelf->a_i))],
                   8,vlSelf->ram__DOT__ram_array[(0xfffU 
-                                                 & ((IData)(1U) 
-                                                    + vlSelf->a_i))],
-                  8,vlSelf->ram__DOT__ram_array[(0xfffU 
-                                                 & vlSelf->a_i)]);
+                                                 & ((IData)(3U) 
+                                                    + vlSelf->a_i))]);
     }
     if (VL_UNLIKELY(((IData)(vlSelf->write_en_i) & 
                      (~ (IData)(vlSelf->AddrsCtrl_i))))) {

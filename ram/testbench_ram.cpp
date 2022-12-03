@@ -16,9 +16,9 @@ int main(int argc,char **argv, char **env){
 
     top->clk_i = 0;
     top->write_en_i = 0;
-    top->AddrsCtrl_i =1;
+    top->AddrsCtrl_i = 1;
     top->a_i = 0;
-    top->wd_i= 4294967295;
+    top->wd_i = 2864434397;
 
     for (i=0; i<5; i++){ 
             

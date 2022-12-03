@@ -23,7 +23,7 @@ always_ff @(posedge clk_i) begin
         ram_array[a_i + 1] = wd_i[23:16];
         ram_array[a_i + 2] = wd_i[15:8];
         ram_array[a_i + 3] = wd_i[7:0];
-        $display(ram_array[a_i + 3],ram_array[a_i + 2],ram_array[a_i + 1],ram_array[a_i + 0]);
+        $display(ram_array[a_i],ram_array[a_i + 1],ram_array[a_i + 2],ram_array[a_i + 3]);
         
     end
 
