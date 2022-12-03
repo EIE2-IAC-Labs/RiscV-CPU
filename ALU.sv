@@ -86,6 +86,9 @@ always_comb begin
         //bitwise or
         4'b0011: ALUResult_o = SrcA_i | SrcB_i;
 
+        //bitwise xor
+        4'b0100: ALUResult_o = SrcA_i ^ SrcB_i;
+
         //signed less than
         4'b0101: begin
                     if( SrcA_i == SrcB_i) ALUResult_o = 0;

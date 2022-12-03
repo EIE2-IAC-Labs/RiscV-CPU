@@ -60,7 +60,6 @@ TO ADD:
 - [x] bitwise shift right
 - [x] Implement Zero_o logic
 - [ ] Implement SRA and SLA
-- [ ] implement Xor
+- [x] implement Xor
 - [x] implement branch logic
 - [ ] check the overlap between ALUctrl and branchctrl
-- [ ] Check as to why there is no instructuon for 0100
