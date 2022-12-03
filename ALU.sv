@@ -5,7 +5,7 @@ module ALU #(
     input logic [DATAWIDTH-1:0]         SrcA_i,
     input logic [DATAWIDTH-1:0]         SrcB_i,
     input logic [3:0]                   ALUctrl_i,
-    input logic [DATAWIDTH-1:0]         BranchCtrl_i
+    input logic [2:0]                   BranchCtrl_i
     input logic [SHIFT_WIDTH-1:0]       shift,
 
     output logic [DATAWIDTH-1:0]        ALUResult_o,
@@ -19,6 +19,13 @@ end
 
 always_comb begin
     case(BranchCtrl_i) begin
+        //Zero
+        4'b0000: begin
+                if(SrcA_i == SrcB_i) Zero_o = 1;
+                else Zero_o = 0;
+            end
+        
+        //
 
         default: Zero_o = 0;
     endcase

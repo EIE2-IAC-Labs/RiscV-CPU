@@ -35,13 +35,32 @@ Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
 | 0001 | sub | y |
 | 0010 | bitwise and | y |
 | 0011 | bitwise or | y |
+| 0011 | xor |  |
 | 0101 | SLT | y |
 | 0110 | ULT | y |
-| 0111 | LSR | y |
-| 1000 | LSL | y |
+| 0111 | SRL | y |
+| 1000 | SLL | y |
+| 1001 | SRA |  |
+| 1010 | SLA |  |
+
+
+| BranchCtrl | operation | Fully Tested? |
+| --- | --- | --- |
+| 000 | Zero |  |
+| 001 | Equal |  |
+| 010 | Not Equal |  |
+| 011 | < |  |
+| 100 | >= |  |
+| 101 | < unsigned |  |
+| 110 | >= unsigned |  |
+
 
 TO ADD:
 - [x] bitwise shift left
 - [x] bitwise shift right
 - [x] Implement Zero_o logic
+- [ ] Implement SRA and SLA
+- [ ] implement Xor
+- [ ] implement branch logic
+
 - [ ] Check as to why there is no instructuon for 0100
