@@ -61,6 +61,6 @@ TO ADD:
 - [x] Implement Zero_o logic
 - [ ] Implement SRA and SLA
 - [ ] implement Xor
-- [ ] implement branch logic
-
+- [x] implement branch logic
+- [ ] check the overlap between ALUctrl and branchctrl
 - [ ] Check as to why there is no instructuon for 0100

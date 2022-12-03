@@ -5,11 +5,12 @@ module top #(
     input logic [DATAWIDTH-1:0]         SrcA_i,
     input logic [DATAWIDTH-1:0]         SrcB_i,
     input logic [3:0]                   ALUctrl_i,
-    input logic                         clk,
+    input logic [2:0]                   BranchCtrl_i,
     input logic [SHIFT_WIDTH-1:0]       shift,
+    input logic                         clk,
 
     output logic [DATAWIDTH-1:0]        ALUResult_o,
-    output logic                        Zero_o
+    output logic                        branch_operation_o
 );
 
 
@@ -18,8 +19,9 @@ ALU test_alu(
     .SrcB_i (SrcB_i),
     .shift (shift),
     .ALUctrl_i (ALUctrl_i),
+    .BranchCtrl_i (BranchCtrl_i),
     .ALUResult_o (ALUResult_o),
-    .Zero_o (Zero_o)
+    .branch_operation_o (branch_operation_o)
 );
 
 endmodule
