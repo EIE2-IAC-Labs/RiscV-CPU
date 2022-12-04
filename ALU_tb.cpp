@@ -122,12 +122,12 @@ int main(int argc, char **argv, char **env) {
     if(simcyc == 17){
       top->SrcA_i = 1;
       top->SrcB_i = 1;
-      top->ALUctrl_i = 8;
+      top->ALUctrl_i = 4;
     } //0
     if(simcyc == 18){
       top->SrcA_i = 2;
       top->SrcB_i = 1;
-      top->ALUctrl_i = 8;
+      top->ALUctrl_i = 4;
     } //3
 
 
@@ -144,96 +144,96 @@ int main(int argc, char **argv, char **env) {
     } //0
 
     //not equal
-    if(simcyc == 18){
+    if(simcyc == 21){
       top->SrcA_i = 2;
       top->SrcB_i = 2;
       top->BranchCtrl_i = 1;
     } //0
-    if(simcyc == 18){
+    if(simcyc == 22){
       top->SrcA_i = 2;
       top->SrcB_i = 1;
     } //1
 
     //signed <
-    if(simcyc == 19){
+    if(simcyc == 23){
       top->SrcA_i = 2;
       top->SrcB_i = 2;
       top->BranchCtrl_i = 2;
     } //0
-    if(simcyc == 19){
+    if(simcyc == 24){
       top->SrcA_i = 3;
       top->SrcB_i = 2;
     } //0
-    if(simcyc == 19){
+    if(simcyc == 25){
       top->SrcA_i = 1;
       top->SrcB_i = 2;
     } //1
-    if(simcyc == 19){
+    if(simcyc == 26){
       top->SrcA_i = -1;
       top->SrcB_i = 2;
     } //1
-    if(simcyc == 19){
+    if(simcyc == 27){
       top->SrcA_i = -2;
       top->SrcB_i = -1;
     } //1
-    if(simcyc == 19){
+    if(simcyc == 28){
       top->SrcA_i = -1;
       top->SrcB_i = -2;
     } //0
 
     //signed >=
-    if(simcyc == 19){
+    if(simcyc == 29){
       top->SrcA_i = 2;
       top->SrcB_i = 2;
-      top->BranchCtrl_i = 2;
+      top->BranchCtrl_i = 3;
     } //1
-    if(simcyc == 19){
+    if(simcyc == 30){
       top->SrcA_i = 3;
       top->SrcB_i = 2;
     } //1
-    if(simcyc == 19){
+    if(simcyc == 31){
       top->SrcA_i = 1;
       top->SrcB_i = 2;
     } //0
-    if(simcyc == 19){
+    if(simcyc == 32){
       top->SrcA_i = -1;
       top->SrcB_i = 2;
     } //0
-    if(simcyc == 19){
+    if(simcyc == 33){
       top->SrcA_i = -2;
       top->SrcB_i = -1;
     } //0
-    if(simcyc == 19){
+    if(simcyc == 34){
       top->SrcA_i = -1;
       top->SrcB_i = -2;
     } //1
 
     // <
-    if(simcyc == 18){
+    if(simcyc == 35){
       top->SrcA_i = 2;
       top->SrcB_i = 1;
       top->BranchCtrl_i = 4;
     } //0
-    if(simcyc == 18){
+    if(simcyc == 36){
       top->SrcA_i = 2;
       top->SrcB_i = 2;
     } //0
-    if(simcyc == 18){
+    if(simcyc == 37){
       top->SrcA_i = 2;
       top->SrcB_i = 3;
     } //1
 
     // >=
-    if(simcyc == 18){
+    if(simcyc == 38){
       top->SrcA_i = 2;
       top->SrcB_i = 1;
       top->BranchCtrl_i = 5;
     } //1
-    if(simcyc == 18){
+    if(simcyc == 39){
       top->SrcA_i = 2;
       top->SrcB_i = 2;
     } //1
-    if(simcyc == 18){
+    if(simcyc == 40){
       top->SrcA_i = 1;
       top->SrcB_i = 2;
     } //0

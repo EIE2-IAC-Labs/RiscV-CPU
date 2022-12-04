@@ -21,6 +21,7 @@ To start with the project am doing the follow:
 - SrcA_i
 - SrcB_i
 - ALUctrl_i
+- BranchCtrl_i
 
 ### Output
 
@@ -35,7 +36,7 @@ Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
 | 0001 | sub | y |
 | 0010 | bitwise and | y |
 | 0011 | bitwise or | y |
-| 0100 | xor |  |
+| 0100 | xor | y |
 | 0101 | SLT | y |
 | 0110 | ULT | y |
 | 0111 | SRL | y |
@@ -46,12 +47,12 @@ Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
 
 | BranchCtrl | operation | Fully Tested? |
 | --- | --- | --- |
-| 000 | Equal |  |
-| 001 | Not Equal |  |
-| 010 | < |  |
-| 011 | >= |  |
-| 100 | < unsigned |  |
-| 101 | >= unsigned |  |
+| 000 | Equal | y |
+| 001 | Not Equal | y |
+| 010 | < | y |
+| 011 | >= | y |
+| 100 | < unsigned | y |
+| 101 | >= unsigned | y |
 
 
 TO ADD:
