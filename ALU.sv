@@ -92,7 +92,7 @@ always_comb begin
         4'b0111: ALUResult_o = SrcA_i >> shift;
 
         //SLL
-        4'b01000: ALUResult_o = SrcA_i << shift;
+        4'b0100: ALUResult_o = SrcA_i << shift;
 
         //SRA
         4'b1001: ALUResult_o = SrcA_Signed >>> shift;
