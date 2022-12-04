@@ -54,27 +54,27 @@ int main(int argc, char **argv, char **env) {
     if(simcyc == 4){
       top->ALUctrl_i = 5;
     }  //0
-    if(simcyc == 6){
+    if(simcyc == 5){
       top->SrcB_i = 30;
       top->ALUctrl_i = 5;
     } //1
-    if(simcyc == 8){
+    if(simcyc == 6){
       top->SrcB_i = -30;
       top->ALUctrl_i = 5;
     } // 1
-    if(simcyc == 10){
+    if(simcyc == 7){
       top->SrcA_i = -20;
       top->ALUctrl_i = 5;
     } // 0
-    if(simcyc == 12){
+    if(simcyc == 8){
       top->SrcA_i = -40;
       top->ALUctrl_i = 5;
     } //1
-    if(simcyc == 14){
+    if(simcyc == 9){
       top->SrcA_i = -30;
       top->ALUctrl_i = 5;
     } //0
-    if(simcyc == 16){
+    if(simcyc == 10){
       top->SrcA_i = 30;
       top->SrcB_i = 30;
       top->ALUctrl_i = 5;
@@ -83,15 +83,15 @@ int main(int argc, char **argv, char **env) {
     //todo test edge cases
 
     //ULT
-    if(simcyc == 18){
+    if(simcyc == 11){
       top->SrcA_i = 40;
       top->ALUctrl_i = 6;
     } //0
-    if(simcyc == 20){
+    if(simcyc == 12){
       top->SrcA_i = 20;
       top->ALUctrl_i = 6;
     } //1
-    if(simcyc == 22){
+    if(simcyc == 13){
       top->SrcA_i = -30;
       top->SrcB_i = -31;
       top->ALUctrl_i = 6;
@@ -99,23 +99,145 @@ int main(int argc, char **argv, char **env) {
 
 
     //Zero_o
-    if(simcyc == 24){
+    if(simcyc == 14){
       top->SrcA_i = -30;
       top->SrcB_i = -30;
     } //1
 
 
     //lsl
-    if(simcyc == 26){
+    if(simcyc == 15){
       top->SrcA_i = 10;
       top->ALUctrl_i = 7;
     } //10
 
     //lsr
-    if(simcyc == 28){
+    if(simcyc == 16){
       top->SrcA_i = 10;
       top->ALUctrl_i = 8;
     } //10
+
+
+    //xor
+    if(simcyc == 17){
+      top->SrcA_i = 1;
+      top->SrcB_i = 1;
+      top->ALUctrl_i = 8;
+    } //0
+    if(simcyc == 18){
+      top->SrcA_i = 2;
+      top->SrcB_i = 1;
+      top->ALUctrl_i = 8;
+    } //3
+
+
+    //Testing Branch Functionality:
+    //equal
+    if(simcyc == 19){
+      top->SrcA_i = 2;
+      top->SrcB_i = 2;
+      top->BranchCtrl_i = 0;
+    } //1
+    if(simcyc == 20){
+      top->SrcA_i = 2;
+      top->SrcB_i = 1;
+    } //0
+
+    //not equal
+    if(simcyc == 18){
+      top->SrcA_i = 2;
+      top->SrcB_i = 2;
+      top->BranchCtrl_i = 1;
+    } //0
+    if(simcyc == 18){
+      top->SrcA_i = 2;
+      top->SrcB_i = 1;
+    } //1
+
+    //signed <
+    if(simcyc == 19){
+      top->SrcA_i = 2;
+      top->SrcB_i = 2;
+      top->BranchCtrl_i = 2;
+    } //0
+    if(simcyc == 19){
+      top->SrcA_i = 3;
+      top->SrcB_i = 2;
+    } //0
+    if(simcyc == 19){
+      top->SrcA_i = 1;
+      top->SrcB_i = 2;
+    } //1
+    if(simcyc == 19){
+      top->SrcA_i = -1;
+      top->SrcB_i = 2;
+    } //1
+    if(simcyc == 19){
+      top->SrcA_i = -2;
+      top->SrcB_i = -1;
+    } //1
+    if(simcyc == 19){
+      top->SrcA_i = -1;
+      top->SrcB_i = -2;
+    } //0
+
+    //signed >=
+    if(simcyc == 19){
+      top->SrcA_i = 2;
+      top->SrcB_i = 2;
+      top->BranchCtrl_i = 2;
+    } //1
+    if(simcyc == 19){
+      top->SrcA_i = 3;
+      top->SrcB_i = 2;
+    } //1
+    if(simcyc == 19){
+      top->SrcA_i = 1;
+      top->SrcB_i = 2;
+    } //0
+    if(simcyc == 19){
+      top->SrcA_i = -1;
+      top->SrcB_i = 2;
+    } //0
+    if(simcyc == 19){
+      top->SrcA_i = -2;
+      top->SrcB_i = -1;
+    } //0
+    if(simcyc == 19){
+      top->SrcA_i = -1;
+      top->SrcB_i = -2;
+    } //1
+
+    // <
+    if(simcyc == 18){
+      top->SrcA_i = 2;
+      top->SrcB_i = 1;
+      top->BranchCtrl_i = 4;
+    } //0
+    if(simcyc == 18){
+      top->SrcA_i = 2;
+      top->SrcB_i = 2;
+    } //0
+    if(simcyc == 18){
+      top->SrcA_i = 2;
+      top->SrcB_i = 3;
+    } //1
+
+    // >=
+    if(simcyc == 18){
+      top->SrcA_i = 2;
+      top->SrcB_i = 1;
+      top->BranchCtrl_i = 5;
+    } //1
+    if(simcyc == 18){
+      top->SrcA_i = 2;
+      top->SrcB_i = 2;
+    } //1
+    if(simcyc == 18){
+      top->SrcA_i = 1;
+      top->SrcB_i = 2;
+    } //0
+
 
     // either simulation finished, or 'q' is pressed
     if (Verilated::gotFinish()) 
