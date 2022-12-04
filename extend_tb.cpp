@@ -21,11 +21,7 @@ int main(int argc, char **argv, char **env) {
   tfp->open ("ALU_test.vcd");
 
   // initialize simulation input 
-  top->SrcA_i = 20;
-  top->SrcB_i = 10;
-  top->shift = 1;
-  top->ALUctrl_i = 0;
-
+  top->ImmSrc_i = 0;
   // run simulation for MAX_SIM_CYC clock cycles
   for (simcyc=0; simcyc<MAX_SIM_CYC; simcyc++) {
     // dump variables into VCD file and toggle clock
@@ -35,226 +31,41 @@ int main(int argc, char **argv, char **env) {
       top->eval ();
     }
 
-    //sub
+    //000
     if(simcyc == 1){
-      top->ALUctrl_i = 1;
-    }
-
-    //and
+      top->ImmSrc_i = 0;
+      top->Imm_i = 2863591150;
+    } // out: FFFFFAAA
     if(simcyc == 2){
-      top->ALUctrl_i = 2;
-    }
+      top->Imm_i = 447672046;
+    } // out: 000001AA
 
-    //or
+    //001
     if(simcyc == 3){
-      top->ALUctrl_i = 3;
-    }
-
-    //SLT
+      top->ImmSrc_i = 1;
+      top->Imm_i = 2835346688;
+    } // out: FFFFFA8A
     if(simcyc == 4){
-      top->ALUctrl_i = 5;
-    }  //0
+      top->Imm_i = 419427584;
+    } // out: 0000018A
+
+    //010
     if(simcyc == 5){
-      top->SrcB_i = 30;
-      top->ALUctrl_i = 5;
-    } //1
+      top->ImmSrc_i = 2;
+      top->Imm_i = 2834230933;
+    } // out: 00000A94
     if(simcyc == 6){
-      top->SrcB_i = -30;
-      top->ALUctrl_i = 5;
-    } // 1
+      top->Imm_i = 686747285;
+    } // out: 00000A94
+    
+    //011
     if(simcyc == 7){
-      top->SrcA_i = -20;
-      top->ALUctrl_i = 5;
-    } // 0
+      top->ImmSrc_i = 3;
+      top->Imm_i = 2863312622;
+    } // out: FFFAAAAA
     if(simcyc == 8){
-      top->SrcA_i = -40;
-      top->ALUctrl_i = 5;
-    } //1
-    if(simcyc == 9){
-      top->SrcA_i = -30;
-      top->ALUctrl_i = 5;
-    } //0
-    if(simcyc == 10){
-      top->SrcA_i = 30;
-      top->SrcB_i = 30;
-      top->ALUctrl_i = 5;
-    } //0
-
-    //todo test edge cases
-
-    //ULT
-    if(simcyc == 11){
-      top->SrcA_i = 40;
-      top->ALUctrl_i = 6;
-    } //0
-    if(simcyc == 12){
-      top->SrcA_i = 20;
-      top->ALUctrl_i = 6;
-    } //1
-    if(simcyc == 13){
-      top->SrcA_i = -30;
-      top->SrcB_i = -31;
-      top->ALUctrl_i = 6;
-    } //1
-
-
-    //Zero_o
-    if(simcyc == 14){
-      top->SrcA_i = -30;
-      top->SrcB_i = -30;
-    } //1
-
-
-    //lsl
-    if(simcyc == 15){
-      top->SrcA_i = 10;
-      top->ALUctrl_i = 7;
-    } //10
-
-    //lsr
-    if(simcyc == 16){
-      top->SrcA_i = 10;
-      top->ALUctrl_i = 8;
-    } //10
-
-
-    //xor
-    if(simcyc == 17){
-      top->SrcA_i = 1;
-      top->SrcB_i = 1;
-      top->ALUctrl_i = 4;
-    } //0
-    if(simcyc == 18){
-      top->SrcA_i = 2;
-      top->SrcB_i = 1;
-      top->ALUctrl_i = 4;
-    } //3
-
-
-    //Testing Branch Functionality:
-    //equal
-    if(simcyc == 19){
-      top->SrcA_i = 2;
-      top->SrcB_i = 2;
-      top->BranchCtrl_i = 0;
-    } //1
-    if(simcyc == 20){
-      top->SrcA_i = 2;
-      top->SrcB_i = 1;
-    } //0
-
-    //not equal
-    if(simcyc == 21){
-      top->SrcA_i = 2;
-      top->SrcB_i = 2;
-      top->BranchCtrl_i = 1;
-    } //0
-    if(simcyc == 22){
-      top->SrcA_i = 2;
-      top->SrcB_i = 1;
-    } //1
-
-    //signed <
-    if(simcyc == 23){
-      top->SrcA_i = 2;
-      top->SrcB_i = 2;
-      top->BranchCtrl_i = 2;
-    } //0
-    if(simcyc == 24){
-      top->SrcA_i = 3;
-      top->SrcB_i = 2;
-    } //0
-    if(simcyc == 25){
-      top->SrcA_i = 1;
-      top->SrcB_i = 2;
-    } //1
-    if(simcyc == 26){
-      top->SrcA_i = -1;
-      top->SrcB_i = 2;
-    } //1
-    if(simcyc == 27){
-      top->SrcA_i = -2;
-      top->SrcB_i = -1;
-    } //1
-    if(simcyc == 28){
-      top->SrcA_i = -1;
-      top->SrcB_i = -2;
-    } //0
-
-    //signed >=
-    if(simcyc == 29){
-      top->SrcA_i = 2;
-      top->SrcB_i = 2;
-      top->BranchCtrl_i = 3;
-    } //1
-    if(simcyc == 30){
-      top->SrcA_i = 3;
-      top->SrcB_i = 2;
-    } //1
-    if(simcyc == 31){
-      top->SrcA_i = 1;
-      top->SrcB_i = 2;
-    } //0
-    if(simcyc == 32){
-      top->SrcA_i = -1;
-      top->SrcB_i = 2;
-    } //0
-    if(simcyc == 33){
-      top->SrcA_i = -2;
-      top->SrcB_i = -1;
-    } //0
-    if(simcyc == 34){
-      top->SrcA_i = -1;
-      top->SrcB_i = -2;
-    } //1
-
-    // <
-    if(simcyc == 35){
-      top->SrcA_i = 2;
-      top->SrcB_i = 1;
-      top->BranchCtrl_i = 4;
-    } //0
-    if(simcyc == 36){
-      top->SrcA_i = 2;
-      top->SrcB_i = 2;
-    } //0
-    if(simcyc == 37){
-      top->SrcA_i = 2;
-      top->SrcB_i = 3;
-    } //1
-
-    // >=
-    if(simcyc == 38){
-      top->SrcA_i = 2;
-      top->SrcB_i = 1;
-      top->BranchCtrl_i = 5;
-    } //1
-    if(simcyc == 39){
-      top->SrcA_i = 2;
-      top->SrcB_i = 2;
-    } //1
-    if(simcyc == 40){
-      top->SrcA_i = 1;
-      top->SrcB_i = 2;
-    } //0
-
-    //SRA
-    if(simcyc == 41){
-      top->SrcA_i = 10;
-      top->ALUctrl_i = 9;
-    } //5
-    if(simcyc == 42){
-      top->SrcA_i = -10;
-    } //-5
-
-    //SLA
-    if(simcyc == 43){
-      top->SrcA_i = 10;
-      top->ALUctrl_i = 10;
-    } //20
-    if(simcyc == 44){
-      top->SrcA_i = -10;
-    } //-20
+      top->Imm_i = 447393518;
+    } // out: 0001AAAA
 
     // either simulation finished, or 'q' is pressed
     if (Verilated::gotFinish()) 
