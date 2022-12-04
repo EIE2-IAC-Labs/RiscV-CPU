@@ -15,7 +15,7 @@ To start with the project am doing the follow:
 
 ### Input
 
-- ImmSrc_i [1:0]
+- ImmSrc_i [2:0]
 - Imm_i
 
 ### Output
