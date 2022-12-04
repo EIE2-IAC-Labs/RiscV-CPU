@@ -36,7 +36,7 @@ To start with the project am doing the follow:
 TODO:
 - [ ] check if bit 1 from 0b10 goes to 0 (slide 20 L6)
 - [x] decide schema and operations to implement
-- [ ] implement schema and operations
+- [x] implement schema and operations
 - [ ] test schema and operations
 
 
