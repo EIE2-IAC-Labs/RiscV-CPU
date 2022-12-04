@@ -109,12 +109,18 @@ always_comb begin
                     else ALUResult_o = 1;
                 end
         
-        //lsr
+        //SRL
         4'b0111: ALUResult_o = SrcA_i >> shift;
 
-        //lsl
+        //SLL
         4'b01000: ALUResult_o = SrcA_i << shift;
-    
+
+        //SRA
+        4'b1001: ALUResult_o = {SrcA_i[DATAWIDTH-1], SrcA_i [DATAWIDTH - 2:0] >> shift};
+
+        //SLA
+        4'b1010: ALUResult_o = {SrcA_i[DATAWIDTH-1], SrcA_i [DATAWIDTH - 2:0] << shift};   
+
         default: ALUResult_o = 0;
     endcase
     
