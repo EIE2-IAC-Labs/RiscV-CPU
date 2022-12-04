@@ -9,66 +9,66 @@ module ALU #(
     input logic [SHIFT_WIDTH-1:0]       shift,
 
     output logic [DATAWIDTH-1:0]        ALUResult_o,
-    output logic                        branch_operation_o
+    output logic                        Zero_o
 );
 
 always_comb begin
     case (BranchCtrl_i)
         //Zero
         3'b000: begin
-                if(SrcA_i == SrcB_i) branch_operation_o = 1;
-                else branch_operation_o = 0;
+                if(SrcA_i == SrcB_i) Zero_o = 1;
+                else Zero_o = 0;
         end
 
         //Not equal
         3'b001: begin
-                if(SrcA_i != SrcB_i) branch_operation_o = 1;
-                else branch_operation_o = 0;
+                if(SrcA_i != SrcB_i) Zero_o = 1;
+                else Zero_o = 0;
         end
 
         //<
         3'b010: begin
-                    if( SrcA_i == SrcB_i) branch_operation_o = 0;
-                    else if ((SrcA_i [DATAWIDTH - 1] == 0'b0) && (SrcB_i [DATAWIDTH - 1] == 0'b1)) branch_operation_o = 0;
-                    else if ((SrcA_i [DATAWIDTH - 1] > SrcB_i [DATAWIDTH - 1])) branch_operation_o = 1;
+                    if( SrcA_i == SrcB_i) Zero_o = 0;
+                    else if ((SrcA_i [DATAWIDTH - 1] == 0'b0) && (SrcB_i [DATAWIDTH - 1] == 0'b1)) Zero_o = 0;
+                    else if ((SrcA_i [DATAWIDTH - 1] > SrcB_i [DATAWIDTH - 1])) Zero_o = 1;
                     else if ((SrcA_i [DATAWIDTH - 1] == 0'b0) && (SrcB_i [DATAWIDTH - 1] == 0'b0)) begin
-                        if (SrcA_i [DATAWIDTH - 2:0] > SrcB_i [DATAWIDTH - 2:0]) branch_operation_o = 0;
-                        else branch_operation_o = 1;
+                        if (SrcA_i [DATAWIDTH - 2:0] > SrcB_i [DATAWIDTH - 2:0]) Zero_o = 0;
+                        else Zero_o = 1;
                     end
                     else if ((SrcA_i [DATAWIDTH - 1] == 1'b1) && (SrcB_i [DATAWIDTH - 1] == 1'b1)) begin
-                        if (SrcA_i [DATAWIDTH - 2:0] > SrcB_i [DATAWIDTH - 2:0]) branch_operation_o = 0;
-                        else branch_operation_o = 1;
+                        if (SrcA_i [DATAWIDTH - 2:0] > SrcB_i [DATAWIDTH - 2:0]) Zero_o = 0;
+                        else Zero_o = 1;
                     end
                 end
 
         //>=
         3'b011: begin
-                    if( SrcA_i == SrcB_i) branch_operation_o = 1;
-                    else if ((SrcA_i [DATAWIDTH - 1] == 0'b0) && (SrcB_i [DATAWIDTH - 1] == 0'b1)) branch_operation_o = 1;
-                    else if ((SrcA_i [DATAWIDTH - 1] > SrcB_i [DATAWIDTH - 1])) branch_operation_o = 0;
+                    if( SrcA_i == SrcB_i) Zero_o = 1;
+                    else if ((SrcA_i [DATAWIDTH - 1] == 0'b0) && (SrcB_i [DATAWIDTH - 1] == 0'b1)) Zero_o = 1;
+                    else if ((SrcA_i [DATAWIDTH - 1] > SrcB_i [DATAWIDTH - 1])) Zero_o = 0;
                     else if ((SrcA_i [DATAWIDTH - 1] == 0'b0) && (SrcB_i [DATAWIDTH - 1] == 0'b0)) begin
-                        if (SrcA_i [DATAWIDTH - 2:0] > SrcB_i [DATAWIDTH - 2:0]) branch_operation_o = 1;
-                        else branch_operation_o = 0;
+                        if (SrcA_i [DATAWIDTH - 2:0] > SrcB_i [DATAWIDTH - 2:0]) Zero_o = 1;
+                        else Zero_o = 0;
                     end
                     else if ((SrcA_i [DATAWIDTH - 1] == 1'b1) && (SrcB_i [DATAWIDTH - 1] == 1'b1)) begin
-                        if (SrcA_i [DATAWIDTH - 2:0] > SrcB_i [DATAWIDTH - 2:0]) branch_operation_o = 1;
-                        else branch_operation_o = 0;
+                        if (SrcA_i [DATAWIDTH - 2:0] > SrcB_i [DATAWIDTH - 2:0]) Zero_o = 1;
+                        else Zero_o = 0;
                     end
                 end
 
         //< unsigned
         3'b100: begin
-                if(SrcA_i < SrcB_i) branch_operation_o = 1;
-                else branch_operation_o = 0;
+                if(SrcA_i < SrcB_i) Zero_o = 1;
+                else Zero_o = 0;
         end
 
         //>= unsigned
         3'b101: begin
-                if(SrcA_i >= SrcB_i) branch_operation_o = 1;
-                else branch_operation_o = 0;
+                if(SrcA_i >= SrcB_i) Zero_o = 1;
+                else Zero_o = 0;
         end
 
-        default: branch_operation_o = 0;
+        default: Zero_o = 0;
     endcase
 end
 

@@ -10,7 +10,7 @@ module top #(
     input logic                         clk,
 
     output logic [DATAWIDTH-1:0]        ALUResult_o,
-    output logic                        branch_operation_o
+    output logic                        Zero_o
 );
 
 
@@ -21,7 +21,7 @@ ALU test_alu(
     .ALUctrl_i (ALUctrl_i),
     .BranchCtrl_i (BranchCtrl_i),
     .ALUResult_o (ALUResult_o),
-    .branch_operation_o (branch_operation_o)
+    .Zero_o (Zero_o)
 );
 
 endmodule

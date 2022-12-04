@@ -35,7 +35,7 @@ Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
 | 0001 | sub | y |
 | 0010 | bitwise and | y |
 | 0011 | bitwise or | y |
-| 0011 | xor |  |
+| 0100 | xor |  |
 | 0101 | SLT | y |
 | 0110 | ULT | y |
 | 0111 | SRL | y |
@@ -46,13 +46,12 @@ Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
 
 | BranchCtrl | operation | Fully Tested? |
 | --- | --- | --- |
-| 000 | Zero |  |
-| 001 | Equal |  |
-| 010 | Not Equal |  |
-| 011 | < |  |
-| 100 | >= |  |
-| 101 | < unsigned |  |
-| 110 | >= unsigned |  |
+| 000 | Equal |  |
+| 001 | Not Equal |  |
+| 010 | < |  |
+| 011 | >= |  |
+| 100 | < unsigned |  |
+| 101 | >= unsigned |  |
 
 
 TO ADD:
