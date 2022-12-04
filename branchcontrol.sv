@@ -24,7 +24,19 @@ always_comb begin
                         else branch_o = 1;
                     end
                 end //blt branch_o if rd1_i less than rd2_i
-        3'b101: branch_o = rd1_i >= rd2_i ? 1'b1 : 1'b0; //bge branch_o if rd1_i greater than or equal than rd2_i
+        3'b101: begin
+                    if( rd1_i == rd2_i) branch_o = 1;
+                    else if ((rd1_i [DW - 1] == 0'b0) && (rd2_i [DW - 1] == 0'b1)) branch_o = 1;
+                    else if ((rd1_i [DW - 1] > rd2_i [DW - 1])) branch_o = 0;
+                    else if ((rd1_i [DW - 1] == 0'b0) && (rd2_i [DW - 1] == 0'b0)) begin
+                        if (rd1_i [DW - 2:0] > rd2_i [DW - 2:0]) branch_o = 1;
+                        else branch_o = 0;
+                    end
+                    else if ((rd1_i [DW - 1] == 1'b1) && (rd2_i [DW - 1] == 1'b1)) begin
+                        if (rd1_i [DW - 2:0] > rd2_i [DW - 2:0]) branch_o = 1;
+                        else branch_o = 0;
+                    end
+                end //bge branch_o if rd1_i greater than or equal than rd2_i
         3'b110: branch_o = rd1_i < rd2_i ? 1'b1 : 1'b0; //
         3'b111: branch_o = rd1_i >= rd2_i ? 1'b1 : 1'b0; 
         default: branch_o=1'b0;    
