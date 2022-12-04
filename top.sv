@@ -1,27 +1,16 @@
-module top #(
+module top # (
     parameter DATAWIDTH = 32,
-            SHIFT_WIDTH = 5
 )(
-    input logic [DATAWIDTH-1:0]         SrcA_i,
-    input logic [DATAWIDTH-1:0]         SrcB_i,
-    input logic [3:0]                   ALUctrl_i,
-    input logic [2:0]                   BranchCtrl_i,
-    input logic [SHIFT_WIDTH-1:0]       shift,
-    input logic                         clk,
+    input logic [2:0]               ImmSrc_i,
+    input logic [DATAWIDTH-1:0]     Imm_i,
 
-    output logic [DATAWIDTH-1:0]        ALUResult_o,
-    output logic                        Zero_o
+    output logic [DATAWIDTH-1:0]    ImmExt_o
 );
 
-
-ALU test_alu(
-    .SrcA_i (SrcA_i),
-    .SrcB_i (SrcB_i),
-    .shift (shift),
-    .ALUctrl_i (ALUctrl_i),
-    .BranchCtrl_i (BranchCtrl_i),
-    .ALUResult_o (ALUResult_o),
-    .Zero_o (Zero_o)
+extend test_extend(
+    .ImmSrc_i(ImmSrc_i),
+    .Imm_i(Imm_i),
+    .ImmExt_o(ImmExt_o)
 );
 
 endmodule
