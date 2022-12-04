@@ -14,13 +14,13 @@ NOP( 23 times)  // after a second
 addi r1, r0, 10000. // r1 =11111 -> five light on
 lw  r2 0(r3)   //cycle 0		//store in r2 the value at address r3 from RAM
 addi  r4 r0, 2.   // cycle 1
-beq r2, r4, (go to 1) //cycle 2     // 2 cycles delay -> 2 is stored at addr(which follows the order from the sequence from file random_number.cpp)
+beq r2, r4, (go to line3) //cycle 2     // 2 cycles delay -> 2 is stored at addr(which follows the order from the sequence from file random_number.cpp)
 addi  r4 r0, 4. //cycle 3
 NOP //cycle 4
-beq r2, r4, (go to 1) //cycle 5     // 5 cycles delay -> 5 is stored at addr(which follows the order from the sequence from file random_number.cpp)
+beq r2, r4, (go to line3) //cycle 5     // 5 cycles delay -> 5 is stored at addr(which follows the order from the sequence from file random_number.cpp)
 NOP // cycle 6
 addi r4 r0, 8. // cycle 7
-beq r2, r4, (go to 1) //cycle 8     // 8 cycles delay -> 8 is stored at addr(which follows the order from the sequence from file random_number.cpp)
+beq r2, r4, (go to line3) //cycle 8     // 8 cycles delay -> 8 is stored at addr(which follows the order from the sequence from file random_number.cpp)
 
 /* we can continue using this logic to get different delays , the disadvantage is 
 that we can't make delays of consequtive number of cycles. In this case I decided to use the random numbers 2, 5 and 8 instead 1, 3, 9 */
