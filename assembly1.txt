@@ -1,8 +1,13 @@
 addi r3, r0, 1      //use r3 as the number 1 
 addi r4, r0, 11     //use r4 as the number 11 
-
+addi r5, r0, 3      
 //start
-we store the random number in r2
+
+//random number generation:
+add r5, r5, r5
+addi r5, r5, 7
+andi r5, r5, 63 // 63=6'b111111 = 6'd63 which is the closest number to 71 written with just ones
+addi r2, r5, 0
 
 addi r1, r0, 0
 sub r4, r4, r3,
@@ -51,3 +56,6 @@ srl/sra r2, r2, r3 //divide by 2(right shift by 1) because every iteration has 2
 sub r2, r2, r3           
 bne r2, r0, (-1) // branch if r2 !=r0  // random delay
 j start
+
+/* implemented similar logic like in assembly.txt just instead of mod 71 I am using AND with 6'b111111 = 63 which is very 
+close to 72 (3 seconds) but gives random values with NO REPETITION. The delay is much tidier and memory efficient.*/
