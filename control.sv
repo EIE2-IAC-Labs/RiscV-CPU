@@ -1,96 +1,76 @@
 module control #(
     parameter ADDRESS_WIDTH = 32
 ) (
-    input logic                         zero_i,         // flag for if zero result in ALU
-    input logic [ADDRESS_WIDTH-1:0]     instr_i,        // input instruction
+    input logic                         zero_i,         // flag for if zero result in ALU TODO: REMOVE???
+    input logic [ADDRESS_WIDTH-1:0]     op_i,           // input opcode, last 7 bits of instr
+    input logic [2:0]                   funct3_i,
+    input logic                         funct7bit_i,    // bit 30 of instruction         
     output logic                        regWrite_en_o,  // Register write enable
     output logic [3:0]                  ALUctrl_o,      // determines alu op
     output logic                        ALUsrc_o,       // selects immOp or regOp
-    output logic [2:0]                  IMMctrl_o,      // control signal for sign extension
-    output logic                        PCsrc_o         // selects between branch or incr pc
+    output logic [2:0]                  immSrc_o,       // control signal for sign extension
+    output logic                        BRANCHsrc_o,    // gives control of PCsrc to branchctrl module
+    output logic                        addrSelect_o    // toggles between word / byte addressing in RAM
 );
-    logic [6:0] opcode;
-    assign opcode = instr_i[6:0];
+
+    assign BRANCHsrc_o = (op_i == 7'b1100011) ? 1'b1 : 1'b0;
+    assign ALUsrc_o = ((op_i == 7'b0010011) || (op_i == 7'b0000011)) ? 1'b1 : 1'b0; 
+    assign regWrite_en_o = ((op_i == 7'b0110011) || (op_i == 7'b0010011) || (op_i == 7'b0000011)) ? 1'b1 : 1'b0;
+    
 
     always_comb begin
-        case (opcode)
-            7'b0110011: // R-type instructions
-                case (instr_i[14:12]) // switch-casing funct3, as this determines the ops
+        case (op_i)
+            7'b0110011, 7'b0010011: // R-type and I-type bitwise instructions
+                case (funct3_i) // switch-casing funct3, as this determines the ops
                     3'b000:
-                        if (instr_i[30]) begin // bit 5 of funct7
+                        if (funct7bit_i) begin // bit 5 of funct7
                             ALUctrl_o = 4'b0001; // sub
                         end else begin
                             ALUctrl_o = 4'b0000; // add
                         end    
-                    // 3'b001: // sll
-                    3'b010: ALU_ctrl_o = 4'b0101 // slt
-                    3'b011: ALU_ctrl_o = 4'b0110 // sltu
-                    // 3'b100: // xor
-                    // 3'b101:
-                    //     if (instr_i[30]) begin
-                    //         // shift right arithmetic
-                    //     end else begin
-                    //         // shift right logical
-                    //     end
-                    3'b110: ALUctrl_o = 4'b0011// or
-                    3'b111: ALUctrl_o = 4'b0010// and
+                    3'b001: ALUctrl_o = 4'b1000; // sll | slli
+                    3'b010: ALUctrl_o = 4'b0101; // slt | slti
+                    3'b011: ALUctrl_o = 4'b0110; // sltu | sltiu
+                    3'b100: ALUctrl_o = 4'b0100; // xor | xori
+                    3'b101:
+                        if (funct7bit_i) begin
+                            ALUctrl_o = 4'b1001; // shift right arithmetic
+                        end else begin
+                            ALUctrl_o = 4'b0111; // shift right logical
+                        end
+                    3'b110: ALUctrl_o = 4'b0011; // or  
+                    3'b111: ALUctrl_o = 4'b0010; // and
                     default: ;
                 endcase
-            // 7'b0000011: // I-type load instructions
-            //     case (instr_i[14:12])
-            //         3'b000: // lb
-            //         3'b001: // lh
-            //         3'b010: // lw
-            //         3'b100: // lbu
-            //         3'b101: // lhu
-            //         default: $display("Immediate load: Something is very wrong");
-            //     endcase
-            // 7'b0010011: // I-type bitwise instructions
-            //     case (instr_i[14:12])
-            //         3'b000: // addi
-            //         3'b001: // slli  //TODO: DOES THIS NEED TO CHECK FOR FUNCT7 TO BE 0000000???!!?!?!?!?!
-            //         3'b010: // slti
-            //         3'b011: // sltiu, set less than immediate unsigned
-            //         3'b100: // xori
-            //         3'b101:
-            //             if (instr_i[30]) begin
-            //                 // srai
-            //             end else begin
-            //                 // srli
-            //             end
-            //         3'b110: // ori
-            //         3'b111: // andi
-            //         default: ;
-            //     endcase
-
-
-            ////////////////////////////////////////////
-            //////////////// ELKOUNY ///////////////////
-            ////////////////////////////////////////////
             
+            7'b0010011: immSrc_o = 3'b000; // note this is a parallel case statement
 
-            // 7'b0100011: // S-type instructions
-            //     case (instr_i[14:12])
-            //         3'b000: // sb, store byte
-            //         3'b001: // sh, store half
-            //         3'b010: // sw, store word
-            //         default: $display("Store: Something is very wrong");
-            //     endcase
-            // 7'b1100011: // B-type instructions
-                // case (instr_i[14:12])
-                //     3'b000: // beq
-                //     3'b001: // bne
-                //     3'b100: // blt
-                //     3'b101: // bge
-                //     3'b110: // bltu
-                //     3'b111: // bgeu
-                //     default: $display("Branch: Something is very wrong");
-                // endcase
+            7'b0000011: begin// I-type load instructions
+                immSrc_o = 3'b000; 
+                case (funct3_i)
+                    3'b000: ;// lb
+                    3'b001: ;// lh
+                    3'b010: ;// lw
+                    3'b100: ;// lbu
+                    3'b101: ;// lhu
+                    default: ;
+                endcase
+            end
+
+            7'b0100011: begin// S-type instructions
+                case (funct3_i)
+                    3'b000: // sb, store byte
+                    3'b001: // sh, store half
+                    3'b010: // sw, store word
+                    default: $display("Store: Something is very wrong");
+                endcase
+            end 
+            
             // 7'b0010111: // Add Upper Immediate to PC
             // 7'b0110111: // Load Upper Immediate
             // 7'b1100111: // Jump and Link Register
             // 7'b1101111: // Jump and Link 
-            default: $display("BIG PROBLEM");
+            default: immSrc_o = 3'b000; // this should have no effect if ALUsrc is 0, just precaution
         endcase
     end
 
