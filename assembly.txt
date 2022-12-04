@@ -1,17 +1,27 @@
-addi r1, r0, 0.
+// formula 1 lights assembly code
+
+addi r1, r0, 0.         //r1 is the register that stores the value for the lights on/off
 addi  r3, r3, 4.		//increase the address by 4
 NOP( 22 times)	//because we need delay of exactly one second=24 cycles
-addi r1, r0, 1.
-NOP( 23 times)
-addi r1, r0, 10.
-NOP( 23 times)
-addi r1, r0, 100.
-NOP( 23 times)
-addi r1, r0, 1000.
-NOP( 23 times)
-addi r1, r0, 10000.
-lw  r2 0(r3)		//store in r2 the value at address r3 from RAM
+addi r1, r0, 1. // r1 =1 -> one light on
+NOP( 23 times)  // after a second
+addi r1, r0, 10. // r1 =11 // -> two light on
+NOP( 23 times)  // after a second
+addi r1, r0, 100. // r1 =111 -> three light on
+NOP( 23 times)  // after a second
+addi r1, r0, 1000. // r1 =1111 -> four light on
+NOP( 23 times)  // after a second
+addi r1, r0, 10000. // r1 =11111 -> five light on
+lw  r2 0(r3)   //cycle 0		//store in r2 the value at address r3 from RAM
+addi  r4 r0, 2.   // cycle 1
+beq r2, r4, (go to 1) //cycle 2     // 2 cycles delay -> 2 is stored at addr(which follows the order from the sequence from file random_number.cpp)
+addi  r4 r0, 4. //cycle 3
+NOP //cycle 4
+beq r2, r4, (go to 1) //cycle 5     // 5 cycles delay -> 5 is stored at addr(which follows the order from the sequence from file random_number.cpp)
+NOP // cycle 6
+addi r4 r0, 8. // cycle 7
+beq r2, r4, (go to 1) //cycle 8     // 8 cycles delay -> 8 is stored at addr(which follows the order from the sequence from file random_number.cpp)
 
-TO DO: explain how to get random numbers, store the random numbers 
-in registers so the branch instructions could be used, explain why 
-are the branch instructions needed
+/* we can continue using this logic to get different delays , the disadvantage is 
+that we can't make delays of consequtive number of cycles. In this case I decided to use the random numbers 2, 5 and 8 instead 1, 3, 9 */
+

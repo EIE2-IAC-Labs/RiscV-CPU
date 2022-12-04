@@ -8,7 +8,7 @@
 
    for (int i=0; i<50; i++){
      x=(a*x + b)%71;
-     std::cout<<x<< std::endl;
+     std::cout << x << std::endl;
    }
  }
 
