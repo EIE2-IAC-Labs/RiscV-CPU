@@ -13,7 +13,10 @@ module ALU #(
 );
 
 logic signed [DATAWIDTH-1:0] SrcA_Signed;
+logic signed [DATAWIDTH-1:0] SrcB_Signed;
+
 assign SrcA_Signed = SrcA_i;
+assign SrcB_Signed = SrcB_i;
 
 always_comb begin
     case (BranchCtrl_i)
@@ -31,32 +34,14 @@ always_comb begin
 
         //<
         3'b010: begin
-                    if( SrcA_i == SrcB_i) Zero_o = 0;
-                    else if ((SrcA_i [DATAWIDTH - 1] == 0'b0) && (SrcB_i [DATAWIDTH - 1] == 0'b1)) Zero_o = 0;
-                    else if ((SrcA_i [DATAWIDTH - 1] > SrcB_i [DATAWIDTH - 1])) Zero_o = 1;
-                    else if ((SrcA_i [DATAWIDTH - 1] == 0'b0) && (SrcB_i [DATAWIDTH - 1] == 0'b0)) begin
-                        if (SrcA_i [DATAWIDTH - 2:0] > SrcB_i [DATAWIDTH - 2:0]) Zero_o = 0;
-                        else Zero_o = 1;
-                    end
-                    else if ((SrcA_i [DATAWIDTH - 1] == 1'b1) && (SrcB_i [DATAWIDTH - 1] == 1'b1)) begin
-                        if (SrcA_i [DATAWIDTH - 2:0] > SrcB_i [DATAWIDTH - 2:0]) Zero_o = 0;
-                        else Zero_o = 1;
-                    end
+                    if(SrcA_Signed < SrcB_Signed) Zero_o = 1;
+                    else Zero_o = 0;
                 end
 
         //>=
         3'b011: begin
-                    if( SrcA_i == SrcB_i) Zero_o = 1;
-                    else if ((SrcA_i [DATAWIDTH - 1] == 0'b0) && (SrcB_i [DATAWIDTH - 1] == 0'b1)) Zero_o = 1;
-                    else if ((SrcA_i [DATAWIDTH - 1] > SrcB_i [DATAWIDTH - 1])) Zero_o = 0;
-                    else if ((SrcA_i [DATAWIDTH - 1] == 0'b0) && (SrcB_i [DATAWIDTH - 1] == 0'b0)) begin
-                        if (SrcA_i [DATAWIDTH - 2:0] > SrcB_i [DATAWIDTH - 2:0]) Zero_o = 1;
-                        else Zero_o = 0;
-                    end
-                    else if ((SrcA_i [DATAWIDTH - 1] == 1'b1) && (SrcB_i [DATAWIDTH - 1] == 1'b1)) begin
-                        if (SrcA_i [DATAWIDTH - 2:0] > SrcB_i [DATAWIDTH - 2:0]) Zero_o = 1;
-                        else Zero_o = 0;
-                    end
+                    if(SrcA_Signed >= SrcB_Signed) Zero_o = 1;
+                    else Zero_o = 0;
                 end
 
         //< unsigned
@@ -94,17 +79,8 @@ always_comb begin
 
         //signed less than
         4'b0101: begin
-                    if( SrcA_i == SrcB_i) ALUResult_o = 0;
-                    else if ((SrcA_i [DATAWIDTH - 1] == 0'b0) && (SrcB_i [DATAWIDTH - 1] == 0'b1)) ALUResult_o = 0;
-                    else if ((SrcA_i [DATAWIDTH - 1] > SrcB_i [DATAWIDTH - 1])) ALUResult_o = 1;
-                    else if ((SrcA_i [DATAWIDTH - 1] == 0'b0) && (SrcB_i [DATAWIDTH - 1] == 0'b0)) begin
-                        if (SrcA_i [DATAWIDTH - 2:0] > SrcB_i [DATAWIDTH - 2:0]) ALUResult_o = 0;
-                        else ALUResult_o = 1;
-                    end
-                    else if ((SrcA_i [DATAWIDTH - 1] == 1'b1) && (SrcB_i [DATAWIDTH - 1] == 1'b1)) begin
-                        if (SrcA_i [DATAWIDTH - 2:0] > SrcB_i [DATAWIDTH - 2:0]) ALUResult_o = 0;
-                        else ALUResult_o = 1;
-                    end
+                    if(SrcA_Signed >= SrcB_Signed) ALUResult_o = 0;
+                    else ALUResult_o = 1;
                 end
         //unsigned less than
         4'b0110: begin
