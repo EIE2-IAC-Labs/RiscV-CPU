@@ -1,10 +1,7 @@
 # Group 14 IAC Coursework
 ##### Nik Lewis, Benedict Short, Ana Dimoska, Ahmed Elkouny
-- [x]  ALU ctrl codes
-- [ ]  outline what operations we need for the first version of the CPU
-- [x]  Come up with input, output
-- [ ]  come up with surround logic that drives the ALU
 
+## File Written By Benedict Short
 
 To start with the project am doing the follow:
 - [x] register file
@@ -18,48 +15,28 @@ To start with the project am doing the follow:
 
 ### Input
 
-- SrcA_i
-- SrcB_i
-- ALUctrl_i
-- BranchCtrl_i
+- ImmSrc_i [1:0]
+- Imm_i
 
 ### Output
 
-- ALUResult_o
-- Zero_o
-
-Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
-
-| ALUctrl | operation | Fully Tested? |
-| --- | --- | --- |
-| 0000 | add | y |
-| 0001 | sub | y |
-| 0010 | bitwise and | y |
-| 0011 | bitwise or | y |
-| 0100 | xor | y |
-| 0101 | SLT | y |
-| 0110 | ULT | y |
-| 0111 | SRL | y |
-| 1000 | SLL | y |
-| 1001 | SRA | y |
-| 1010 | SLA | y |
+- ImmExt_o
 
 
-| BranchCtrl | operation | Fully Tested? |
-| --- | --- | --- |
-| 000 | Equal | y |
-| 001 | Not Equal | y |
-| 010 | < | y |
-| 011 | >= | y |
-| 100 | < unsigned | y |
-| 101 | >= unsigned | y |
+### Input Scheme:
+| ImmSrc | instruction word bits into imm_i | bit size | Use Case | Implemented? | Fully Tested? |
+| --- | --- | --- | --- | --- | --- |
+| 000 | instruction[31:20] | [11:0] | I and S type | n | n |
+| 001 | instruction[31:25], instruction[11:7] | [11:5],[4:0] | I and S type | n | n |
+| 010 | instruction[31], instruction[7], instruction[30:25], instruction[4:1] | [12], [11], [10:5], [4:1] | branch offset | n | n |
+| 011 | instruction[31:12] | [19:0] | U and I Type | n | n |
+| 100 | instruction[31], instruction[19:12], instruction[11]instruction [30:21] | [20], [19:12], [11], [10:1] | U and I Type | n | n |
 
 
-TO ADD:
-- [x] bitwise shift left
-- [x] bitwise shift right
-- [x] Implement Zero_o logic
-- [x] Implement SRA and SLA
-- [x] implement Xor
-- [x] implement branch logic
-- [ ] check the overlap between ALUctrl and branchctrl
+TODO:
+- [ ] check if bit 1 from 0b10 goes to 0 (slide 20 L6)
+- [x] decide schema and operations to implement
+- [ ] implement schema and operations
+- [ ] test schema and operations
+
+
