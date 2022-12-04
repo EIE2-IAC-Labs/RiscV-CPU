@@ -41,8 +41,8 @@ Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
 | 0110 | ULT | y |
 | 0111 | SRL | y |
 | 1000 | SLL | y |
-| 1001 | SRA |  |
-| 1010 | SLA |  |
+| 1001 | SRA | y |
+| 1010 | SLA | y |
 
 
 | BranchCtrl | operation | Fully Tested? |
@@ -59,7 +59,7 @@ TO ADD:
 - [x] bitwise shift left
 - [x] bitwise shift right
 - [x] Implement Zero_o logic
-- [ ] Implement SRA and SLA
+- [x] Implement SRA and SLA
 - [x] implement Xor
 - [x] implement branch logic
 - [ ] check the overlap between ALUctrl and branchctrl
