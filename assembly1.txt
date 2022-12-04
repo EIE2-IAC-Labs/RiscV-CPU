@@ -1,0 +1,53 @@
+addi r3, r0, 1      //use r3 as the number 1 
+addi r4, r0, 11     //use r4 as the number 11 
+
+//start
+we store the random number in r2
+
+addi r1, r0, 0
+sub r4, r4, r3,
+bne r4, r0, (-1) // branch if r2 !=r0
+addi r4, r0, 11  // 11  because here we have +1 cycle and the next instr takes +1 cycle and every interation has 2 cycles
+
+addi r1, r0, 1. // r1 =1 -> one light on
+sub r4, r4, r3,
+bne r4, r0, (-1) // branch if r2 !=r0
+addi r4, r0, 11  // 11 because here we have +1 cycle and the next instr takes +1 cycle and every interation has 2 cycles
+
+
+addi r1, r0, 10. // r1 =11 // -> two lights on
+sub r4, r4, r3,
+bne r4, r0, (-1) // branch if r2 !=r0
+addi r4, r0, 11  // 11 because here we have +1 cycle and the next instr takes +1 cycle and every interation has 2 cycles
+
+addi r1, r0, 100. // r1 =111 -> three lights on
+sub r4, r4, r3,
+bne r4, r0, (-1) // branch if r2 !=r0
+addi r4, r0, 11  // 11 because here we have +1 cycle and the next instr takes +1 cycle and every interation has 2 cycles
+
+addi r1, r0, 1000. // r1 =1111 -> four lights on
+sub r4, r4, r3,
+bne r4, r0, (-1) // branch if r2 !=r0
+addi r4, r0, 11  // 11 because here we have +1 cycle and the next instr takes +1 cycle and every interation has 2 cycles
+
+addi r1, r0, 10000. // r1 =11111 -> five lights on
+sub r4, r4, r3,
+bne r4, r0, (-1) // branch if r2 !=r0
+addi r4, r0, 11  // 11 because here we have +1 cycle and the next instr takes +1 cycle and every interation has 2 cycles
+
+addi r1, r0, 100000. // r1 =111111 -> six lights on
+sub r4, r4, r3,
+bne r4, r0, (-1) // branch if r2 !=r0
+addi r4, r0, 11  // 11 because here we have +1 cycle and the next instr takes +1 cycle and every interation has 2 cycles
+
+addi r1, r0, 1000000. // r1 =1111111 -> seven lights on
+sub r4, r4, r3,
+bne r4, r0, (-1) // branch if r2 !=r0
+addi r4, r0, 11  // 11 because here we have +1 cycle and the next instr takes +1 cycle and every interation has 2 cycles
+
+addi r1, r0, 10000000. // r1 =11111111 -> eight lights on
+
+srl/sra r2, r2, r3 //divide by 2(right shift by 1) because every iteration has 2 cycles
+sub r2, r2, r3           
+bne r2, r0, (-1) // branch if r2 !=r0  // random delay
+j start
