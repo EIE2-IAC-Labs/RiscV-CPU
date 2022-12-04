@@ -50,4 +50,12 @@ Done by using `testbench_rom.cpp` and `instructions.mem`.
 
 # Assembly code
 
+---
+
+#### First attempt
+
 The code written in `assembly.txt` is using r1 to store the value that turns on and turns off the lights. The next light is turned on after 24 cycles = 1 second. All lights go off after random number of cycles. The random number is generated from `random_number.cpp` and it is stored in the RAM. More explanation is provided in the files `random_number.cpp` and `assembly.txt`.
+
+#### Second attempt
+
+The random numbers are generated with the code and don't repeat. The delay is much tidier and memory efficient. See `assembly1.txt` for more information.
