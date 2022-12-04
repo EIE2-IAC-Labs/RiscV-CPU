@@ -1,0 +1,17 @@
+addi r1, r0, 0.
+addi  r3, r3, 4.		//increase the address by 4
+NOP( 22 times)	//because we need delay of exactly one second=24 cycles
+addi r1, r0, 1.
+NOP( 23 times)
+addi r1, r0, 10.
+NOP( 23 times)
+addi r1, r0, 100.
+NOP( 23 times)
+addi r1, r0, 1000.
+NOP( 23 times)
+addi r1, r0, 10000.
+lw  r2 0(r3)		//store in r2 the value at address r3 from RAM
+
+TO DO: explain how to get random numbers, store the random numbers 
+in registers so the branch instructions could be used, explain why 
+are the branch instructions needed
