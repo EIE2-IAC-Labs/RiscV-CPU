@@ -35,5 +35,6 @@
 
 * Added an extra bit to ALUctrl (was 3, now 4) in order to account for extra instructions.
 > This was less of a creative decision and more of a necessity to allow all instructions to be represented.
+* Not including `lh`, `lbu`, `lhu`, `sh` instructions.
 * BranchSrc, ALUsrc and regWrite_en are driven by single assign statements, easier to debug. 
 * Currently deciding whether to do branching as part of the control or as part of the ALU. (elaborate)
