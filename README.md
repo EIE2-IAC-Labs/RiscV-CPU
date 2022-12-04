@@ -26,11 +26,11 @@ To start with the project am doing the follow:
 ### Input Scheme:
 | ImmSrc | instruction word bits into imm_i | bit size | Use Case | Implemented? | Fully Tested? |
 | --- | --- | --- | --- | --- | --- |
-| 000 | instruction[31:20] | [11:0] | I and S type | n | n |
-| 001 | instruction[31:25], instruction[11:7] | [11:5],[4:0] | I and S type | n | n |
-| 010 | instruction[31], instruction[7], instruction[30:25], instruction[4:1] | [12], [11], [10:5], [4:1] | branch offset | n | n |
-| 011 | instruction[31:12] | [19:0] | U and I Type | n | n |
-| 100 | instruction[31], instruction[19:12], instruction[11]instruction [30:21] | [20], [19:12], [11], [10:1] | U and I Type | n | n |
+| 000 | instruction[31:20] | [11:0] | I and S type | y | y |
+| 001 | instruction[31:25], instruction[11:7] | [11:5],[4:0] | I and S type | y | y |
+| 010 | instruction[31], instruction[7], instruction[30:25], instruction[4:1] | [12], [11], [10:5], [4:1] | branch offset | y | y |
+| 011 | instruction[31:12] | [19:0] | U and I Type | y | y |
+| 100 | instruction[31], instruction[19:12], instruction[11]instruction [30:21] | [20], [19:12], [11], [10:1] | U and I Type | y | n |
 
 
 TODO:
