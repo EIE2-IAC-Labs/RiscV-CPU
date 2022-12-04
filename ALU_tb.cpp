@@ -238,6 +238,23 @@ int main(int argc, char **argv, char **env) {
       top->SrcB_i = 2;
     } //0
 
+    //SRA
+    if(simcyc == 41){
+      top->SrcA_i = 10;
+      top->ALUctrl_i = 9;
+    } //5
+    if(simcyc == 43){
+      top->SrcA_i = -10;
+    } //-5
+
+    //SLA
+    if(simcyc == 45){
+      top->SrcA_i = 10;
+      top->ALUctrl_i = 10;
+    } //20
+    if(simcyc == 47){
+      top->SrcA_i = -10;
+    } //-20
 
     // either simulation finished, or 'q' is pressed
     if (Verilated::gotFinish()) 

@@ -12,6 +12,9 @@ module ALU #(
     output logic                        Zero_o
 );
 
+logic signed [DATAWIDTH-1:0] SrcA_Signed;
+assign SrcA_Signed = SrcA_i;
+
 always_comb begin
     case (BranchCtrl_i)
         //Zero
@@ -116,10 +119,10 @@ always_comb begin
         4'b01000: ALUResult_o = SrcA_i << shift;
 
         //SRA
-        4'b1001: ALUResult_o = {SrcA_i[DATAWIDTH-1], SrcA_i [DATAWIDTH - 2:0] >> shift};
+        4'b1001: ALUResult_o = SrcA_Signed >>> shift;
 
         //SLA
-        4'b1010: ALUResult_o = {SrcA_i[DATAWIDTH-1], SrcA_i [DATAWIDTH - 2:0] << shift};   
+        4'b1010: ALUResult_o = SrcA_Signed <<< shift;   
 
         default: ALUResult_o = 0;
     endcase
