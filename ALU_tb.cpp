@@ -243,16 +243,16 @@ int main(int argc, char **argv, char **env) {
       top->SrcA_i = 10;
       top->ALUctrl_i = 9;
     } //5
-    if(simcyc == 43){
+    if(simcyc == 42){
       top->SrcA_i = -10;
     } //-5
 
     //SLA
-    if(simcyc == 45){
+    if(simcyc == 43){
       top->SrcA_i = 10;
       top->ALUctrl_i = 10;
     } //20
-    if(simcyc == 47){
+    if(simcyc == 44){
       top->SrcA_i = -10;
     } //-20
 
