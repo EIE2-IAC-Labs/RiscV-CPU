@@ -1,7 +1,8 @@
 module control (
     input logic [6:0]                   op_i,           // input opcode, last 7 bits of instr
     input logic [2:0]                   funct3_i,
-    input logic                         funct7bit_i,    // bit 30 of instruction         
+    input logic                         funct7bit_i,    // bit 30 of instruction
+    output logic                        memWrite_en_o   // memory write enable         
     output logic                        regWrite_en_o,  // Register write enable
     output logic [3:0]                  ALUctrl_o,      // determines alu op
     output logic                        ALUsrc_o,       // selects immOp or regOp
@@ -11,6 +12,7 @@ module control (
     output logic                        ResultSrc_o     // toggles between using ALUresult and ReadData from RAM. 
 );
 
+    assign memWrite_en_o = (op_i ==  7'b0100011) ? 1'b1 : 1'b0;
     assign BranchSrc_o = (op_i == 7'b1100011) ? 1'b1 : 1'b0;
     assign ALUsrc_o = ((op_i == 7'b0010011) || (op_i == 7'b0000011)) ? 1'b1 : 1'b0; 
     assign regWrite_en_o = ((op_i == 7'b0110011) || (op_i == 7'b0010011) || (op_i == 7'b0000011)) ? 1'b1 : 1'b0;
