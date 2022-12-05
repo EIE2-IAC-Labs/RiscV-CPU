@@ -76,5 +76,19 @@ add r5, r5, r8                     // add the XOR bit at the end
  right shift the previous random number by 2 bytes and store the last byte then right shift by one byte and store the last byte.
  left shift the previous number by 1 byte and add the XORed bytes.
 
+ right shift (unsigned) r6 r5 by 16
+ store last bit at addr 4
+ right shift (unsigned) r6 r6 by 8,
+ store last bit at addr 8,
+ load byte from address 4 in reg r6 
+ addi r6, 8'hff                         // because it's signed
+ load byte from address 8 in reg r7
+ addi r7, 7'hff                         // because it's signed
+ xor r8, r7, r6
+ left shift r5 by 8,                    // left shift by one byte
+ add r5, r5,  r8                          // add the XORed byte
+
+
+
 
 
