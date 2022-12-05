@@ -34,6 +34,13 @@ module cpu #(
     logic BranchSrcWire;
     logic addrSelectWire;
     logic ResultSrcWire;
+    // register wires
+    logic [4:0] rs1Wire;
+    logic [4:0] rs2Wire;
+    logic [4:0] rdWire;
+    logic [DW-1:0] wd3Wire;
+
+
 
 
     assign inc_PC = PC_wire+4;
@@ -70,6 +77,26 @@ module cpu #(
         addrSelect_o(addrSelectWire),
         ResultSrc_o(ResultSrcWire)
     );
+    assign rs1Wire=InstructionWire[19:15];
+    assign rs2Wire=InstructionWire[24:20];
+    assign rdWire=InstructionWire[11:7];
+
+
+    register register(
+        .clk(clk),
+        .AD1_i(rs1Wire),
+        .AD2_i(rs2Wire),
+        .AD3_i(rdWire),
+        .WE3_i(regWrite_enWire),
+        .WD3_i(wd3Wire),
+
+        .RD1_o(RD1Wire),
+        .RD2_o(RD2Wire),
+        .a0_o(data_out)
+
+    );
+
+    
 
 
 
