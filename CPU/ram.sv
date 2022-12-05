@@ -10,7 +10,7 @@ module ram #(
     output logic [WIDTH-1:0] rd_o
 );
 
-logic [DATA_W-1:0] ram_array [12'hFFF : 12'h0]; 
+logic [DATA_W-1:0] ram_array [32'hFFF : 32'h0]; 
 
 initial begin 
     $display  ("Loading ram.");
