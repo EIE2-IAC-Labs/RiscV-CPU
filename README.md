@@ -64,3 +64,4 @@ TO ADD:
 - [x] implement Xor
 - [x] implement branch logic
 - [ ] check the overlap between ALUctrl and branchctrl
+- [ ] change shift so we shift op1 by op2
