@@ -7,10 +7,11 @@
 - [x] Create Basic Skeleton
 - [x] Fill in R-Type Instructions
 - [x] Fill in I-Type Load instructions
-- [ ] Fill in I-Type Bitwise instructions
-- [ ] Fill in S-Type instructions
-- [ ] Fill in B-Type instructions
-- [ ] Miscellaneous instructions at the bottom (probably not required but might do anyway. These might require more work.)
+- [x] Fill in I-Type Bitwise instructions
+- [x] Fill in S-Type instructions
+- [x] Fill in B-Type instructions
+- [x] Create testbench and doit.sh file
+- [ ] Jump and Link Instructions
 
 ---
 
