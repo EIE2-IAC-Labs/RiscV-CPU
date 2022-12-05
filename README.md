@@ -61,8 +61,8 @@ The random numbers are generated with the code and don't repeat. The delay is mu
 
 #### 3rd version of the random number generator
 
-The random numbers are generated with the code by left shifting the previous random number and putting the `XORed` `5th` and `6th` bit as last bit. 
+The random numbers are generated with the code by left shifting the previous random number and putting the `XORed` `5th` and `6th` bit as last bit. See `assembly1.txt` for more information.
 
 #### 4th version of the random number generator
-The random numbers are generated with the code by storing the 4th and 3rd byte and XORing them. The XORed byte is added to the previously left shifted number by one byte.
+The random numbers are generated with the code by storing the `4th` and `3rd` byte and `XORing` them. The XORed byte is added to the previously left shifted number by one byte. See `assembly1.txt` for more information.
 
