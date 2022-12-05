@@ -42,6 +42,7 @@ module cpu #(
     // extend wire
     logic [24:0] ImmediateWire;
     logic [DW-1:0] ImmediateExtendWire;
+    // alu wires
 
 
 
@@ -106,6 +107,21 @@ module cpu #(
 
         ImmExt_o(ImmediateExtendWire)
     );
+    assign Aluop2Wire=ALUsrcWire ? ImmediateExtendWire : RD2Wire;
+
+    ALU ALU(
+        .SrcA_i(RD1Wire),
+        .SrcB_i(Aluop2Wire),
+        .ALUctrl_i(ALUctrlWire),
+        .BranchCtrl_i(funct3),
+        
+        .ALUResult_o(ALUResultWire),
+        .Branch_o(branchWire)
+    );
+
+    PCsrcWire = BranchSrcWire ? branchWire : 1'b0;
+    
+
 
     
 
