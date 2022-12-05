@@ -39,10 +39,13 @@ module cpu #(
     logic [4:0] rs2Wire;
     logic [4:0] rdWire;
     logic [DW-1:0] wd3Wire;
+    // extend wire
+    logic [24:0] ImmediateWire;
+    logic [DW-1:0] ImmediateExtendWire;
 
 
 
-
+    assign branch_PC=PC_wire+ImmediateExtendWire;
     assign inc_PC = PC_wire+4;
     assign next_PC = PCsrcWire ? inc_PC : branch_PC;
     PC PC(
@@ -93,8 +96,21 @@ module cpu #(
         .RD1_o(RD1Wire),
         .RD2_o(RD2Wire),
         .a0_o(data_out)
-
     );
+
+    assign ImmediateWire=InstructionWire[31:7];
+    
+    extend extend(
+        ImmSrc_i(ImmSrcWire),
+        Imm_i(ImmediateWire),
+
+        ImmExt_o(ImmediateExtendWire)
+    );
+
+    
+
+
+
 
     
 
