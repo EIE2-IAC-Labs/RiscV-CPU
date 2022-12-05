@@ -20,6 +20,7 @@ module cpu #(
     logic [DW-1:0]    Aluop2Wire;
     logic             branchWire;
     logic [DW-1:0] ALUResultWire;
+    
     // rom wires
     logic [DW-1:0] InstructionWire;
     // control wires
@@ -42,7 +43,8 @@ module cpu #(
     // extend wire
     logic [24:0] ImmediateWire;
     logic [DW-1:0] ImmediateExtendWire;
-    // alu wires
+    // ram wire
+    logic [DW-1:0] RamOutWire;
 
 
 
@@ -119,23 +121,20 @@ module cpu #(
         .Branch_o(branchWire)
     );
 
-    PCsrcWire = BranchSrcWire ? branchWire : 1'b0;
-    
+    assign PCsrcWire = BranchSrcWire ? branchWire : 1'b0;
 
+    ram ram(
+        .clk_i(clk),
+        .write_en_i(memWrite_enWire),
+        .a_i(ALUResultWire),
+        .AddrsCtrl_i(addrSelectWire),
+        .wd_i(RD2Wire),
 
-    
+        .rd_o(RamOutWire)
 
+    );
 
-
-
-    
-
-
-
-
-    
-
-
+    assign wd3Wire = ResultSrcWire ? RamOutWire : ALUResultWire ;
 
 
 endmodule
