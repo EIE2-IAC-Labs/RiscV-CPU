@@ -26,7 +26,7 @@ To start with the project am doing the follow:
 ### Output
 
 - ALUResult_o
-- Zero_o
+- Branch_o
 
 Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
 
@@ -64,4 +64,4 @@ TO ADD:
 - [x] implement Xor
 - [x] implement branch logic
 - [ ] check the overlap between ALUctrl and branchctrl
-- [ ] change shift so we shift op1 by op2
+- [x] change shift so we shift op1 by op2
