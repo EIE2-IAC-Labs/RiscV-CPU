@@ -6,7 +6,6 @@ module ALU #(
     input logic [DATAWIDTH-1:0]         SrcB_i,
     input logic [3:0]                   ALUctrl_i,
     input logic [2:0]                   BranchCtrl_i,
-    input logic [SHIFT_WIDTH-1:0]       shift,
 
     output logic [DATAWIDTH-1:0]        ALUResult_o,
     output logic                        Branch_o
@@ -95,10 +94,10 @@ always_comb begin
         4'b0100: ALUResult_o = SrcA_i << shift;
 
         //SRA
-        4'b1001: ALUResult_o = SrcA_Signed >>> shift;
+        4'b1001: ALUResult_o = SrcA_Signed >>> SrcB_i[SHIFT_WIDTH-1:0];
 
         //SLA
-        4'b1010: ALUResult_o = SrcA_Signed <<< shift;   
+        4'b1010: ALUResult_o = SrcA_Signed <<< SrcB_i[SHIFT_WIDTH-1:0];;   
 
         //LW
         4'b1111: ALUResult_o = SrcB_i;
