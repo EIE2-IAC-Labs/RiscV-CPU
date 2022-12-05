@@ -97,7 +97,7 @@ always_comb begin
         4'b1001: ALUResult_o = SrcA_Signed >>> SrcB_i[SHIFT_WIDTH-1:0];
 
         //SLA
-        4'b1010: ALUResult_o = SrcA_Signed <<< SrcB_i[SHIFT_WIDTH-1:0];;   
+        4'b1010: ALUResult_o = SrcA_Signed <<< SrcB_i[SHIFT_WIDTH-1:0];
 
         //LW
         4'b1111: ALUResult_o = SrcB_i;
