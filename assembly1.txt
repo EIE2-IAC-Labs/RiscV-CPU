@@ -62,7 +62,7 @@ close to 72 (3 seconds) but gives random values with NO REPETITION. The delay is
 
 
 //random number generation 3rd way max 63:
-separate the 5th and 4th bit by shifting, then XOR them and put the bit at the end of the previously left shift shift random number by 1 bit
+separate the 5th and 4th bit by shifting, then XOR them and put the bit at the end of the previously left shifted random number by 1 bit
 
 right shift (unsigned) r6 r5 by 5. // save the 5th bit  
 andi r7 r5 (5'b11111)              // getting rid of the 5th bit
