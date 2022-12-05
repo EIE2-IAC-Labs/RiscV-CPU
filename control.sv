@@ -1,6 +1,5 @@
 module control (
-    // input logic                         zero_i,         // flag for if zero result in ALU TODO: REMOVE???
-    input logic [6:0]     op_i,           // input opcode, last 7 bits of instr
+    input logic [6:0]                   op_i,           // input opcode, last 7 bits of instr
     input logic [2:0]                   funct3_i,
     input logic                         funct7bit_i,    // bit 30 of instruction         
     output logic                        regWrite_en_o,  // Register write enable
@@ -48,6 +47,7 @@ module control (
             7'b1100011: ImmSrc_o = 3'b010; // B-Type instructions
 
             7'b0000011: begin // I-type load instructions
+                ALUctrl_o = 4'b1111;
                 ImmSrc_o = 3'b000;
                 case (funct3_i)
                     3'b000: // lb
@@ -59,6 +59,7 @@ module control (
             end
 
             7'b0100011: begin // S-type instructions
+                ALUctrl_o = 4'b1111;
                 ImmSrc_o = 3'b001;
                 case (funct3_i)
                     3'b000: // sb
