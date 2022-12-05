@@ -23,7 +23,6 @@ int main(int argc, char **argv, char **env) {
   // initialize simulation input 
   top->SrcA_i = 20;
   top->SrcB_i = 10;
-  top->shift = 1;
   top->ALUctrl_i = 0;
 
   // run simulation for MAX_SIM_CYC clock cycles
@@ -108,12 +107,14 @@ int main(int argc, char **argv, char **env) {
     //lsl
     if(simcyc == 15){
       top->SrcA_i = 10;
+      top->SrcB_i = 1;
       top->ALUctrl_i = 7;
     } //10
 
     //lsr
     if(simcyc == 16){
       top->SrcA_i = 10;
+      top->SrcB_i = 1;
       top->ALUctrl_i = 8;
     } //10
 
@@ -241,6 +242,7 @@ int main(int argc, char **argv, char **env) {
     //SRA
     if(simcyc == 41){
       top->SrcA_i = 10;
+      top->SrcB_i = 1;
       top->ALUctrl_i = 9;
     } //5
     if(simcyc == 42){
@@ -250,6 +252,7 @@ int main(int argc, char **argv, char **env) {
     //SLA
     if(simcyc == 43){
       top->SrcA_i = 10;
+      top->SrcB_i = 1;
       top->ALUctrl_i = 10;
     } //20
     if(simcyc == 44){
