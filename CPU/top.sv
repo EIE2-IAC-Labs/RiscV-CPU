@@ -1,13 +1,13 @@
-module cpu #(
+module top #(
     parameter DW=32
 ) (
-    input logic rst_i,
+    input logic rst,
     input logic trigger_i,
-    input logic clk_i,
-    output logic [7:0] data_out
+    input logic clk,
+
+    output logic [DW-1:0] data_out
 );
-    // extenstion block
-    
+   
     //pc wires
     logic [DW-1:0]        inc_PC;
     logic [DW-1:0]     branch_PC;
@@ -29,9 +29,9 @@ module cpu #(
     logic funct7;
     logic memWrite_enWire;
     logic regWrite_enWire;
-    logic ALUctrlWire;
+    logic [3:0] ALUctrlWire;
     logic ALUsrcWire;
-    logic ImmSrcWire;
+    logic [2:0] ImmSrcWire;
     logic BranchSrcWire;
     logic addrSelectWire;
     logic ResultSrcWire;
@@ -41,7 +41,7 @@ module cpu #(
     logic [4:0] rdWire;
     logic [DW-1:0] wd3Wire;
     // extend wire
-    logic [24:0] ImmediateWire;
+    logic [DW-1:0] ImmediateWire;
     logic [DW-1:0] ImmediateExtendWire;
     // ram wire
     logic [DW-1:0] RamOutWire;
@@ -50,19 +50,20 @@ module cpu #(
 
     assign branch_PC=PC_wire+ImmediateExtendWire;
     assign inc_PC = PC_wire+4;
-    assign next_PC = PCsrcWire ? inc_PC : branch_PC;
+    assign next_PC = PCsrcWire ? branch_PC : inc_PC;
+    
     PC PC(
         .clk(clk),
         .rst(rst),
         .PC_i(next_PC),
 
-        .PC_op(PC_wire)
+        .PC_o(PC_wire)
     );
 
     rom rom(
         .a_i(PC_wire),
 
-        rd_o(InstructionWire)
+        .rd_o(InstructionWire)
     );
 
     assign opcode = InstructionWire[6:0];
@@ -70,25 +71,25 @@ module cpu #(
     assign funct7 = InstructionWire[30];
 
     control control(
-        op_i(opcode),
-        funct3_i(funct3),
-        funct7bit_i(funct7),
+        .op_i(opcode),
+        .funct3_i(funct3),
+        .funct7bit_i(funct7),
 
-        memWrite_en_o(memWrite_enWire),
-        regWrite_en_o(regWrite_enWire),
-        ALUctrl_o(ALUctrlWire),
-        ALUsrc_o(ALUsrcWire),
-        ImmSrc_o(ImmSrcWire),
-        BranchSrc_o(BranchSrcWire),
-        addrSelect_o(addrSelectWire),
-        ResultSrc_o(ResultSrcWire)
+        .memWrite_en_o(memWrite_enWire),
+        .regWrite_en_o(regWrite_enWire),
+        .ALUctrl_o(ALUctrlWire),
+        .ALUsrc_o(ALUsrcWire),
+        .ImmSrc_o(ImmSrcWire),
+        .BranchSrc_o(BranchSrcWire),
+        .addrSelect_o(addrSelectWire),
+        .ResultSrc_o(ResultSrcWire)
     );
     assign rs1Wire=InstructionWire[19:15];
     assign rs2Wire=InstructionWire[24:20];
     assign rdWire=InstructionWire[11:7];
 
 
-    register register(
+    register_file register_file(
         .clk(clk),
         .AD1_i(rs1Wire),
         .AD2_i(rs2Wire),
@@ -101,13 +102,13 @@ module cpu #(
         .a0_o(data_out)
     );
 
-    assign ImmediateWire=InstructionWire[31:7];
+    assign ImmediateWire=InstructionWire;
     
     extend extend(
-        ImmSrc_i(ImmSrcWire),
-        Imm_i(ImmediateWire),
+        .ImmSrc_i(ImmSrcWire),
+        .Imm_i(ImmediateWire),
 
-        ImmExt_o(ImmediateExtendWire)
+        .ImmExt_o(ImmediateExtendWire)
     );
     assign Aluop2Wire=ALUsrcWire ? ImmediateExtendWire : RD2Wire;
 
