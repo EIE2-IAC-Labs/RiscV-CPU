@@ -43,6 +43,7 @@ Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
 | 1000 | SLL | y |
 | 1001 | SRA | y |
 | 1010 | SLA | y |
+| 1111 | Generic Load/Store | y |
 
 
 | BranchCtrl | operation | Fully Tested? |

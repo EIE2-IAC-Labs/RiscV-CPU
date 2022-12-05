@@ -9,7 +9,7 @@ module ALU #(
     input logic [SHIFT_WIDTH-1:0]       shift,
 
     output logic [DATAWIDTH-1:0]        ALUResult_o,
-    output logic                        Zero_o
+    output logic                        Branch_o
 );
 
 logic signed [DATAWIDTH-1:0] SrcA_Signed;
@@ -20,43 +20,43 @@ assign SrcB_Signed = SrcB_i;
 
 always_comb begin
     case (BranchCtrl_i)
-        //Zero
+        //Equal
         3'b000: begin
-                if(SrcA_i == SrcB_i) Zero_o = 1;
-                else Zero_o = 0;
+                if(SrcA_i == SrcB_i) Branch_o = 1;
+                else Branch_o = 0;
         end
 
         //Not equal
         3'b001: begin
-                if(SrcA_i != SrcB_i) Zero_o = 1;
-                else Zero_o = 0;
+                if(SrcA_i != SrcB_i) Branch_o = 1;
+                else Branch_o = 0;
         end
 
         //<
         3'b010: begin
-                    if(SrcA_Signed < SrcB_Signed) Zero_o = 1;
-                    else Zero_o = 0;
+                    if(SrcA_Signed < SrcB_Signed) Branch_o = 1;
+                    else Branch_o = 0;
                 end
 
         //>=
         3'b011: begin
-                    if(SrcA_Signed >= SrcB_Signed) Zero_o = 1;
-                    else Zero_o = 0;
+                    if(SrcA_Signed >= SrcB_Signed) Branch_o = 1;
+                    else Branch_o = 0;
                 end
 
         //< unsigned
         3'b100: begin
-                if(SrcA_i < SrcB_i) Zero_o = 1;
-                else Zero_o = 0;
+                if(SrcA_i < SrcB_i) Branch_o = 1;
+                else Branch_o = 0;
         end
 
         //>= unsigned
         3'b101: begin
-                if(SrcA_i >= SrcB_i) Zero_o = 1;
-                else Zero_o = 0;
+                if(SrcA_i >= SrcB_i) Branch_o = 1;
+                else Branch_o = 0;
         end
 
-        default: Zero_o = 0;
+        default: Branch_o = 0;
     endcase
 end
 
@@ -99,6 +99,9 @@ always_comb begin
 
         //SLA
         4'b1010: ALUResult_o = SrcA_Signed <<< shift;   
+
+        //LW
+        4'b1111: ALUResult_o = SrcB_i;
 
         default: ALUResult_o = 0;
     endcase
