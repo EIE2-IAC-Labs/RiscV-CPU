@@ -1,8 +1,9 @@
 module rom #(
     parameter  WIDTH = 32, 
-               DATA_W = 8 //because we have PC+4 so 4 * 8 = 32 bits
+               DATA_W = 8, //because we have PC+4 so 4 * 8 = 32 bits
+               PC_W = 12
 )(
-    input  logic [WIDTH-1:0] a_i,
+    input  logic [PC_W-1:0] a_i,
     output logic [WIDTH-1:0] rd_o
 );
 
