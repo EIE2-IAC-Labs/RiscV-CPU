@@ -7,6 +7,8 @@ module ram #(
     input  logic  AddrsCtrl_i,
     input  logic [WIDTH-1:0] a_i,
     input  logic [WIDTH-1:0] wd_i,
+
+    
     output logic [WIDTH-1:0] rd_o
 );
 
