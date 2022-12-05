@@ -6,18 +6,7 @@
 
 using namespace std;
 
-int main(int argc, char **argv, char **env){
-
-    Verilated::commandArgs(argc, argv);
-    //init top verilog instance
-    Vcontrol* top = new Vcontrol;
-
-    //init simulation inputs
-    top->op_i = 0b0110011;
-    top->funct3_i = 0b000;
-    top->funct7bit_i = 0b1;
-
-    top->eval();
+void display(Vcontrol* top){
 
     cout << endl;
     cout << "----- INPUTS ---------------------------" << endl << endl;
@@ -35,7 +24,66 @@ int main(int argc, char **argv, char **env){
     cout << "BranchSrc_o: " << bitset<1>(top->BranchSrc_o) << endl;
     cout << "addrSelect_o: " << bitset<1>(top->addrSelect_o) << endl;
     cout << "ResultSrc_o: " << bitset<1>(top->ResultSrc_o) << endl;
+}
 
+int main(int argc, char **argv, char **env){
+
+    Verilated::commandArgs(argc, argv);
+    //init top verilog instance
+    Vcontrol* top = new Vcontrol;
+
+    vector<int> funct3{0b000, 0b001, 0b010, 0b011, 0b100, 0b101, 0b110, 0b111};
+    vector<int> funct3_load_store{0b000, 0b001, 0b010, 0b100, 0b101};
+    vector<int> funct3_branch{0b000, 0b001, 0b100, 0b101, 0b110, 0b111};
+
+    top->op_i = 0b0110011; // Testing R-Type instructions
+    for(int i = 0; i < 8; i++){
+        top->funct3_i = funct3[i];
+        if (funct3[i] == 0b101){
+            top->funct7bit_i = 0b1;
+            top->eval();
+            display(top);
+            top->funct7bit_i = 0b0;
+        }
+        top->eval();
+        display(top);
+    }
+
+    top->op_i = 0b0010011;  // Testing I-Type Bitwise Instructions
+    for(int i = 0; i < 8; i++){
+        top->funct3_i = funct3[i];
+        if (funct3[i] == 0b101){
+            top->funct7bit_i = 0b1;
+            top->eval();
+            display(top);
+            top->funct7bit_i = 0b0;
+        }
+        top->eval();
+        display(top);
+    }
+
+    top->op_i = 0b0000011;  // Testing I-Type Load Instructions
+    for(int i = 0; i < 5; i++){
+        top->funct3_i = funct3_load_store[i];
+        top->eval();
+        display(top);
+    }
+
+    top->op_i = 0b0100011;  // Testing I-Type Store Instructions
+    for(int i = 0; i < 3; i++){
+        top->funct3_i = funct3_load_store[i];
+        top->eval();
+        display(top);
+    }
+
+    top->op_i = 0b1100011;  // Testing Branch Instructions
+    for(int i = 0; i < 6; i++){
+        top->funct3_i = funct3_branch[i];
+        top->eval();
+        display(top);
+    }
+
+    top->eval();
     exit(0);
 }
 
