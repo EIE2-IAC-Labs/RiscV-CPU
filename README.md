@@ -45,6 +45,8 @@ Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
 | 1000 | SLL | y |
 | 1001 | SRA | y |
 | 1010 | SLA | y |
+| 1011 | JAL | n |
+| 1100 | JALR | n |
 | 1111 | Generic Load/Store | y |
 
 
@@ -67,3 +69,5 @@ TO ADD:
 - [x] implement branch logic
 - [ ] check the overlap between ALUctrl and branchctrl
 - [x] change shift so we shift op1 by op2
+
+- [ ] test JAL and JALR

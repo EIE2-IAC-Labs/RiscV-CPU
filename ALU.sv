@@ -80,12 +80,12 @@ always_comb begin
         4'b0101: begin
                     if(SrcA_Signed >= SrcB_Signed) ALUResult_o = 0;
                     else ALUResult_o = 1;
-                end
+        end
         //unsigned less than
         4'b0110: begin
                     if (SrcA_i >= SrcB_i) ALUResult_o = 0;
                     else ALUResult_o = 1;
-                end
+        end
         
         //SRL
         4'b0111: ALUResult_o = SrcA_i >> SrcB_i[SHIFT_WIDTH-1:0];
@@ -98,6 +98,18 @@ always_comb begin
 
         //SLA
         4'b1010: ALUResult_o = SrcA_Signed <<< SrcB_i[SHIFT_WIDTH-1:0];
+
+        //JAL
+        4'b1011: begin
+                    ALUResult_o = SrcB_i;
+                    Branch_o = 1;
+        end
+
+        //JALR
+        4'b1100: begin
+                    ALUResult_o = SrcA_i + SrcB_i;
+                    Branch_o = 1;
+        end
 
         //LW
         4'b1111: ALUResult_o = SrcB_i;
