@@ -1,6 +1,6 @@
 # Group 14 IAC Coursework
 ##### Nik Lewis, Benedict Short, Ana Dimoska, Ahmed Elkouny
-##Component Written by Benedict Short
+## Component Written by Benedict Short
 
 - [x]  ALU ctrl codes
 - [ ]  outline what operations we need for the first version of the CPU
