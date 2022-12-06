@@ -28,6 +28,15 @@ class Vtop VL_NOT_FINAL : public VerilatedModel {
     VL_IN8(&clk,0,0);
     VL_IN8(&rst,0,0);
     VL_IN8(&trigger_i,0,0);
+    VL_OUT8(&opcode,6,0);
+    VL_OUT8(&funct3,2,0);
+    VL_OUT8(&funct7,0,0);
+    VL_OUT8(&rs1Wire,4,0);
+    VL_OUT8(&rs2Wire,4,0);
+    VL_OUT8(&rdWire,4,0);
+    VL_OUT(&PC_wire,31,0);
+    VL_OUT(&InstructionWire,31,0);
+    VL_OUT(&wd3Wire,31,0);
     VL_OUT(&data_out,31,0);
     VL_OUT(&RD1Wire,31,0);
     VL_OUT(&Aluop2Wire,31,0);

@@ -14,6 +14,15 @@ Vtop::Vtop(VerilatedContext* _vcontextp__, const char* _vcname__)
     , clk{vlSymsp->TOP.clk}
     , rst{vlSymsp->TOP.rst}
     , trigger_i{vlSymsp->TOP.trigger_i}
+    , opcode{vlSymsp->TOP.opcode}
+    , funct3{vlSymsp->TOP.funct3}
+    , funct7{vlSymsp->TOP.funct7}
+    , rs1Wire{vlSymsp->TOP.rs1Wire}
+    , rs2Wire{vlSymsp->TOP.rs2Wire}
+    , rdWire{vlSymsp->TOP.rdWire}
+    , PC_wire{vlSymsp->TOP.PC_wire}
+    , InstructionWire{vlSymsp->TOP.InstructionWire}
+    , wd3Wire{vlSymsp->TOP.wd3Wire}
     , data_out{vlSymsp->TOP.data_out}
     , RD1Wire{vlSymsp->TOP.RD1Wire}
     , Aluop2Wire{vlSymsp->TOP.Aluop2Wire}
@@ -124,9 +133,6 @@ VL_ATTR_COLD static void trace_init(void* voidSelf, VerilatedVcd* tracep, uint32
 VL_ATTR_COLD void Vtop___024root__trace_register(Vtop___024root* vlSelf, VerilatedVcd* tracep);
 
 VL_ATTR_COLD void Vtop::trace(VerilatedVcdC* tfp, int levels, int options) {
-    if (tfp->isOpen()) {
-        vl_fatal(__FILE__, __LINE__, __FILE__,"'Vtop::trace()' shall not be called after 'VerilatedVcdC::open()'.");
-    }
     if (false && levels && options) {}  // Prevent unused
     tfp->spTrace()->addModel(this);
     tfp->spTrace()->addInitCb(&trace_init, &(vlSymsp->TOP));

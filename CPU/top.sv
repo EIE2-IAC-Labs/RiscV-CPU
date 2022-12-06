@@ -5,11 +5,21 @@ module top #(
     input logic trigger_i,
     input logic clk,
 
-    output logic [DW-1:0] data_out,
+    output logic [DW-1:0]       PC_wire,
+    output logic [DW-1:0]       InstructionWire, 
+    output logic [6:0]          opcode,
+    output logic [2:0]          funct3,
+    output logic                funct7,
+    output logic [4:0]          rs1Wire,
+    output logic [4:0]          rs2Wire,
+    output logic [4:0]          rdWire,
+    output logic [DW-1:0]       wd3Wire,   
+    output logic [DW-1:0]       data_out,
     output logic [DW-1:0]       RD1Wire,
-    output logic [DW-1:0]    Aluop2Wire,
-    output logic [DW-1:0] ALUResultWire
-
+    output logic [DW-1:0]       Aluop2Wire,
+    output logic [DW-1:0]       ALUResultWire
+    // output logic [DW-1:0]       ImmediateWire,
+    // output logic [DW-1:0]       ImmediateExtendWire
 
 );
    
@@ -17,7 +27,7 @@ module top #(
     logic [DW-1:0]        inc_PC;
     logic [DW-1:0]     branch_PC;
     logic [DW-1:0]       next_PC;
-    logic [DW-1:0]       PC_wire;
+    // logic [DW-1:0]       PC_wire;
     logic              PCsrcWire;
     //alu wires
     // logic [DW-1:0]       RD1Wire;
@@ -27,11 +37,11 @@ module top #(
     // logic [DW-1:0] ALUResultWire;
     
     // rom wires
-    logic [DW-1:0] InstructionWire;
+    // logic [DW-1:0] InstructionWire;
     // control wires
-    logic [6:0] opcode;
-    logic [2:0] funct3;
-    logic funct7;
+    // logic [6:0] opcode;
+    // logic [2:0] funct3;
+    // logic funct7;
     logic memWrite_enWire;
     logic regWrite_enWire;
     logic [3:0] ALUctrlWire;
@@ -41,10 +51,10 @@ module top #(
     logic addrSelectWire;
     logic ResultSrcWire;
     // register wires
-    logic [4:0] rs1Wire;
-    logic [4:0] rs2Wire;
-    logic [4:0] rdWire;
-    logic [DW-1:0] wd3Wire;
+    // logic [4:0] rs1Wire;
+    // logic [4:0] rs2Wire;
+    // logic [4:0] rdWire;
+    // logic [DW-1:0] wd3Wire;
     // extend wire
     logic [DW-1:0] ImmediateWire;
     logic [DW-1:0] ImmediateExtendWire;

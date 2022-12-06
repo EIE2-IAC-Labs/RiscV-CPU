@@ -42,7 +42,7 @@ int main(int argc, char **argv, char **env) {
     }
      
     vbdCycle(simcyc);
-    top->rst = (simcyc < 2);    // assert reset for 1st cycle
+    // assert reset for 1st cycle
 
     vbdHex(3,(int(top->data_out)>>8)&0xF);
     vbdHex(2,(int(top->data_out)>>4)&0xF);
