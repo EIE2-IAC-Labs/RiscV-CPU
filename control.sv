@@ -2,21 +2,23 @@ module control (
     input logic [6:0]                   op_i,           // input opcode, last 7 bits of instr
     input logic [2:0]                   funct3_i,
     input logic                         funct7bit_i,    // bit 30 of instruction
-    output logic                        memWrite_en_o,   // memory write enable         
+    output logic                        memWrite_en_o,  // memory write enable         
     output logic                        regWrite_en_o,  // Register write enable
     output logic [3:0]                  ALUctrl_o,      // determines alu op
     output logic                        ALUsrc_o,       // selects immOp or regOp
     output logic [2:0]                  ImmSrc_o,       // control signal for sign extension
     output logic                        BranchSrc_o,    // gives control of PCsrc to branchctrl module
     output logic                        addrSelect_o,   // toggles between word / byte addressing in RAM
-    output logic                        ResultSrc_o     // toggles between using ALUresult and ReadData from RAM. 
+    output logic                        ResultSrc_o,    // toggles between using ALUresult and ReadData from RAM. 
+    output logic                        jal_o           // overrides PCbranch and WD3
 );
 
     assign memWrite_en_o = (op_i ==  7'b0100011) ? 1'b1 : 1'b0;
-    assign BranchSrc_o = (op_i == 7'b1100011) ? 1'b1 : 1'b0;
-    assign ALUsrc_o = ((op_i == 7'b0010011) || (op_i == 7'b0000011)) ? 1'b1 : 1'b0; 
-    assign regWrite_en_o = ((op_i == 7'b0110011) || (op_i == 7'b0010011) || (op_i == 7'b0000011)) ? 1'b1 : 1'b0;
+    assign BranchSrc_o = ((op_i == 7'b1100011) || (op_i == 7'b1100111) || (op_i == 7'b1101111)) ? 1'b1 : 1'b0;
+    assign ALUsrc_o = ((op_i == 7'b0010011) || (op_i == 7'b0000011) || (op_i == 7'b1100111) || (op_i == 7'b1101111)) ? 1'b1 : 1'b0; 
+    assign regWrite_en_o = ((op_i == 7'b0110011) || (op_i == 7'b0010011) || (op_i == 7'b0000011) || (op_i == 7'b1100111) || (op_i == 7'b1101111)) ? 1'b1 : 1'b0;
     assign ResultSrc_o = (op_i == 7'b0000011) ? 1'b1 : 1'b0;
+    assign jal_o = ((op_i == 7'b1100111) || (op_i == 7'b1101111)) ? 1'b1 : 1'b0;
     
     always_comb begin
 
@@ -74,8 +76,16 @@ module control (
             
             // 7'b0010111: // Add Upper Immediate to PC
             // 7'b0110111: // Load Upper Immediate
-            // 7'b1100111: // Jump and Link Register
-            // 7'b1101111: // Jump and Link 
+
+            7'b1100111: begin // Jump and Link Register
+                ImmSrc_o = 3'b100;
+                ALUctrl_o = 4'b1011; // ALU will forward SrcB to ALUresult, and set branch_o = 1
+            end
+
+            7'b1101111: begin // Jump and Link 
+                ImmSrc_o = 3'b100;
+                ALUctrl_o = 4'b1100;  // add srca and srcb, but set branch_o to 1
+            end
 
             default: ImmSrc_o = 3'b000; // this should have no effect if ALUsrc is 0, just precaution
         endcase

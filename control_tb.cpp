@@ -24,6 +24,7 @@ void display(Vcontrol* top){
     cout << "BranchSrc_o: " << bitset<1>(top->BranchSrc_o) << endl;
     cout << "addrSelect_o: " << bitset<1>(top->addrSelect_o) << endl;
     cout << "ResultSrc_o: " << bitset<1>(top->ResultSrc_o) << endl;
+    cout << "jal_o: " << bitset<1>(top->jal_o) << endl;
 }
 
 int main(int argc, char **argv, char **env){
@@ -82,6 +83,14 @@ int main(int argc, char **argv, char **env){
         top->eval();
         display(top);
     }
+
+    top->op_i = 0b1100111;
+    top->eval();
+    display(top);
+
+    top->op_i = 0b1101111;
+    top->eval();
+    display(top);
 
     top->eval();
     exit(0);
