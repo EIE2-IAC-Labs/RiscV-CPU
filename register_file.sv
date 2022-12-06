@@ -3,28 +3,35 @@ module register_file #(
                 DATA_WIDTH = 32
 )(
     input logic                             clk,
-    input logic [ADDRESS_WIDTH-1:0]         AD1,
-    input logic [ADDRESS_WIDTH-1:0]         AD2,
-    input logic [ADDRESS_WIDTH-1:0]         AD3,
-    input logic                             WE3,
-    input logic [DATA_WIDTH-1:0]            WD3,
+    input logic [ADDRESS_WIDTH-1:0]         AD1_i,
+    input logic [ADDRESS_WIDTH-1:0]         AD2_i,
+    input logic [ADDRESS_WIDTH-1:0]         AD3_i,
+    input logic                             WE3_i,
+    input logic [DATA_WIDTH-1:0]            WD3_i,
 
-    output logic [DATA_WIDTH-1:0]           RD1,
-    output logic [DATA_WIDTH-1:0]           RD2,
-    output logic [DATA_WIDTH-1:0]           a0  
+    output logic [DATA_WIDTH-1:0]           RD1_o,
+    output logic [DATA_WIDTH-1:0]           RD2_o,
+    output logic [DATA_WIDTH-1:0]           a0_o  
 );
 
 logic [DATA_WIDTH-1:0] register_array [2**ADDRESS_WIDTH-1:0];
+logic [DATA_WIDTH-1:0] a1;
 
+initial begin
+    for (int i = 0; i < $size(register_array); i++) begin
+        register_array[i] = 32'b0;
+    end
+end
 always_ff @(posedge clk) begin
-    if (WE3) register_array[AD3] <= WD3;
-   
+    if (WE3_i) register_array[AD3_i] <= WD3_i;
 end
-always_comb begin
-    RD1 = register_array[AD1];
-    RD2 = register_array[AD2];
+always_comb begin 
+    RD1_o = register_array[AD1_i];
+    RD2_o = register_array[AD2_i];
+    
 end
+assign  a0_o = register_array[10];
 
-assign  a0 = register_array[10];
+
 
 endmodule

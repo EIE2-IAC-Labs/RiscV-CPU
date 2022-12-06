@@ -7,7 +7,7 @@
 #include <sstream>
 
 #include "vbuddy.cpp"     // include vbuddy code
-#define MAX_SIM_CYC 50
+#define MAX_SIM_CYC 100
 
 int main(int argc, char **argv, char **env) {
   int simcyc;     // simulation clock count
@@ -24,7 +24,7 @@ int main(int argc, char **argv, char **env) {
  
   // init Vbuddy
   if (vbdOpen()!=1) return(-1);
-  vbdHeader("L3T2:kos");
+  vbdHeader("CPU!");
   vbdSetMode(0);        // Flag mode set to one-shot
 
   // initialize simulation inputs
@@ -42,11 +42,11 @@ int main(int argc, char **argv, char **env) {
     }
      
     vbdCycle(simcyc);
-    top->rst = (simcyc < 2);    // assert reset for 1st cycle
+    // assert reset for 1st cycle
 
-    vbdHex(3,(int(top->a0out)>>8)&0xF);
-    vbdHex(2,(int(top->a0out)>>4)&0xF);
-    vbdHex(1,int(top->a0out)&0xF);
+    vbdHex(3,(int(top->data_out)>>8)&0xF);
+    vbdHex(2,(int(top->data_out)>>4)&0xF);
+    vbdHex(1,int(top->data_out)&0xF);
 
 }
 vbdClose();     // ++++

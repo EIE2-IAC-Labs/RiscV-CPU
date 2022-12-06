@@ -2,7 +2,7 @@ module control (
     input logic [6:0]                   op_i,           // input opcode, last 7 bits of instr
     input logic [2:0]                   funct3_i,
     input logic                         funct7bit_i,    // bit 30 of instruction
-    output logic                        memWrite_en_o   // memory write enable         
+    output logic                        memWrite_en_o,   // memory write enable         
     output logic                        regWrite_en_o,  // Register write enable
     output logic [3:0]                  ALUctrl_o,      // determines alu op
     output logic                        ALUsrc_o,       // selects immOp or regOp
