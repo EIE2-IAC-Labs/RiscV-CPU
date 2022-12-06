@@ -15,6 +15,9 @@ Vtop::Vtop(VerilatedContext* _vcontextp__, const char* _vcname__)
     , rst{vlSymsp->TOP.rst}
     , trigger_i{vlSymsp->TOP.trigger_i}
     , data_out{vlSymsp->TOP.data_out}
+    , RD1Wire{vlSymsp->TOP.RD1Wire}
+    , Aluop2Wire{vlSymsp->TOP.Aluop2Wire}
+    , ALUResultWire{vlSymsp->TOP.ALUResultWire}
     , rootp{&(vlSymsp->TOP)}
 {
     // Register model with the context

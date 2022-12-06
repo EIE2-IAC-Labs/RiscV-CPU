@@ -16,7 +16,7 @@ always_comb begin
         0'b001: ImmExt_o = {{21{Imm_i[31]}}, Imm_i[30:25], Imm_i[11:7]};
 
         //instruction[31], instruction[7], instruction[30:25], instruction[4:1]
-        0'b010: ImmExt_o = {{20{Imm_i[31]}}, Imm_i[7], Imm_i[30:25], Imm_i[4:1], 1'b0};
+        0'b010: ImmExt_o = {{20{Imm_i[31]}}, Imm_i[7], Imm_i[30:25], Imm_i[11:8], 1'b0};
 
         //instruction[31:12]
         0'b011: ImmExt_o = {{13{Imm_i[31]}}, Imm_i[30:12]};

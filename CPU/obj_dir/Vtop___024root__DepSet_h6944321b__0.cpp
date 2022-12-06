@@ -30,12 +30,13 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
     __Vdlyvset__top__DOT__register_file__DOT__register_array__v0 = 0U;
     __Vdlyvset__top__DOT__ram__DOT__ram_array__v0 = 0U;
     __Vdlyvset__top__DOT__ram__DOT__ram_array__v4 = 0U;
+    VL_WRITEF("%10#\n",32,vlSelf->top__DOT__PC_wire);
     if ((((0x33U == (0x7fU & vlSelf->top__DOT__InstructionWire)) 
           | (0x13U == (0x7fU & vlSelf->top__DOT__InstructionWire))) 
          | (3U == (0x7fU & vlSelf->top__DOT__InstructionWire)))) {
         __Vdlyvval__top__DOT__register_file__DOT__register_array__v0 
             = ((3U == (0x7fU & vlSelf->top__DOT__InstructionWire))
-                ? vlSelf->top__DOT__RamOutWire : vlSelf->top__DOT__ALUResultWire);
+                ? vlSelf->top__DOT__RamOutWire : vlSelf->ALUResultWire);
         __Vdlyvset__top__DOT__register_file__DOT__register_array__v0 = 1U;
         __Vdlyvdim0__top__DOT__register_file__DOT__register_array__v0 
             = (0x1fU & (vlSelf->top__DOT__InstructionWire 
@@ -44,43 +45,41 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
     if (VL_UNLIKELY(((0x23U == (0x7fU & vlSelf->top__DOT__InstructionWire)) 
                      & (IData)(vlSelf->top__DOT__addrSelectWire)))) {
         VL_WRITEF("%3#%3#%3#%3#\n",8,vlSelf->top__DOT__ram__DOT__ram_array
-                  [(0xfffU & vlSelf->top__DOT__ALUResultWire)],
+                  [(0xfffU & vlSelf->ALUResultWire)],
                   8,vlSelf->top__DOT__ram__DOT__ram_array
-                  [(0xfffU & ((IData)(1U) + vlSelf->top__DOT__ALUResultWire))],
+                  [(0xfffU & ((IData)(1U) + vlSelf->ALUResultWire))],
                   8,vlSelf->top__DOT__ram__DOT__ram_array
-                  [(0xfffU & ((IData)(2U) + vlSelf->top__DOT__ALUResultWire))],
+                  [(0xfffU & ((IData)(2U) + vlSelf->ALUResultWire))],
                   8,vlSelf->top__DOT__ram__DOT__ram_array
-                  [(0xfffU & ((IData)(3U) + vlSelf->top__DOT__ALUResultWire))]);
+                  [(0xfffU & ((IData)(3U) + vlSelf->ALUResultWire))]);
         __Vdlyvval__top__DOT__ram__DOT__ram_array__v0 
             = (vlSelf->top__DOT__RD2Wire >> 0x18U);
         __Vdlyvset__top__DOT__ram__DOT__ram_array__v0 = 1U;
         __Vdlyvdim0__top__DOT__ram__DOT__ram_array__v0 
-            = (0xfffU & vlSelf->top__DOT__ALUResultWire);
+            = (0xfffU & vlSelf->ALUResultWire);
         __Vdlyvval__top__DOT__ram__DOT__ram_array__v1 
             = (0xffU & (vlSelf->top__DOT__RD2Wire >> 0x10U));
         __Vdlyvdim0__top__DOT__ram__DOT__ram_array__v1 
-            = (0xfffU & ((IData)(1U) + vlSelf->top__DOT__ALUResultWire));
+            = (0xfffU & ((IData)(1U) + vlSelf->ALUResultWire));
         __Vdlyvval__top__DOT__ram__DOT__ram_array__v2 
             = (0xffU & (vlSelf->top__DOT__RD2Wire >> 8U));
         __Vdlyvdim0__top__DOT__ram__DOT__ram_array__v2 
-            = (0xfffU & ((IData)(2U) + vlSelf->top__DOT__ALUResultWire));
+            = (0xfffU & ((IData)(2U) + vlSelf->ALUResultWire));
         __Vdlyvval__top__DOT__ram__DOT__ram_array__v3 
             = (0xffU & vlSelf->top__DOT__RD2Wire);
         __Vdlyvdim0__top__DOT__ram__DOT__ram_array__v3 
-            = (0xfffU & ((IData)(3U) + vlSelf->top__DOT__ALUResultWire));
+            = (0xfffU & ((IData)(3U) + vlSelf->ALUResultWire));
     }
     if (VL_UNLIKELY(((0x23U == (0x7fU & vlSelf->top__DOT__InstructionWire)) 
                      & (~ (IData)(vlSelf->top__DOT__addrSelectWire))))) {
         VL_WRITEF("%3#\n",8,vlSelf->top__DOT__ram__DOT__ram_array
-                  [(0xfffU & vlSelf->top__DOT__ALUResultWire)]);
+                  [(0xfffU & vlSelf->ALUResultWire)]);
         __Vdlyvval__top__DOT__ram__DOT__ram_array__v4 
             = (0xffU & vlSelf->top__DOT__RD2Wire);
         __Vdlyvset__top__DOT__ram__DOT__ram_array__v4 = 1U;
         __Vdlyvdim0__top__DOT__ram__DOT__ram_array__v4 
-            = (0xfffU & vlSelf->top__DOT__ALUResultWire);
+            = (0xfffU & vlSelf->ALUResultWire);
     }
-    vlSelf->top__DOT__PC_wire = ((IData)(vlSelf->rst)
-                                  ? 0U : vlSelf->top__DOT__next_PC);
     if (__Vdlyvset__top__DOT__register_file__DOT__register_array__v0) {
         vlSelf->top__DOT__register_file__DOT__register_array[__Vdlyvdim0__top__DOT__register_file__DOT__register_array__v0] 
             = __Vdlyvval__top__DOT__register_file__DOT__register_array__v0;
@@ -99,6 +98,8 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__ram__DOT__ram_array[__Vdlyvdim0__top__DOT__ram__DOT__ram_array__v4] 
             = __Vdlyvval__top__DOT__ram__DOT__ram_array__v4;
     }
+    vlSelf->top__DOT__PC_wire = ((IData)(vlSelf->rst)
+                                  ? 0U : vlSelf->top__DOT__next_PC);
     vlSelf->data_out = vlSelf->top__DOT__register_file__DOT__register_array
         [0xaU];
     vlSelf->top__DOT__InstructionWire = ((vlSelf->top__DOT__rom__DOT__rom_array
@@ -119,7 +120,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
                                                [(0xfffU 
                                                  & ((IData)(3U) 
                                                     + vlSelf->top__DOT__PC_wire))])));
-    vlSelf->top__DOT__RD1Wire = vlSelf->top__DOT__register_file__DOT__register_array
+    vlSelf->RD1Wire = vlSelf->top__DOT__register_file__DOT__register_array
         [(0x1fU & (vlSelf->top__DOT__InstructionWire 
                    >> 0xfU))];
     vlSelf->top__DOT__RD2Wire = vlSelf->top__DOT__register_file__DOT__register_array
@@ -313,7 +314,8 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
                                                           & (vlSelf->top__DOT__InstructionWire 
                                                              >> 0x14U)) 
                                                          | (0x1eU 
-                                                            & vlSelf->top__DOT__InstructionWire))))
+                                                            & (vlSelf->top__DOT__InstructionWire 
+                                                               >> 7U)))))
                                                    : 
                                                   ((3U 
                                                     == (IData)(vlSelf->top__DOT__ImmSrcWire))
@@ -341,12 +343,10 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
                                                               & (vlSelf->top__DOT__InstructionWire 
                                                                  >> 0x14U)))))
                                                      : 0U)))));
-    vlSelf->top__DOT__Aluop2Wire = (((0x13U == (0x7fU 
-                                                & vlSelf->top__DOT__InstructionWire)) 
-                                     | (3U == (0x7fU 
-                                               & vlSelf->top__DOT__InstructionWire)))
-                                     ? vlSelf->top__DOT__ImmediateExtendWire
-                                     : vlSelf->top__DOT__RD2Wire);
+    vlSelf->Aluop2Wire = (((0x13U == (0x7fU & vlSelf->top__DOT__InstructionWire)) 
+                           | (3U == (0x7fU & vlSelf->top__DOT__InstructionWire)))
+                           ? vlSelf->top__DOT__ImmediateExtendWire
+                           : vlSelf->top__DOT__RD2Wire);
     vlSelf->top__DOT__next_PC = (((0x63U == (0x7fU 
                                              & vlSelf->top__DOT__InstructionWire)) 
                                   & ((0x4000U & vlSelf->top__DOT__InstructionWire)
@@ -354,138 +354,103 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
                                              >> 0xdU)) 
                                          & ((0x1000U 
                                              & vlSelf->top__DOT__InstructionWire)
-                                             ? (vlSelf->top__DOT__RD1Wire 
-                                                >= vlSelf->top__DOT__Aluop2Wire)
-                                             : (vlSelf->top__DOT__RD1Wire 
-                                                < vlSelf->top__DOT__Aluop2Wire)))
+                                             ? (vlSelf->RD1Wire 
+                                                >= vlSelf->Aluop2Wire)
+                                             : (vlSelf->RD1Wire 
+                                                < vlSelf->Aluop2Wire)))
                                       : ((0x2000U & vlSelf->top__DOT__InstructionWire)
                                           ? ((0x1000U 
                                               & vlSelf->top__DOT__InstructionWire)
-                                              ? VL_GTES_III(32, vlSelf->top__DOT__RD1Wire, vlSelf->top__DOT__Aluop2Wire)
-                                              : VL_LTS_III(32, vlSelf->top__DOT__RD1Wire, vlSelf->top__DOT__Aluop2Wire))
+                                              ? VL_GTES_III(32, vlSelf->RD1Wire, vlSelf->Aluop2Wire)
+                                              : VL_LTS_III(32, vlSelf->RD1Wire, vlSelf->Aluop2Wire))
                                           : ((0x1000U 
                                               & vlSelf->top__DOT__InstructionWire)
-                                              ? (vlSelf->top__DOT__RD1Wire 
-                                                 != vlSelf->top__DOT__Aluop2Wire)
-                                              : (vlSelf->top__DOT__RD1Wire 
-                                                 == vlSelf->top__DOT__Aluop2Wire)))))
+                                              ? (vlSelf->RD1Wire 
+                                                 != vlSelf->Aluop2Wire)
+                                              : (vlSelf->RD1Wire 
+                                                 == vlSelf->Aluop2Wire)))))
                                   ? (vlSelf->top__DOT__PC_wire 
                                      + vlSelf->top__DOT__ImmediateExtendWire)
                                   : ((IData)(4U) + vlSelf->top__DOT__PC_wire));
-    vlSelf->top__DOT__ALUResultWire = ((8U & (IData)(vlSelf->top__DOT__ALUctrlWire))
-                                        ? ((4U & (IData)(vlSelf->top__DOT__ALUctrlWire))
-                                            ? ((2U 
-                                                & (IData)(vlSelf->top__DOT__ALUctrlWire))
-                                                ? (
-                                                   (1U 
-                                                    & (IData)(vlSelf->top__DOT__ALUctrlWire))
-                                                    ? vlSelf->top__DOT__Aluop2Wire
-                                                    : 0U)
-                                                : 0U)
-                                            : ((2U 
-                                                & (IData)(vlSelf->top__DOT__ALUctrlWire))
-                                                ? (
-                                                   (1U 
-                                                    & (IData)(vlSelf->top__DOT__ALUctrlWire))
-                                                    ? 0U
-                                                    : 
-                                                   (vlSelf->top__DOT__RD1Wire 
-                                                    << 
-                                                    (0x1fU 
-                                                     & vlSelf->top__DOT__Aluop2Wire)))
-                                                : (
-                                                   (1U 
-                                                    & (IData)(vlSelf->top__DOT__ALUctrlWire))
-                                                    ? 
-                                                   VL_SHIFTRS_III(32,32,5, vlSelf->top__DOT__RD1Wire, 
-                                                                  (0x1fU 
-                                                                   & vlSelf->top__DOT__Aluop2Wire))
-                                                    : 
-                                                   (vlSelf->top__DOT__RD1Wire 
-                                                    << 
-                                                    (0x1fU 
-                                                     & vlSelf->top__DOT__Aluop2Wire)))))
-                                        : ((4U & (IData)(vlSelf->top__DOT__ALUctrlWire))
-                                            ? ((2U 
-                                                & (IData)(vlSelf->top__DOT__ALUctrlWire))
-                                                ? (
-                                                   (1U 
-                                                    & (IData)(vlSelf->top__DOT__ALUctrlWire))
-                                                    ? 
-                                                   (vlSelf->top__DOT__RD1Wire 
-                                                    >> 
-                                                    (0x1fU 
-                                                     & vlSelf->top__DOT__Aluop2Wire))
-                                                    : 
-                                                   ((vlSelf->top__DOT__RD1Wire 
-                                                     >= vlSelf->top__DOT__Aluop2Wire)
-                                                     ? 0U
-                                                     : 1U))
-                                                : (
-                                                   (1U 
-                                                    & (IData)(vlSelf->top__DOT__ALUctrlWire))
-                                                    ? 
-                                                   (VL_GTES_III(32, vlSelf->top__DOT__RD1Wire, vlSelf->top__DOT__Aluop2Wire)
-                                                     ? 0U
-                                                     : 1U)
-                                                    : 
-                                                   (vlSelf->top__DOT__RD1Wire 
-                                                    ^ vlSelf->top__DOT__Aluop2Wire)))
-                                            : ((2U 
-                                                & (IData)(vlSelf->top__DOT__ALUctrlWire))
-                                                ? (
-                                                   (1U 
-                                                    & (IData)(vlSelf->top__DOT__ALUctrlWire))
-                                                    ? 
-                                                   (vlSelf->top__DOT__RD1Wire 
-                                                    | vlSelf->top__DOT__Aluop2Wire)
-                                                    : 
-                                                   (vlSelf->top__DOT__RD1Wire 
-                                                    & vlSelf->top__DOT__Aluop2Wire))
-                                                : (
-                                                   (1U 
-                                                    & (IData)(vlSelf->top__DOT__ALUctrlWire))
-                                                    ? 
-                                                   (vlSelf->top__DOT__RD1Wire 
-                                                    - vlSelf->top__DOT__Aluop2Wire)
-                                                    : 
-                                                   (vlSelf->top__DOT__RD1Wire 
-                                                    + vlSelf->top__DOT__Aluop2Wire)))));
+    vlSelf->ALUResultWire = ((8U & (IData)(vlSelf->top__DOT__ALUctrlWire))
+                              ? ((4U & (IData)(vlSelf->top__DOT__ALUctrlWire))
+                                  ? ((2U & (IData)(vlSelf->top__DOT__ALUctrlWire))
+                                      ? ((1U & (IData)(vlSelf->top__DOT__ALUctrlWire))
+                                          ? vlSelf->Aluop2Wire
+                                          : 0U) : 0U)
+                                  : ((2U & (IData)(vlSelf->top__DOT__ALUctrlWire))
+                                      ? ((1U & (IData)(vlSelf->top__DOT__ALUctrlWire))
+                                          ? 0U : (vlSelf->RD1Wire 
+                                                  << 
+                                                  (0x1fU 
+                                                   & vlSelf->Aluop2Wire)))
+                                      : ((1U & (IData)(vlSelf->top__DOT__ALUctrlWire))
+                                          ? VL_SHIFTRS_III(32,32,5, vlSelf->RD1Wire, 
+                                                           (0x1fU 
+                                                            & vlSelf->Aluop2Wire))
+                                          : (vlSelf->RD1Wire 
+                                             << (0x1fU 
+                                                 & vlSelf->Aluop2Wire)))))
+                              : ((4U & (IData)(vlSelf->top__DOT__ALUctrlWire))
+                                  ? ((2U & (IData)(vlSelf->top__DOT__ALUctrlWire))
+                                      ? ((1U & (IData)(vlSelf->top__DOT__ALUctrlWire))
+                                          ? (vlSelf->RD1Wire 
+                                             >> (0x1fU 
+                                                 & vlSelf->Aluop2Wire))
+                                          : ((vlSelf->RD1Wire 
+                                              >= vlSelf->Aluop2Wire)
+                                              ? 0U : 1U))
+                                      : ((1U & (IData)(vlSelf->top__DOT__ALUctrlWire))
+                                          ? (VL_GTES_III(32, vlSelf->RD1Wire, vlSelf->Aluop2Wire)
+                                              ? 0U : 1U)
+                                          : (vlSelf->RD1Wire 
+                                             ^ vlSelf->Aluop2Wire)))
+                                  : ((2U & (IData)(vlSelf->top__DOT__ALUctrlWire))
+                                      ? ((1U & (IData)(vlSelf->top__DOT__ALUctrlWire))
+                                          ? (vlSelf->RD1Wire 
+                                             | vlSelf->Aluop2Wire)
+                                          : (vlSelf->RD1Wire 
+                                             & vlSelf->Aluop2Wire))
+                                      : ((1U & (IData)(vlSelf->top__DOT__ALUctrlWire))
+                                          ? (vlSelf->RD1Wire 
+                                             - vlSelf->Aluop2Wire)
+                                          : (vlSelf->RD1Wire 
+                                             + vlSelf->Aluop2Wire)))));
     if (((0x23U != (0x7fU & vlSelf->top__DOT__InstructionWire)) 
          & (IData)(vlSelf->top__DOT__addrSelectWire))) {
         vlSelf->top__DOT__RamOutWire = ((vlSelf->top__DOT__ram__DOT__ram_array
-                                         [(0xfffU & vlSelf->top__DOT__ALUResultWire)] 
+                                         [(0xfffU & vlSelf->ALUResultWire)] 
                                          << 0x18U) 
                                         | ((vlSelf->top__DOT__ram__DOT__ram_array
                                             [(0xfffU 
                                               & ((IData)(1U) 
-                                                 + vlSelf->top__DOT__ALUResultWire))] 
+                                                 + vlSelf->ALUResultWire))] 
                                             << 0x10U) 
                                            | ((vlSelf->top__DOT__ram__DOT__ram_array
                                                [(0xfffU 
                                                  & ((IData)(2U) 
-                                                    + vlSelf->top__DOT__ALUResultWire))] 
+                                                    + vlSelf->ALUResultWire))] 
                                                << 8U) 
                                               | vlSelf->top__DOT__ram__DOT__ram_array
                                               [(0xfffU 
                                                 & ((IData)(3U) 
-                                                   + vlSelf->top__DOT__ALUResultWire))])));
+                                                   + vlSelf->ALUResultWire))])));
     }
     if (((0x23U != (0x7fU & vlSelf->top__DOT__InstructionWire)) 
          & (~ (IData)(vlSelf->top__DOT__addrSelectWire)))) {
         if ((1U & (~ (vlSelf->top__DOT__ram__DOT__ram_array
-                      [(0xfffU & ((IData)(3U) + vlSelf->top__DOT__ALUResultWire))] 
+                      [(0xfffU & ((IData)(3U) + vlSelf->ALUResultWire))] 
                       >> 7U)))) {
             vlSelf->top__DOT__RamOutWire = vlSelf->top__DOT__ram__DOT__ram_array
-                [(0xfffU & ((IData)(3U) + vlSelf->top__DOT__ALUResultWire))];
+                [(0xfffU & ((IData)(3U) + vlSelf->ALUResultWire))];
         }
         if ((0x80U & vlSelf->top__DOT__ram__DOT__ram_array
-             [(0xfffU & ((IData)(3U) + vlSelf->top__DOT__ALUResultWire))])) {
+             [(0xfffU & ((IData)(3U) + vlSelf->ALUResultWire))])) {
             vlSelf->top__DOT__RamOutWire = (0xffffff00U 
                                             | vlSelf->top__DOT__ram__DOT__ram_array
                                             [(0xfffU 
                                               & ((IData)(3U) 
-                                                 + vlSelf->top__DOT__ALUResultWire))]);
+                                                 + vlSelf->ALUResultWire))]);
         }
     }
 }

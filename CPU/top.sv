@@ -5,7 +5,12 @@ module top #(
     input logic trigger_i,
     input logic clk,
 
-    output logic [DW-1:0] data_out
+    output logic [DW-1:0] data_out,
+    output logic [DW-1:0]       RD1Wire,
+    output logic [DW-1:0]    Aluop2Wire,
+    output logic [DW-1:0] ALUResultWire
+
+
 );
    
     //pc wires
@@ -15,11 +20,11 @@ module top #(
     logic [DW-1:0]       PC_wire;
     logic              PCsrcWire;
     //alu wires
-    logic [DW-1:0]       RD1Wire;
+    // logic [DW-1:0]       RD1Wire;
     logic [DW-1:0]       RD2Wire;
-    logic [DW-1:0]    Aluop2Wire;
+    // logic [DW-1:0]    Aluop2Wire;
     logic             branchWire;
-    logic [DW-1:0] ALUResultWire;
+    // logic [DW-1:0] ALUResultWire;
     
     // rom wires
     logic [DW-1:0] InstructionWire;

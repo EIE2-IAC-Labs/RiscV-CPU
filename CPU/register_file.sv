@@ -15,6 +15,7 @@ module register_file #(
 );
 
 logic [DATA_WIDTH-1:0] register_array [2**ADDRESS_WIDTH-1:0];
+logic [DATA_WIDTH-1:0] a1;
 
 initial begin
     for (int i = 0; i < $size(register_array); i++) begin
@@ -27,7 +28,10 @@ end
 always_comb begin 
     RD1_o = register_array[AD1_i];
     RD2_o = register_array[AD2_i];
+    
 end
 assign  a0_o = register_array[10];
+
+
 
 endmodule
