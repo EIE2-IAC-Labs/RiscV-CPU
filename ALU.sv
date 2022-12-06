@@ -1,6 +1,6 @@
 module ALU #(
-    parameter DATAWIDTH =   32, 
-            SHIFT_WIDTH = 5
+    parameter DATAWIDTH =   32,
+                SHIFT_WIDTH = 5
 )(
     input logic [DATAWIDTH-1:0]         SrcA_i,
     input logic [DATAWIDTH-1:0]         SrcB_i,
@@ -13,50 +13,53 @@ module ALU #(
 
 logic signed [DATAWIDTH-1:0] SrcA_Signed;
 logic signed [DATAWIDTH-1:0] SrcB_Signed;
+logic                        overwrite_branch_o;
 
 assign SrcA_Signed = SrcA_i;
 assign SrcB_Signed = SrcB_i;
 
 always_comb begin
-    case (BranchCtrl_i)
-        //Equal
-        3'b000: begin
-                if(SrcA_i == SrcB_i) Branch_o = 1;
-                else Branch_o = 0;
-        end
-
-        //Not equal
-        3'b001: begin
-                if(SrcA_i != SrcB_i) Branch_o = 1;
-                else Branch_o = 0;
-        end
-
-        //<
-        3'b010: begin
-                    if(SrcA_Signed < SrcB_Signed) Branch_o = 1;
+    if(overwrite_branch_o == 1'b0)begin
+        case (BranchCtrl_i)
+            //Equal
+            3'b000: begin
+                    if(SrcA_i == SrcB_i) Branch_o = 1;
                     else Branch_o = 0;
-                end
+            end
 
-        //>=
-        3'b011: begin
-                    if(SrcA_Signed >= SrcB_Signed) Branch_o = 1;
+            //Not equal
+            3'b001: begin
+                    if(SrcA_i != SrcB_i) Branch_o = 1;
                     else Branch_o = 0;
-                end
+            end
 
-        //< unsigned
-        3'b100: begin
-                if(SrcA_i < SrcB_i) Branch_o = 1;
-                else Branch_o = 0;
-        end
+            //<
+            3'b010: begin
+                        if(SrcA_Signed < SrcB_Signed) Branch_o = 1;
+                        else Branch_o = 0;
+                    end
 
-        //>= unsigned
-        3'b101: begin
-                if(SrcA_i >= SrcB_i) Branch_o = 1;
-                else Branch_o = 0;
-        end
+            //>=
+            3'b011: begin
+                        if(SrcA_Signed >= SrcB_Signed) Branch_o = 1;
+                        else Branch_o = 0;
+                    end
 
-        default: Branch_o = 0;
-    endcase
+            //< unsigned
+            3'b100: begin
+                    if(SrcA_i < SrcB_i) Branch_o = 1;
+                    else Branch_o = 0;
+            end
+
+            //>= unsigned
+            3'b101: begin
+                    if(SrcA_i >= SrcB_i) Branch_o = 1;
+                    else Branch_o = 0;
+            end
+
+            default: Branch_o = 0;
+        endcase
+    end
 end
 
 always_comb begin
@@ -116,7 +119,11 @@ always_comb begin
 
         default: ALUResult_o = 0;
     endcase
-    
+end
+
+always_comb begin
+    if ((ALUctrl_i == 4'b1011) || (ALUctrl_i == 4'b1100)) overwrite_branch_o = 1;
+    else overwrite_branch_o = 0;
 end
 
 endmodule 
