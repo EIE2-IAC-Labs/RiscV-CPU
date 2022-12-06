@@ -1,6 +1,5 @@
 module top #(
-    parameter DATAWIDTH = 32,
-            SHIFT_WIDTH = 5
+    parameter DATAWIDTH = 32
 )(
     input logic [DATAWIDTH-1:0]         SrcA_i,
     input logic [DATAWIDTH-1:0]         SrcB_i,

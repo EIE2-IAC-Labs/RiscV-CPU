@@ -267,6 +267,13 @@ int main(int argc, char **argv, char **env) {
     } //-20
 
 
+    //JAL
+    //if(simcyc == 44){
+    //  top->SrcB_i = -10;
+    //  top->ALUctrl_i = 15;
+    //} //-20
+
+
     // either simulation finished, or 'q' is pressed
     if (Verilated::gotFinish()) 
       exit(0);
