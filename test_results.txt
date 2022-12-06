@@ -1,0 +1,513 @@
+----- INPUTS ---------------------------
+
+OP: 0110011 , FUNCT3: 000 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 0000
+ALUsrc_o: 0
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0110011 , FUNCT3: 001 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 1000
+ALUsrc_o: 0
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0110011 , FUNCT3: 010 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 0101
+ALUsrc_o: 0
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0110011 , FUNCT3: 011 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 0110
+ALUsrc_o: 0
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0110011 , FUNCT3: 100 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 0100
+ALUsrc_o: 0
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0110011 , FUNCT3: 101 , FUNCT7BIT: 1
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 1001
+ALUsrc_o: 0
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0110011 , FUNCT3: 101 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 0111
+ALUsrc_o: 0
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0110011 , FUNCT3: 110 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 0011
+ALUsrc_o: 0
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0110011 , FUNCT3: 111 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 0010
+ALUsrc_o: 0
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0010011 , FUNCT3: 000 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 0000
+ALUsrc_o: 1
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0010011 , FUNCT3: 001 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 1000
+ALUsrc_o: 1
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0010011 , FUNCT3: 010 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 0101
+ALUsrc_o: 1
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0010011 , FUNCT3: 011 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 0110
+ALUsrc_o: 1
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0010011 , FUNCT3: 100 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 0100
+ALUsrc_o: 1
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0010011 , FUNCT3: 101 , FUNCT7BIT: 1
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 1001
+ALUsrc_o: 1
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0010011 , FUNCT3: 101 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 0111
+ALUsrc_o: 1
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0010011 , FUNCT3: 110 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 0011
+ALUsrc_o: 1
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0010011 , FUNCT3: 111 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 0010
+ALUsrc_o: 1
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0000011 , FUNCT3: 000 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 1111
+ALUsrc_o: 1
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 1
+jal_o: 0
+Load Half, Load Half Unsigned and Load Byte Unsigned have not been implemented!!
+
+----- INPUTS ---------------------------
+
+OP: 0000011 , FUNCT3: 001 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 1111
+ALUsrc_o: 1
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 1
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0000011 , FUNCT3: 010 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 1111
+ALUsrc_o: 1
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 1
+ResultSrc_o: 1
+jal_o: 0
+Load Half, Load Half Unsigned and Load Byte Unsigned have not been implemented!!
+
+----- INPUTS ---------------------------
+
+OP: 0000011 , FUNCT3: 100 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 1111
+ALUsrc_o: 1
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 1
+ResultSrc_o: 1
+jal_o: 0
+Load Half, Load Half Unsigned and Load Byte Unsigned have not been implemented!!
+
+----- INPUTS ---------------------------
+
+OP: 0000011 , FUNCT3: 101 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 1111
+ALUsrc_o: 1
+ImmSrc_o: 000
+BranchSrc_o: 0
+addrSelect_o: 1
+ResultSrc_o: 1
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0100011 , FUNCT3: 000 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 0
+AluCtrl: 1111
+ALUsrc_o: 0
+ImmSrc_o: 001
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+Store Half has not been implemented!!
+
+----- INPUTS ---------------------------
+
+OP: 0100011 , FUNCT3: 001 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 0
+AluCtrl: 1111
+ALUsrc_o: 0
+ImmSrc_o: 001
+BranchSrc_o: 0
+addrSelect_o: 0
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 0100011 , FUNCT3: 010 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 0
+AluCtrl: 1111
+ALUsrc_o: 0
+ImmSrc_o: 001
+BranchSrc_o: 0
+addrSelect_o: 1
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 1100011 , FUNCT3: 000 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 0
+AluCtrl: 1111
+ALUsrc_o: 0
+ImmSrc_o: 010
+BranchSrc_o: 1
+addrSelect_o: 1
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 1100011 , FUNCT3: 001 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 0
+AluCtrl: 1111
+ALUsrc_o: 0
+ImmSrc_o: 010
+BranchSrc_o: 1
+addrSelect_o: 1
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 1100011 , FUNCT3: 100 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 0
+AluCtrl: 1111
+ALUsrc_o: 0
+ImmSrc_o: 010
+BranchSrc_o: 1
+addrSelect_o: 1
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 1100011 , FUNCT3: 101 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 0
+AluCtrl: 1111
+ALUsrc_o: 0
+ImmSrc_o: 010
+BranchSrc_o: 1
+addrSelect_o: 1
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 1100011 , FUNCT3: 110 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 0
+AluCtrl: 1111
+ALUsrc_o: 0
+ImmSrc_o: 010
+BranchSrc_o: 1
+addrSelect_o: 1
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 1100011 , FUNCT3: 111 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 0
+AluCtrl: 1111
+ALUsrc_o: 0
+ImmSrc_o: 010
+BranchSrc_o: 1
+addrSelect_o: 1
+ResultSrc_o: 0
+jal_o: 0
+
+----- INPUTS ---------------------------
+
+OP: 1100111 , FUNCT3: 111 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 1011
+ALUsrc_o: 1
+ImmSrc_o: 100
+BranchSrc_o: 1
+addrSelect_o: 1
+ResultSrc_o: 0
+jal_o: 1
+
+----- INPUTS ---------------------------
+
+OP: 1101111 , FUNCT3: 111 , FUNCT7BIT: 0
+
+----- OUTPUTS ---------------------------
+
+regwrite: 1
+AluCtrl: 1100
+ALUsrc_o: 1
+ImmSrc_o: 100
+BranchSrc_o: 1
+addrSelect_o: 1
+ResultSrc_o: 0
+jal_o: 1
