@@ -1,13 +1,21 @@
 addi r3, r0, 1      //use r3 as the number 1 
 addi r4, r0, 11     //use r4 as the number 11 
 addi r5, r0, 3      
-//start
 
-//random number generation 2nd way:
-add r5, r5, r5
-addi r5, r5, 7
-andi r5, r5, 63 // 63=6'b111111 = 6'd63 which is the closest number to 71 written with just ones
-addi r2, r5, 0
+->>> start
+
+//random number generation 3rd way max 63:
+//separate the 5th and 4th bit by shifting, then XOR them and put the bit at the end of the previously left shifted random number by 1 bit
+
+right shift (unsigned) r6 r5 by 5. // save the 5th bit  
+andi r7 r5 (5'b11111)              // getting rid of the 5th bit
+right shift (unsigned) r7 by 4,    // save just the 4t bit
+xor r8, r6, r7                     // XOR the bits
+addi r8, r8 (1'b1)                 // we just want the least signifucant bit (the XOR bit)
+left shift (unsigned) r5 by 1      // we left shift the previous number one bit so we can just add the XOR bit at the end
+add r5, r5, r8                     // add the XOR bit at the end
+
+// the 8 lights:
 
 addi r1, r0, 0
 sub r4, r4, r3,
@@ -52,43 +60,10 @@ addi r4, r0, 11  // 11 because here we have +1 cycle and the next instr takes +1
 
 addi r1, r0, 10000000. // r1 =11111111 -> eight lights on
 
+// the delay
+
 srl/sra r2, r2, r3 //divide by 2(right shift by 1) because every iteration has 2 cycles
 sub r2, r2, r3           
 bne r2, r0, (-1) // branch if r2 !=r0  // random delay
+addi r1, r0, 0 // turn off lights
 j start
-
-/* implemented similar logic like in assembly.txt just instead of mod 71 I am using AND with 6'b111111 = 63 which is very 
-close to 72 (3 seconds) but gives random values with NO REPETITION. The delay is much tidier and memory efficient.*/
-
-
-//random number generation 3rd way max 63:
-separate the 5th and 4th bit by shifting, then XOR them and put the bit at the end of the previously left shifted random number by 1 bit
-
-right shift (unsigned) r6 r5 by 5. // save the 5th bit  
-andi r7 r5 (5'b11111)              // getting rid of the 5th bit
-right shift (unsigned) r7 by 4,    // save just the 4t bit
-xor r8, r6, r7                     // XOR the bits
-addi r8, r8 (1'b1)                 // we just want the least signifucant bit (the XOR bit)
-left shift (unsigned) r5 by 1      // we left shift the previous number one bit so we can just add the XOR bit at the end
-add r5, r5, r8                     // add the XOR bit at the end
-
-//random number generation 4th way max 2^33-1 :
- right shift the previous random number by 2 bytes and store the last byte then right shift by one byte and store the last byte.
- left shift the previous number by 1 byte and add the XORed bytes.
-
- right shift (unsigned) r6 r5 by 16
- store last bit at addr 4
- right shift (unsigned) r6 r6 by 8,
- store last bit at addr 8,
- load byte from address 4 in reg r6 
- addi r6, 8'hff                         // because it's signed
- load byte from address 8 in reg r7
- addi r7, 7'hff                         // because it's signed
- xor r8, r7, r6
- left shift r5 by 8,                    // left shift by one byte
- add r5, r5,  r8                          // add the XORed byte
-
-
-
-
-
