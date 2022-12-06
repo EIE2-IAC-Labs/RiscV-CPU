@@ -1,3 +1,5 @@
 /.vscode/
 /obj_dir/
 /.DS_Store
+/vbuddy.cfg
+/top.vcd

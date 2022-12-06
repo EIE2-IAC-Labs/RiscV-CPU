@@ -56,7 +56,7 @@ module top #(
     // logic [4:0] rdWire;
     // logic [DW-1:0] wd3Wire;
     // extend wire
-    logic [DW-1:0] ImmediateWire;
+    logic [DW-1:7] ImmediateWire;
     logic [DW-1:0] ImmediateExtendWire;
     // ram wire
     logic [DW-1:0] RamOutWire;
@@ -117,7 +117,7 @@ module top #(
         .a0_o(data_out)
     );
 
-    assign ImmediateWire=InstructionWire;
+    assign ImmediateWire=InstructionWire[DW-1:7];
     
     extend extend(
         .ImmSrc_i(ImmSrcWire),
