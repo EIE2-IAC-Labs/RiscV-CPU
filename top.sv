@@ -113,6 +113,7 @@ module top #(
         .AD3_i(rdWire),
         .WE3_i(regWrite_enWire),
         .WD3_i(wd3Wire),
+        ,TRIGGER_i(trigger_i),
 
         .RD1_o(RD1Wire),
         .RD2_o(RD2Wire),
