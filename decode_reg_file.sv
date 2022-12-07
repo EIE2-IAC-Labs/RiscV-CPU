@@ -1,6 +1,7 @@
 module decode_reg_file #(
     parameter DATA_WIDTH = 32
 )(
+    input logic                         clk,
     input logic                         RegWriteD_i,
     input logic                         ResultSrcD_i,
     input logic                         MemWriteD_i,
