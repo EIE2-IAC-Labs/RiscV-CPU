@@ -1,6 +1,6 @@
 # Group 14 IAC Coursework
 ##### Nik Lewis, Benedict Short, Ana Dimoska, Ahmed Elkouny
-## Component Written by Benedict Short
+## Component Written by Benedict Short, merged from an empty main at the start
 
 ### Input
 - clk
