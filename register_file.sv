@@ -11,6 +11,9 @@ module register_file #(
 
     output logic [DATA_WIDTH-1:0]           RD1_o,
     output logic [DATA_WIDTH-1:0]           RD2_o,
+
+    output logic [DATA_WIDTH-1:0]           a2_o,  
+    output logic [DATA_WIDTH-1:0]           a1_o,  
     output logic [DATA_WIDTH-1:0]           a0_o  
 );
 
@@ -30,7 +33,9 @@ always_comb begin
     RD2_o = register_array[AD2_i];
     
 end
-assign  a0_o = register_array[10];
+assign  a2_o = register_array[13];
+assign  a1_o = register_array[12];
+assign  a0_o = register_array[11];
 
 
 

@@ -15,6 +15,8 @@ module top #(
     output logic [4:0]          rdWire,
     output logic [DW-1:0]       wd3Wire,   
     output logic [DW-1:0]       data_out,
+    output logic [DW-1:0]       data_out1,
+    output logic [DW-1:0]       data_out2,
     output logic [DW-1:0]       RD1Wire,
     output logic [DW-1:0]       Aluop2Wire,
     output logic [DW-1:0]       ALUResultWire
@@ -56,7 +58,7 @@ module top #(
     // logic [4:0] rdWire;
     // logic [DW-1:0] wd3Wire;
     // extend wire
-    logic [DW-1:7] ImmediateWire;
+    logic [DW-1:0] ImmediateWire;
     logic [DW-1:0] ImmediateExtendWire;
     // ram wire
     logic [DW-1:0] RamOutWire;
@@ -114,10 +116,12 @@ module top #(
 
         .RD1_o(RD1Wire),
         .RD2_o(RD2Wire),
+        .a2_o(data_out2),
+        .a1_o(data_out1),
         .a0_o(data_out)
     );
 
-    assign ImmediateWire=InstructionWire[DW-1:7];
+    assign ImmediateWire=InstructionWire[31:7];
     
     extend extend(
         .ImmSrc_i(ImmSrcWire),
