@@ -1,4 +1,4 @@
-module execute #(
+module execute_reg_file #(
     parameter DATA_WIDTH = 32
 )(
 input logic                     clk,
