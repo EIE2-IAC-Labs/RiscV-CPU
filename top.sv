@@ -14,6 +14,7 @@ module top #(
     output logic [4:0]          rs2Wire,
     output logic [4:0]          rdWire,
     output logic [DW-1:0]       wd3Wire,   
+    output logic [DW-1:0]       wd3Wire0,   
     output logic [DW-1:0]       data_out,
     output logic [DW-1:0]       data_out1,
     output logic [DW-1:0]       data_out2,
@@ -160,5 +161,6 @@ module top #(
 
     );
 
-    assign wd3Wire = ResultSrcWire ? RamOutWire : ALUResultWire ;
+    assign wd3Wire0 = ResultSrcWire ? RamOutWire : ALUResultWire ;
+    assign wd3Wire = JALWire ? inc_PC :wd3Wire;
 endmodule
