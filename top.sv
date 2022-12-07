@@ -58,7 +58,7 @@ module top #(
     // logic [4:0] rdWire;
     // logic [DW-1:0] wd3Wire;
     // extend wire
-    logic [DW-1:0] ImmediateWire;
+    logic [DW-8:0] ImmediateWire;
     logic [DW-1:0] ImmediateExtendWire;
     // ram wire
     logic [DW-1:0] RamOutWire;
