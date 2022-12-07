@@ -16,8 +16,12 @@
 - RD2_o
 - a0_o
 
+### Important Details:
+When trigger active, register t0 automatically overwrite to a value of 1.
+
 
 TO ADD:
 - [x] make basic register file structure
 - [ ] add trigger input
 - [ ] test register_file
+- [ ] check if t0 being used by anything
