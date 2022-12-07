@@ -29,6 +29,7 @@ module top #(
     logic [DW-1:0]        inc_PC;
     logic [DW-1:0]     branch_PC;
     logic [DW-1:0]       next_PC;
+    logic [DW-1:0]       jump_PC;
     // logic [DW-1:0]       PC_wire;
     logic              PCsrcWire;
     //alu wires
@@ -68,8 +69,9 @@ module top #(
 
 
     assign branch_PC=PC_wire+ImmediateExtendWire;
+    assign jump_PC = JALWire? ALUResultWire : branch_PC;
     assign inc_PC = PC_wire+4;
-    assign next_PC = PCsrcWire ? branch_PC : inc_PC;
+    assign next_PC = PCsrcWire ? jump_PC : inc_PC;
     
     PC PC(
         .clk(clk),
