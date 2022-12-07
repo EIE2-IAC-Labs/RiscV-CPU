@@ -32,19 +32,19 @@ module decode_reg_file #(
 );
 
 always_ff @(posedge clk) begin
-    RegWriteD_i <= RegWriteE_o;
-    ResultSrcD_i <= ResultSrcE_o;
-    MemWriteD_i <= MemWriteE_o;
-    JumpD_i <= JumpE_o;
-    BranchD_i <= BranchE_o;
-    ALUControlD_i <= ALUControlE_o;
-    ALUSrcD_i <= ALUSrcE_o;
-    RD1_i <= RD1E_o;
-    RD2_i <= RD2E_o;
-    PCD_i <= PCE_o;
-    RdD_i <= RdE_o;
-    ImmExtD_i <= ImmExtE_o;
-    PCPlus4D_i <= PCPlus4E_o;
+    RegWriteE_o <= RegWriteD_i;
+    ResultSrcE_o <= ResultSrcD_i;
+    MemWriteE_o <= MemWriteD_i;
+    JumpE_o <= JumpD_i;
+    BranchE_o <= BranchD_i;
+    ALUControlE_o <= ALUControlD_i;
+    ALUSrcE_o <= ALUSrcD_i;
+    RD1E_o <= RD1_i;
+    RD2E_o <= RD2_i;
+    PCE_o <= PCD_i;
+    RdE_o <= RdD_i;
+    ImmExtE_o <= ImmExtD_i;
+    PCPlus4E_o <= PCPlus4D_i;
 end
 
 endmodule
