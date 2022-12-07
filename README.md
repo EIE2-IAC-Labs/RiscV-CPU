@@ -9,6 +9,7 @@
 - AD3_i
 - WE3_i
 - WD3_i
+- TRIGGER_i
 
 ### Output
 

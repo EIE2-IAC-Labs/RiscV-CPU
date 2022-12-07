@@ -8,7 +8,7 @@ module register_file #(
     input logic [ADDRESS_WIDTH-1:0]         AD3_i,
     input logic                             WE3_i,
     input logic [DATA_WIDTH-1:0]            WD3_i,
-    input logic                             trigger_i
+    input logic                             TRIGGER_i
 
     output logic [DATA_WIDTH-1:0]           RD1_o,
     output logic [DATA_WIDTH-1:0]           RD2_o,
@@ -19,7 +19,7 @@ logic [DATA_WIDTH-1:0] register_array [2**ADDRESS_WIDTH-1:0];
 
 always_ff @(posedge clk) begin
     if (WE3_i) register_array[AD3_i] <= WD3_i;
-    if(trigger_i == 1'b1) register_array[5] <= 1;
+    if(TRIGGER_i == 1'b1) register_array[5] <= 1;
    
 end
 always_comb begin
