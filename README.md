@@ -14,7 +14,6 @@ We need 4 registers to divide the CPU into the 4 pipelined states:
 ##### Output:
 - InstrD_o
 - PCD_o
-- PCF_o
 - PCPlus4D_o
 
 
@@ -95,3 +94,4 @@ We need 4 registers to divide the CPU into the 4 pipelined states:
 - [ ] Implement each reg file
 - [ ] Check signals that cut over different sections
 - [ ] Find Bitwidths of each input/output
+- [ ] is reg_file correct name for datastructure
