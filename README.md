@@ -2,6 +2,9 @@
 ##### Nik Lewis, Benedict Short, Ana Dimoska, Ahmed Elkouny
 ## Components Written by Benedict Short
 
+# DO NOT MERGE, work in progress
+
+
 ### Details:
 We need 4 registers to divide the CPU into the 4 pipelined states:
 
@@ -95,3 +98,4 @@ We need 4 registers to divide the CPU into the 4 pipelined states:
 - [ ] Check signals that cut over different sections
 - [ ] Find Bitwidths of each input/output
 - [ ] is reg_file correct name for datastructure
+- [ ] rename inputs and outputs according to actual CPU
