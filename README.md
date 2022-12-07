@@ -88,6 +88,7 @@ We need 4 registers to divide the CPU into the 4 pipelined states:
 - ALUResultMM_o
 - ReadDataW_o
 - RdW_o
+- PCPlus4W_o
 
 
 
