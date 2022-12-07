@@ -119,7 +119,7 @@ module top #(
         .AD3_i(rdWire),
         .WE3_i(regWrite_enWire),
         .WD3_i(wd3Wire),
-        ,TRIGGER_i(trigger_i),
+        .TRIGGER_i(trigger_i),
 
         .RD1_o(RD1Wire),
         .RD2_o(RD2Wire),
@@ -162,5 +162,5 @@ module top #(
     );
 
     assign wd3Wire0 = ResultSrcWire ? RamOutWire : ALUResultWire ;
-    assign wd3Wire = JALWire ? inc_PC :wd3Wire;
+    assign wd3Wire = JALWire ? inc_PC :wd3Wire0;
 endmodule
