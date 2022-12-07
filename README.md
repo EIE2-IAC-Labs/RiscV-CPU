@@ -4,7 +4,8 @@
 
 ### Details:
 We need 4 registers to divide the CPU into the 4 pipelined states:
-- fetch_reg_file
+
+#### fetch_reg_file
 
 ##### Input:
 - RD_i
@@ -17,7 +18,7 @@ We need 4 registers to divide the CPU into the 4 pipelined states:
 - PCPlus4D_i
 
 
-- decode_reg_file
+#### decode_reg_file
 ##### Input:
 - RegWriteD
 - ResultSrcD
@@ -50,7 +51,7 @@ We need 4 registers to divide the CPU into the 4 pipelined states:
 
 
 
-- execute_reg_file
+#### execute_reg_file
 ##### Input:
 - RegWriteE
 - ResultSrcE
@@ -69,7 +70,7 @@ We need 4 registers to divide the CPU into the 4 pipelined states:
 - RdM
 - PCPlus4M
 
-- writeback_reg_file
+#### writeback_reg_file
 
 ##### Input:
 - RegWriteM
