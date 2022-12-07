@@ -52,6 +52,8 @@ module top #(
     logic BranchSrcWire;
     logic addrSelectWire;
     logic ResultSrcWire;
+    logic JALWire;
+
     // register wires
     // logic [4:0] rs1Wire;
     // logic [4:0] rs2Wire;
@@ -99,7 +101,8 @@ module top #(
         .ImmSrc_o(ImmSrcWire),
         .BranchSrc_o(BranchSrcWire),
         .addrSelect_o(addrSelectWire),
-        .ResultSrc_o(ResultSrcWire)
+        .ResultSrc_o(ResultSrcWire),
+        .jal_o(JALWire)
     );
     assign rs1Wire=InstructionWire[19:15];
     assign rs2Wire=InstructionWire[24:20];
