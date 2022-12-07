@@ -155,6 +155,4 @@ module top #(
     );
 
     assign wd3Wire = ResultSrcWire ? RamOutWire : ALUResultWire ;
-
-
 endmodule
