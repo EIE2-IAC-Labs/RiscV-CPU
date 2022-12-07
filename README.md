@@ -14,78 +14,78 @@ We need 4 registers to divide the CPU into the 4 pipelined states:
 ##### Output:
 - InstrD_o
 - PCD_o
-- PCF_i
-- PCPlus4D_i
+- PCF_o
+- PCPlus4D_o
 
 
 #### decode_reg_file
 ##### Input:
-- RegWriteD
-- ResultSrcD
-- MemWriteD
-- JumpD
-- BranchD
-- ALUControlD
-- ALUSrcD
-- RD1
-- RD2
-- PCD
-- RdD
-- ImmExtD
-- PCPlus4D
+- RegWriteD_i
+- ResultSrcD_i
+- MemWriteD_i
+- JumpD_i
+- BranchD_i
+- ALUControlD_i
+- ALUSrcD_i
+- RD1_i
+- RD2_i
+- PCD_i
+- RdD_i
+- ImmExtD_i
+- PCPlus4D_i
 
 ##### Output:
-- RegWriteE
-- ResultSrcE
-- MemWriteE
-- JumpE
-- BranchE
-- ALUControlE
-- ALUSrcE
-- RD1E
-- RD2E
-- PCE
-- RdE
-- ImmExtE
-- PCPlus4E
+- RegWriteE_o
+- ResultSrcE_o
+- MemWriteE_o
+- JumpE_o
+- BranchE_o
+- ALUControlE_o
+- ALUSrcE_o
+- RD1E_o
+- RD2E_o
+- PCE_o
+- RdE_o
+- ImmExtE_o
+- PCPlus4E_o
 
 
 
 #### execute_reg_file
 ##### Input:
-- RegWriteE
-- ResultSrcE
-- MemWriteE
-- ALUResult
-- WriteDataE
-- RdE
-- PcPlus4E
+- RegWriteE_i
+- ResultSrcE_i
+- MemWriteE_i
+- ALUResult_i
+- WriteDataE_i
+- RdE_i
+- PcPlus4E_i
 
 ##### Output:
-- RegWriteM
-- ResultSrcM
-- MemWriteM
-- ALUResultM
-- WriteDataM
-- RdM
-- PCPlus4M
+- RegWriteM_o
+- ResultSrcM_o
+- MemWriteM_o
+- ALUResultM_o
+- WriteDataM_o
+- RdM_o
+- PCPlus4M_o
 
 #### writeback_reg_file
 
 ##### Input:
-- RegWriteM
-- ResultSrcM
-- ALUResultM
-- RD
-- RdM
-- PCPlus4M
+- RegWriteM_i
+- ResultSrcM_i
+- ALUResultM_i
+- RD_i
+- RdM_i
+- PCPlus4M_i
 
 ##### Output:
-- RegWriteW
-- ResultSrcW
-- ALUResultMM
-- ReadDataW
-- RdW
+- RegWriteW_o
+- ResultSrcW_o
+- ALUResultMM_o
+- ReadDataW_o
+- RdW_o
 
 
 
