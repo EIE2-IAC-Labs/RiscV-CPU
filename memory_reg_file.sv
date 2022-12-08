@@ -1,4 +1,4 @@
-module writeback_reg_file #(
+module memory_reg_file #(
     parameter DATA_WIDTH = 32
 )(
     input logic                             clk,
