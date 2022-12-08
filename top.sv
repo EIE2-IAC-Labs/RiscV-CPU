@@ -148,4 +148,5 @@ module top #(
 
     assign wd3Wire0 = ResultSrcWire ? RamOutWire : ALUResultWire ;
     assign wd3Wire = JALWire ? inc_PC :wd3Wire0;
+
 endmodule

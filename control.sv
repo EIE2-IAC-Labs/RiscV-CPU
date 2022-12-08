@@ -81,12 +81,12 @@ module control (
 
             7'b1100111: begin // Jump and Link Register
                 ImmSrc_o = 3'b000;
-                ALUctrl_o = 4'b1011; // ALU will forward SrcB to ALUresult, and set branch_o = 1
+                ALUctrl_o = 4'b1100; // ALU will forward SrcB to ALUresult, and set branch_o = 1
             end
 
             7'b1101111: begin // Jump and Link 
                 ImmSrc_o = 3'b100;
-                ALUctrl_o = 4'b1100;  // add srca and srcb, but set branch_o to 1
+                ALUctrl_o = 4'b1011;  // add srca and srcb, but set branch_o to 1
             end
 
             default: ImmSrc_o = 3'b000; // this should have no effect if ALUsrc is 0, just precaution

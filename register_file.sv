@@ -30,6 +30,10 @@ end
 always_comb begin 
     RD1_o = register_array[AD1_i];
     RD2_o = register_array[AD2_i];
+    $display("Write Addr: %h", AD3_i);
+    $display("Write data: %h", WD3_i);
+    $display("Write a0: %h", register_array[10]);
+    $display("Write enable: %h", WE3_i);
     
 end
 
