@@ -34,25 +34,25 @@ always_comb begin
             end
 
             //<
-            3'b010: begin
+            3'b100: begin
                         if(SrcA_Signed < SrcB_Signed) Branch_o = 1;
                         else Branch_o = 0;
                     end
 
             //>=
-            3'b011: begin
+            3'b101: begin
                         if(SrcA_Signed >= SrcB_Signed) Branch_o = 1;
                         else Branch_o = 0;
                     end
 
             //< unsigned
-            3'b100: begin
+            3'b110: begin
                     if(SrcA_i < SrcB_i) Branch_o = 1;
                     else Branch_o = 0;
             end
 
             //>= unsigned
-            3'b101: begin
+            3'b111: begin
                     if(SrcA_i >= SrcB_i) Branch_o = 1;
                     else Branch_o = 0;
             end
@@ -115,7 +115,7 @@ always_comb begin
         end
 
         //LW
-        4'b1111: ALUResult_o = SrcB_i;
+        4'b1111: ALUResult_o = SrcA_i;
 
         default: ALUResult_o = 0;
     endcase
