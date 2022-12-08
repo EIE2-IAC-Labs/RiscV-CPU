@@ -27,10 +27,13 @@
 * `ALUsrc_o` : Selects between regOp and ImmOp
 * `immSrc_o` : Sign extension control, 3 bits
 * `BRANCHsrc_o` : Selects between branching and incr pc
-* `addrSelect_o` : 1 Bit, selects between word and byte addressing.
 * `memWrite_en_o` : Enables writing to RAM
 * `ResultSrc_o` : toggles between using ALUResult and RAM output for WD3
-* `jal_o` : overrides PCbranch and WD3 to implement jump and link functionality 
+* `memType_o` : Address type for the RAM
+* `memSign_o` : Determines whether signed or unsigned load instruction
+* `jal_o` : overrides ONLY WD3 to implement jump and link functionality
+* `jalr_o` : overrides both WD3 AND PCbranch to load register + offset into PC.
+ 
 
 ---
 
@@ -38,9 +41,7 @@
 
 * Added an extra bit to ALUctrl (was 3, now 4) in order to account for extra instructions.
 > This was less of a creative decision and more of a necessity to allow all instructions to be represented.
-* Not including `lh`, `lbu`, `lhu`, `sh` instructions.
 * Not including any upper immediate instructions.
-* Many of the output flags are driven by single assign statements, as this is easier to debug. 
 * Decided to do branches inside ALU by passing funct3 into it. Alternative was to decode the branch instructions in the control, but it would still require passing a 3-bit control signal to the ALU which is redundant.
 
 ### Testbench usage:
