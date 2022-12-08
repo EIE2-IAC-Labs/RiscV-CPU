@@ -22,9 +22,9 @@ always_comb begin
         0'b011: ImmExt_o = {{13{Imm_i[31]}}, Imm_i[30:12]};
         
         //instruction[31], instruction[19:12], instruction[11]instruction [30:21]
-        0'b100: ImmExt_o = {{12{Imm_i[31]}}, Imm_i[19:12], Imm_i[20], Imm_i[30:21], 1'b0};
+        0'b100: ImmExt_o = {{12{Imm_i[31]}}, Imm_i[19:12], Imm_i[11], Imm_i[30:21], 1'b0};
 
-        default: ImmExt_o = 32'b0;
+        default: ImmExt_o = 25'b0;
     endcase
 end
 
