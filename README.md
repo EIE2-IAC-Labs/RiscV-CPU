@@ -54,10 +54,10 @@ Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
 | --- | --- | --- |
 | 000 | Equal | y |
 | 001 | Not Equal | y |
-| 010 | < | y |
-| 011 | >= | y |
-| 100 | < unsigned | y |
-| 101 | >= unsigned | y |
+| 100 | < | y |
+| 101 | >= | y |
+| 110 | < unsigned | y |
+| 111 | >= unsigned | y |
 
 
 TO ADD:
@@ -69,5 +69,6 @@ TO ADD:
 - [x] implement branch logic
 - [ ] check the overlap between ALUctrl and branchctrl
 - [x] change shift so we shift op1 by op2
+- [ ] check as to why the branchctrl instructions 'jump' bits
 
 - [ ] test JAL and JALR
