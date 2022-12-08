@@ -8,18 +8,15 @@ module register_file #(
     input logic [ADDRESS_WIDTH-1:0]         AD3_i,
     input logic                             WE3_i,
     input logic [DATA_WIDTH-1:0]            WD3_i,
+    input logic                             TRIGGER_i,
 
     output logic [DATA_WIDTH-1:0]           RD1_o,
     output logic [DATA_WIDTH-1:0]           RD2_o,
-
-    output logic [DATA_WIDTH-1:0]           a2_o,  
-    output logic [DATA_WIDTH-1:0]           a1_o,  
-    input logic                             TRIGGER_i,
     output logic [DATA_WIDTH-1:0]           a0_o  
 );
 
 logic [DATA_WIDTH-1:0] register_array [2**ADDRESS_WIDTH-1:0];
-logic [DATA_WIDTH-1:0] a1;
+
 
 initial begin
     for (int i = 0; i < $size(register_array); i++) begin
@@ -35,8 +32,7 @@ always_comb begin
     RD2_o = register_array[AD2_i];
     
 end
-assign  a2_o = register_array[13];
-assign  a1_o = register_array[12];
-assign  a0_o = register_array[11];
+
+assign  a0_o = register_array[10];
 
 endmodule

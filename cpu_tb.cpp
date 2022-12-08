@@ -40,13 +40,13 @@ int main(int argc, char **argv, char **env) {
       top->clk = !top->clk;
       top->eval ();
     }
-     
+    top->trigger_i=vbdFlag();
     vbdCycle(simcyc);
     // assert reset for 1st cycle
-
-    vbdHex(3,(int(top->data_out)>>8)&0xF);
-    vbdHex(2,(int(top->data_out)>>4)&0xF);
-    vbdHex(1,int(top->data_out)&0xF);
+    vbdBar(top->data_out & 0xFF);
+    // vbdHex(3,(int(top->data_out)>>8)&0xF);
+    // vbdHex(2,(int(top->data_out)>>4)&0xF);
+    // vbdHex(1,int(top->data_out)&0xF);
 
 }
 vbdClose();     // ++++

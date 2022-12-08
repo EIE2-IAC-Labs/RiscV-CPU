@@ -5,24 +5,7 @@ module top #(
     input logic trigger_i,
     input logic clk,
 
-    output logic [DW-1:0]       PC_wire,
-    output logic [DW-1:0]       InstructionWire, 
-    output logic [6:0]          opcode,
-    output logic [2:0]          funct3,
-    output logic                funct7,
-    output logic [4:0]          rs1Wire,
-    output logic [4:0]          rs2Wire,
-    output logic [4:0]          rdWire,
-    output logic [DW-1:0]       wd3Wire,   
-    output logic [DW-1:0]       wd3Wire0,   
-    output logic [DW-1:0]       data_out,
-    output logic [DW-1:0]       data_out1,
-    output logic [DW-1:0]       data_out2,
-    output logic [DW-1:0]       RD1Wire,
-    output logic [DW-1:0]       Aluop2Wire,
-    output logic [DW-1:0]       ALUResultWire
-    // output logic [DW-1:0]       ImmediateWire,
-    // output logic [DW-1:0]       ImmediateExtendWire
+    output logic [DW-1:0]       data_out  
 
 );
    
@@ -31,21 +14,21 @@ module top #(
     logic [DW-1:0]     branch_PC;
     logic [DW-1:0]       next_PC;
     logic [DW-1:0]       jump_PC;
-    // logic [DW-1:0]       PC_wire;
+    logic [DW-1:0]       PC_wire;
     logic              PCsrcWire;
     //alu wires
-    // logic [DW-1:0]       RD1Wire;
+    logic [DW-1:0]       RD1Wire;
+    logic [DW-1:0]       Aluop2Wire;
+    logic [DW-1:0]       ALUResultWire;
     logic [DW-1:0]       RD2Wire;
-    // logic [DW-1:0]    Aluop2Wire;
     logic             branchWire;
-    // logic [DW-1:0] ALUResultWire;
     
     // rom wires
-    // logic [DW-1:0] InstructionWire;
+    logic [DW-1:0] InstructionWire;
     // control wires
-    // logic [6:0] opcode;
-    // logic [2:0] funct3;
-    // logic funct7;
+    logic [6:0] opcode;
+    logic [2:0] funct3;
+    logic funct7;
     logic memWrite_enWire;
     logic regWrite_enWire;
     logic [3:0] ALUctrlWire;
@@ -55,12 +38,14 @@ module top #(
     logic addrSelectWire;
     logic ResultSrcWire;
     logic JALWire;
+    logic JALRWire;
 
     // register wires
-    // logic [4:0] rs1Wire;
-    // logic [4:0] rs2Wire;
-    // logic [4:0] rdWire;
-    // logic [DW-1:0] wd3Wire;
+    logic [4:0] rs1Wire;
+    logic [4:0] rs2Wire;
+    logic [4:0] rdWire;
+    logic [DW-1:0] wd3Wire;
+    logic [DW-1:0]       wd3Wire0; 
     // extend wire
     logic [DW-8:0] ImmediateWire;
     logic [DW-1:0] ImmediateExtendWire;
@@ -69,8 +54,8 @@ module top #(
 
 
 
-    assign branch_PC=PC_wire+ImmediateExtendWire;
-    assign jump_PC = JALWire? ALUResultWire : branch_PC;
+    assign branch_PC=PC_wire + ImmediateExtendWire;
+    assign jump_PC = JALRWire ? ALUResultWire : branch_PC;
     assign inc_PC = PC_wire+4;
     assign next_PC = PCsrcWire ? jump_PC : inc_PC;
     
@@ -105,7 +90,8 @@ module top #(
         .BranchSrc_o(BranchSrcWire),
         .addrSelect_o(addrSelectWire),
         .ResultSrc_o(ResultSrcWire),
-        .jal_o(JALWire)
+        .jal_o(JALWire),
+        .jalr_o(JALRWire)
     );
     assign rs1Wire=InstructionWire[19:15];
     assign rs2Wire=InstructionWire[24:20];
@@ -123,8 +109,7 @@ module top #(
 
         .RD1_o(RD1Wire),
         .RD2_o(RD2Wire),
-        .a2_o(data_out2),
-        .a1_o(data_out1),
+        
         .a0_o(data_out)
     );
 

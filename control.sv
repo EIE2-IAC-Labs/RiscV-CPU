@@ -10,7 +10,8 @@ module control (
     output logic                        BranchSrc_o,    // gives control of PCsrc to branchctrl module
     output logic                        addrSelect_o,   // toggles between word / byte addressing in RAM
     output logic                        ResultSrc_o,    // toggles between using ALUresult and ReadData from RAM. 
-    output logic                        jal_o           // overrides PCbranch and WD3
+    output logic                        jal_o,           // overrides PCbranch and WD3
+    output logic                        jalr_o          // overrides WD3 and PCbranch
 );
 
     assign memWrite_en_o = (op_i ==  7'b0100011) ? 1'b1 : 1'b0;
@@ -19,6 +20,7 @@ module control (
     assign regWrite_en_o = ((op_i == 7'b0110011) || (op_i == 7'b0010011) || (op_i == 7'b0000011) || (op_i == 7'b1100111) || (op_i == 7'b1101111)) ? 1'b1 : 1'b0;
     assign ResultSrc_o = (op_i == 7'b0000011) ? 1'b1 : 1'b0;
     assign jal_o = ((op_i == 7'b1100111) || (op_i == 7'b1101111)) ? 1'b1 : 1'b0;
+    assign jalr_o = (op_i == 7'b1100111) ? 1'b1 : 1'b0;
     
     always_comb begin
 
