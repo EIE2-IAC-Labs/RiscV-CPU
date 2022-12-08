@@ -72,7 +72,7 @@ We need 4 registers to divide the CPU into the 4 pipelined states:
 - RdM_o
 - PCPlus4M_o
 
-#### writeback_reg_file
+#### memory_reg_file
 
 ##### Input:
 - RegWriteM_i
