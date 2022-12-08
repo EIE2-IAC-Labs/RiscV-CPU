@@ -80,7 +80,7 @@ module control (
             // 7'b0110111: // Load Upper Immediate
 
             7'b1100111: begin // Jump and Link Register
-                ImmSrc_o = 3'b100;
+                ImmSrc_o = 3'b000;
                 ALUctrl_o = 4'b1011; // ALU will forward SrcB to ALUresult, and set branch_o = 1
             end
 
