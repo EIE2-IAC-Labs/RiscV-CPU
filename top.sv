@@ -53,6 +53,9 @@ module top #(
     logic [DW-1:0] RamOutWire;
 
 
+    /////////////////////////////////////////////////////////////
+    ///////////               FETCH                   ///////////
+    /////////////////////////////////////////////////////////////
 
     assign branch_PC=PC_wire + ImmediateExtendWire;
     assign jump_PC = JALRWire ? ALUResultWire : branch_PC;
@@ -73,9 +76,31 @@ module top #(
         .rd_o(InstructionWire)
     );
 
-    assign opcode = InstructionWire[6:0];
-    assign funct3 = InstructionWire[14:12];
-    assign funct7 = InstructionWire[30];
+    //wires to leave regfile
+    logic [DATA_WIDTH-1:0]       InstrD_o,
+    logic [DATA_WIDTH-1:0]       PCD_o,
+    logic [DATA_WIDTH-1:0]       PCPlus4D_o
+
+    fetch_reg_file fetch_reg_file(
+        .clk(clk).
+        .rdWire(InstructionWire),
+        .PCF_i(PC_wire),
+        .PCPlus4F_i(inc_PC)
+
+        .InstrD_o(InstrD_o),
+        .PCD_o(PCD_o),
+        .PCPlus4D_o(PCPlus4D_o)
+
+    );
+
+    /////////////////////////////////////////////////////////////
+    ///////////               DECODE                  ///////////
+    /////////////////////////////////////////////////////////////
+
+
+    assign opcode = InstrD_o[6:0];
+    assign funct3 = InstrD_o[14:12];
+    assign funct7 = InstrD_o[30];
 
     control control(
         .op_i(opcode),
@@ -123,6 +148,11 @@ module top #(
     );
     assign Aluop2Wire=ALUsrcWire ? ImmediateExtendWire : RD2Wire;
 
+    /////////////////////////////////////////////////////////////
+    ///////////               EXECUTE                 ///////////
+    /////////////////////////////////////////////////////////////
+
+
     ALU ALU(
         .SrcA_i(RD1Wire),
         .SrcB_i(Aluop2Wire),
@@ -134,6 +164,10 @@ module top #(
     );
 
     assign PCsrcWire = BranchSrcWire ? branchWire : 1'b0;
+
+    /////////////////////////////////////////////////////////////
+    ///////////                 MEMORY                ///////////
+    /////////////////////////////////////////////////////////////
 
     ram ram(
         .clk_i(clk),
