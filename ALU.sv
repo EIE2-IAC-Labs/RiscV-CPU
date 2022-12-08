@@ -115,7 +115,7 @@ always_comb begin
         end
 
         //LW
-        4'b1111: ALUResult_o = SrcB_i;
+        4'b1111: ALUResult_o = SrcA_i;
 
         default: ALUResult_o = 0;
     endcase
