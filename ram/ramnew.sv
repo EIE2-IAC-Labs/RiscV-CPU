@@ -5,7 +5,7 @@ module ramnew #(
 ) (
     input  logic                clk_i,
     input  logic                write_en_i,
-    input  logic [WIDTH-1:0]  a_i,
+    input  logic [WIDTH-1:0]    a_i,
     input  logic [WIDTH-1:0]    wd_i,
     output logic [WIDTH-1:0]    rd_o
 );

@@ -14,6 +14,8 @@ module ram_top # (
 
 logic [WIDTH-1:0] WDWire;
 logic [WIDTH-1:0] RDWire;
+logic [WIDTH-1:0] a_ii;
+assign a_ii = {{a_i[31:2]}, {2'b0}};
 
 ram_i ram_i (
     .memtype_i(memtype_i),
@@ -27,7 +29,7 @@ ram_i ram_i (
 ramnew ramnew(
     .write_en_i(write_en_i),
     .clk_i(clk_i),
-    .a_i(a_i),
+    .a_i(a_ii),
     .wd_i(WDWire),
     .rd_o(RDWire)
 

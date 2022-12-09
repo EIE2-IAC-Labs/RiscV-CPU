@@ -16,8 +16,9 @@ int main(int argc,char **argv, char **env){
 
     top->clk_i = 0;
     top->write_en_i = 0;
-    top->memtype_i = 10;
-    top->a_i = 0;
+    top->memtype_i = 1;
+    top->memsign_i = 1;
+    top->a_i = 3;
     top->wd_i = 2864434397; //AABBCCDD
 
     for (i=0; i<5; i++){ 
@@ -34,19 +35,19 @@ int main(int argc,char **argv, char **env){
             
         }
         if (i==2){
-            top->a_i = 4;
+            top->a_i = 7;
             std::cout << top->rd_o << std::endl; //LOAD BYTE 11
              std::cout << "clk 2 " << std::endl;
               
         }
         if (i==3){
-            top->a_i = 8;  
+            top->a_i = 11;  
             std::cout << top->rd_o << std::endl; //LOAD BYTE 11
              std::cout << "clk 3 " << std::endl;
         }   
 
         if (i==4){
-            top->a_i = 12;  
+            top->a_i = 15;  
             std::cout << top->rd_o << std::endl;
              std::cout << "clk 4 " << std::endl;
         }
