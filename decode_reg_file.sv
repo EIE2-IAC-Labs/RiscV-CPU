@@ -16,6 +16,7 @@ module decode_reg_file #(
     input logic [DATA_WIDTH-1:0]        SrcBD_i,
     input logic [DATA_WIDTH-1:0]        RD2D_i,
     input logic [DATA_WIDTH-1:0]        ImmExtD_i,
+    input logic [2:0]                   funct3D_i,
 
     output logic                        resultSrcE_o,
     output logic                        memWriteE_o,
@@ -29,6 +30,7 @@ module decode_reg_file #(
     output logic [DATA_WIDTH-1:0]       SrcBE_o,
     output logic [DATA_WIDTH-1:0]       RD2E_o,
     output logic [DATA_WIDTH-1:0]       ImmExtE_o,
+    output logic [2:0]                  funct3E_o,
 );
 
 always_ff @(negedge clk) begin

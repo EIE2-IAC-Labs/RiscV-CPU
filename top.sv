@@ -57,7 +57,7 @@ module top #(
     ///////////               FETCH                   ///////////
     /////////////////////////////////////////////////////////////
 
-    assign jump_PC = JALRWire ? ALUResultWire : branch_PC;
+    
     assign inc_PC = PC_wire+4;
     assign next_PC = PCsrcWire ? jump_PC : inc_PC;
     
@@ -148,9 +148,9 @@ module top #(
     
 
     logic                        resultSrcE_2;
-    logic                        memWriteDE_2;
-    logic [DATA_WIDTH-1:0]       addrSelectDE_2;
-    logic                        branchSrcDE_2;
+    logic                        memWriteE_2;
+    logic [DATA_WIDTH-1:0]       addrSelectE_2;
+    logic                        branchSrcE_2;
     logic [3:0]                  ALUctrlDE_2;
     logic                        JALE_2;
     logic                        JALRE_2;
@@ -159,6 +159,7 @@ module top #(
     logic [DATA_WIDTH-1:0]       SrcBE_2;
     logic [DATA_WIDTH-1:0]       RD2E_2;
     logic [DATA_WIDTH-1:0]       ImmExtE_2;
+    logic [2:0]                  funct3E_2;
 
     assign Aluop2Wire = ALUSrcE_wire ? ImmExtE_wire : RD2E_wire;
 
@@ -176,12 +177,12 @@ module top #(
         .SrcBD_i(Aluop2Wire),
         .RD2D_i(RD2Wire),
         .ImmExtD_i(ImmediateExtendWire),
+        .funct3D_i(funct3),
         
-
         .resultSrcE_o(resultSrcE_2),
-        .memWriteE_o(memWriteDE_2),
-        .addrSelectE_o(addrSelectDE_2),
-        .branchSrcE_o (branchSrcDE_2),
+        .memWriteE_o(memWriteE_2),
+        .addrSelectE_o(addrSelectE_2),
+        .branchSrcE_o (branchSrcE_2),
         .ALUctrlE_o (ALUctrlDE_2),
         .JALE_o (JALE_2),
         .JALRE_o (JALRE_2),
@@ -189,7 +190,8 @@ module top #(
         .RD1E_o (RD1E_2),
         .SrcBE_o (SrcBE_2),
         .RD2E_o (RD2E_2),
-        .ImmExtE_o (ImmExtE_2)
+        .ImmExtE_o (ImmExtE_2),
+        .funct3E_o(funct3E_2)
     );
 
     
@@ -199,18 +201,39 @@ module top #(
     /////////////////////////////////////////////////////////////
 
     assign branch_PC=PC_wire + ImmediateExtendWire;
+    assign jump_PC = JALRE_2 ? ALUResultWire : branch_PC;
 
     ALU ALU(
-        .SrcA_i(RD1E_wire),
-        .SrcB_i(Aluop2Wire),
-        .ALUctrl_i(ALUSrcE_wire),
-        .BranchCtrl_i(funct3E_wire),
+        .SrcA_i(RD1E_2),
+        .SrcB_i(SrcBE_2),
+        .ALUctrl_i(ALUctrlDE_2),
+        .BranchCtrl_i(funct3E_2),
         
         .ALUResult_o(ALUResultWire),
         .Branch_o(branchWire)
     );
 
-    assign PCsrcWire = BranchE_wire ? branchWire : 1'b0;
+    assign PCsrcWire = branchSrcE_2 ? branchWire : 1'b0;
+
+    logic resultSrcE_3;
+    logic memWriteE_3;
+    logic [DATA_WIDTH-1:0] ALUResultE_3;
+    logic [DATA_WIDTH-1:0] RD2E_3;
+    logic [DATA_WIDTH-1:0] addrSelectE_3;
+
+    execute_reg_file execute_reg_file(
+        .resultSRCD_i(resultSrcE_2),
+        .memWriteD_i(memWriteE_2),
+        .addrSelectD_i(addrSelectE_2),
+        .ALUresultD_i(ALUResultWire),
+        .RD2D_i (RD2E_2),
+
+        .resultSRCE_o (resultSrcE_3),
+        .memWriteE_o (memWriteE_3),
+        .addrSelectE_o (addrSelectE_3),
+        .ALUresultE_o (ALUResultE_3),
+        .RD2E_o (RD2E_3)
+    );
 
     /////////////////////////////////////////////////////////////
     ///////////                 MEMORY                ///////////
@@ -220,10 +243,10 @@ module top #(
 
     ram ram(
         .clk_i(clk),
-        .write_en_i(memWrite_enWire),
-        .a_i(ALUResultWire),
-        .AddrsCtrl_i(addrSelectWire),
-        .wd_i(RD2Wire),
+        .write_en_i(memWriteE_3),
+        .a_i(ALUResultE_3),
+        .AddrsCtrl_i(addrSelectE_3),
+        .wd_i(RD2E_3),
 
         .rd_o(RamOutWire)
 
