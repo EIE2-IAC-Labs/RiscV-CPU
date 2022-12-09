@@ -60,3 +60,4 @@ We need 4 registers to divide the CPU into the 4 pipelined states:
 - [ ] Find Bitwidths of each input/output
 - [ ] is reg_file correct name for datastructure
 - [x] rename inputs and outputs according to actual CPU
+- [ ] check jal and jalr from top file
