@@ -15,7 +15,7 @@ module execute_reg_file #(
     output logic [DATA_WIDTH-1:0]   RD2E_o
 );
 
-always_ff @(posedge clk) begin
+always_ff @(negedge clk) begin
     resultSRCE_o <= resultSRCD_i;
     memWriteE_o <= memWriteD_i;
     addrSelectE_o <= addrSelectD_i;

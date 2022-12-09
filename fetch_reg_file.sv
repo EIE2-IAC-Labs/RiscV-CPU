@@ -11,7 +11,7 @@ module fetch_reg_file #(
     output logic [DATA_WIDTH-1:0]       PCE_o
 );
 
-always_ff @(posedge clk) begin
+always_ff @(negedge clk) begin
     instrE_o <= instrD_i;
     incPCE_o <= incPCD_i;
     PCE_o <= PCD_i;
