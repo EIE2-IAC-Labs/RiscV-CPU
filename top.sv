@@ -101,6 +101,8 @@ module top #(
     assign funct3 = instrE[14:12];
     assign funct7 = instrE[30];
 
+    assign wd3Wire = JALWire ? incPCE :wd3Wire0;
+
     control control(
         .op_i(opcode),
         .funct3_i(funct3),
@@ -252,7 +254,25 @@ module top #(
 
     );
 
-    assign wd3Wire0 = ResultSrcWire ? RamOutWire : ALUResultWire ;
-    assign wd3Wire = JALWire ? inc_PC :wd3Wire0;
+    logic [DATA_WIDTH-1:0] ALUResultE_4;
+    logic [DATA_WIDTH-1:0] RamOutWireE_4;
+    logic resultSrcE_4;
+
+    mem_reg_file mem_reg_file(
+        .ALUResultD_i(ALUResultE_3),
+        .RD2D_i (RamOutWire),
+        .ResultSrcD_i (resultSrcE_3),
+
+        .ALUResultE_o (ALUResultE_4),
+        .RD2E_o (RamOutWireE_4),
+        .ResultSrcE_o (resultSrcE_4)
+    );
+
+    /////////////////////////////////////////////////////////////
+    ///////////               FINAL STAGE             ///////////
+    /////////////////////////////////////////////////////////////
+
+    assign wd3Wire0 = resultSrcE_4 ? RamOutWireE_4 : ALUResultE_4;
+    
 
 endmodule
