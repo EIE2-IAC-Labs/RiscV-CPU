@@ -30,6 +30,7 @@ We need 4 registers to divide the CPU into the 4 pipelined states:
 | SrcBD_i | SrcBE_o |
 | RD2D_i | RD2E_o |
 | ImmExtD_i | ImmExtE_o |
+| JALD_i | JALE_o |
 
 
 
