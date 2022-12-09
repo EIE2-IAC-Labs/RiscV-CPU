@@ -5,98 +5,58 @@
 # DO NOT MERGE, work in progress
 
 
-### Details:
+## Details:
 We need 4 registers to divide the CPU into the 4 pipelined states:
 
-#### fetch_reg_file
+### fetch_reg_file
 
-##### Input:
-- RD_i
-- PCF_i
-- PCPlus4F_i
-##### Output:
-- InstrD_o
-- PCD_o
-- PCPlus4D_o
+| Input | Output |
+| --- | --- |
+| instrD_i | instrE_o |
+| incPCD_i | incPCE_o |
+| PCD_i | PCE_o |
 
-
-#### decode_reg_file
-##### Input:
-- RegWriteD_i
-- ResultSrcD_i
-- MemWriteD_i
-- JumpD_i
-- BranchD_i
-- ALUControlD_i
-- ALUSrcD_i
-- RD1_i
-- RD2_i
-- PCD_i
-- RdD_i
-- ImmExtD_i
-- PCPlus4D_i
-
-##### Output:
-- RegWriteE_o
-- ResultSrcE_o
-- MemWriteE_o
-- JumpE_o
-- BranchE_o
-- ALUControlE_o
-- ALUSrcE_o
-- RD1E_o
-- RD2E_o
-- PCE_o
-- RdE_o
-- ImmExtE_o
-- PCPlus4E_o
+### decode_reg_file
+| Input | Output |
+| --- | --- |
+| resultSrcD_i | resultSrcE_o |
+| memWriteD_i | memWriteE_o |
+| addrSelectD_i | addrSelectE_o |
+| branchSrcD_i | branchSrcE_o |
+| ALUctrlD_i | ALUctrlE_o |
+| JALRD_i | JALRE_o |
+| PCD_i | PCE_o |
+| RD1D_i | RD1E_o |
+| SrcBD_i | SrcBE_o |
+| RD2D_i | RD2E_o |
+| ImmExtD_i | ImmExtE_o |
 
 
 
-#### execute_reg_file
-##### Input:
-- RegWriteE_i
-- ResultSrcE_i
-- MemWriteE_i
-- ALUResult_i
-- WriteDataE_i
-- RdE_i
-- PcPlus4E_i
+### execute_reg_file
+| Input | Output |
+| --- | --- |
+| resultSRCD_i | resultSRCE_o |
+| memWriteD_i | memWriteE_o |
+| addrSelectD_i | addrSelectE_o |
+| ALUresultD_i | ALUresultE_o |
+| RD2D_i | RD2E_o |
 
-##### Output:
-- RegWriteM_o
-- ResultSrcM_o
-- MemWriteM_o
-- ALUResultM_o
-- WriteDataM_o
-- RdM_o
-- PCPlus4M_o
+### memory_reg_file
 
-#### memory_reg_file
-
-##### Input:
-- RegWriteM_i
-- ResultSrcM_i
-- ALUResultM_i
-- RD_i
-- RdM_i
-- PCPlus4M_i
-
-##### Output:
-- RegWriteW_o
-- ResultSrcW_o
-- ALUResultMM_o
-- ReadDataW_o
-- RdW_o
-- PCPlus4W_o
+| Input | Output |
+| --- | --- |
+| ALUResultD_i | ALUResultE_o |
+| RD2D_i | RD2E_o |
+| ResultSrcD_i | ResultSrcE_o |
 
 
 
 
 ### Important Details:
 
-- [ ] Implement each reg file
-- [ ] Check signals that cut over different sections
+- [x] Implement each reg file
+- [x] Check signals that cut over different sections
 - [ ] Find Bitwidths of each input/output
 - [ ] is reg_file correct name for datastructure
-- [ ] rename inputs and outputs according to actual CPU
+- [x] rename inputs and outputs according to actual CPU
