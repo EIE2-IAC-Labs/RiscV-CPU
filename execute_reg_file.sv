@@ -4,13 +4,13 @@ module execute_reg_file #(
     input logic                     clk,
     input logic                     resultSRCD_i,
     input logic                     memWriteD_i,
-    input logic [DATA_WIDTH-1:0]    addrSelectD_i,
+    input logic                     addrSelectD_i,
     input logic [DATA_WIDTH-1:0]    ALUresultD_i,
     input logic [DATA_WIDTH-1:0]    RD2D_i,
 
     output logic                    resultSRCE_o,
     output logic                    memWriteE_o,
-    output logic [DATA_WIDTH-1:0]   addrSelectE_o,
+    output logic                    addrSelectE_o,
     output logic [DATA_WIDTH-1:0]   ALUresultE_o,
     output logic [DATA_WIDTH-1:0]   RD2E_o
 );

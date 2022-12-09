@@ -1,5 +1,6 @@
 module top #(
-    parameter DW=32
+    parameter DW=32,
+    DATA_WIDTH = 32
 ) (
     input logic rst,
     input logic trigger_i,
@@ -81,10 +82,10 @@ module top #(
     logic [DATA_WIDTH-1:0]       PCE;
 
     fetch_reg_file fetch_reg_file(
-        .clk(clk).
-        .rdWire(InstructionWire),
-        .PCF_i(PC_wire),
-        .PCPlus4F_i(inc_PC)
+        .clk(clk),
+        .instrD_i(InstructionWire),
+        .PCD_i(PC_wire),
+        .incPCD_i(inc_PC),
 
         .instrE_o(instrE),
         .incPCE_o(incPCE),
@@ -151,7 +152,7 @@ module top #(
 
     logic                        resultSrcE_2;
     logic                        memWriteE_2;
-    logic [DATA_WIDTH-1:0]       addrSelectE_2;
+    logic                        addrSelectE_2;
     logic                        branchSrcE_2;
     logic [3:0]                  ALUctrlDE_2;
     logic                        JALE_2;
@@ -163,7 +164,7 @@ module top #(
     logic [DATA_WIDTH-1:0]       ImmExtE_2;
     logic [2:0]                  funct3E_2;
 
-    assign Aluop2Wire = ALUSrcE_wire ? ImmExtE_wire : RD2E_wire;
+    assign Aluop2Wire = ALUsrcWire ? ImmediateExtendWire : RD2Wire;
 
     decode_reg_file decode_reg_file (
         .clk(clk),
@@ -171,7 +172,7 @@ module top #(
         .memWriteD_i(memWrite_enWire),
         .addrSelectD_i (addrSelectWire),
         .branchSrcD_i(BranchSrcWire),
-        .ALUctrlD_i(ALUctrlWire),
+        .ALUCtrlD_i(ALUctrlWire),
         .JALD_i (JALWire),
         .JALRD_i (JALRWire),
         .PCD_i(PCE),
@@ -221,9 +222,10 @@ module top #(
     logic memWriteE_3;
     logic [DATA_WIDTH-1:0] ALUResultE_3;
     logic [DATA_WIDTH-1:0] RD2E_3;
-    logic [DATA_WIDTH-1:0] addrSelectE_3;
+    logic addrSelectE_3;
 
     execute_reg_file execute_reg_file(
+        .clk(clk),
         .resultSRCD_i(resultSrcE_2),
         .memWriteD_i(memWriteE_2),
         .addrSelectD_i(addrSelectE_2),
@@ -259,6 +261,7 @@ module top #(
     logic resultSrcE_4;
 
     mem_reg_file mem_reg_file(
+        .clk(clk),
         .ALUResultD_i(ALUResultE_3),
         .RD2D_i (RamOutWire),
         .ResultSrcD_i (resultSrcE_3),
