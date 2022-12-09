@@ -57,7 +57,6 @@ module top #(
     ///////////               FETCH                   ///////////
     /////////////////////////////////////////////////////////////
 
-    assign branch_PC=PC_wire + ImmediateExtendWire;
     assign jump_PC = JALRWire ? ALUResultWire : branch_PC;
     assign inc_PC = PC_wire+4;
     assign next_PC = PCsrcWire ? jump_PC : inc_PC;
@@ -77,9 +76,9 @@ module top #(
     );
 
     //wires to leave regfile
-    logic [DATA_WIDTH-1:0]       InstrDwire;
-    logic [DATA_WIDTH-1:0]       PCDwire;
-    logic [DATA_WIDTH-1:0]       PCPlus4Dwire;
+    logic [DATA_WIDTH-1:0]       instrE;
+    logic [DATA_WIDTH-1:0]       incPCE;
+    logic [DATA_WIDTH-1:0]       PCE;
 
     fetch_reg_file fetch_reg_file(
         .clk(clk).
@@ -87,9 +86,9 @@ module top #(
         .PCF_i(PC_wire),
         .PCPlus4F_i(inc_PC)
 
-        .InstrD_o(InstrD_o),
-        .PCD_o(PCD_o),
-        .PCPlus4D_o(PCPlus4D_o)
+        .instrE_o(instrE),
+        .incPCE_o(incPCE),
+        .PCE_o(PCE)
 
     );
 
@@ -98,9 +97,9 @@ module top #(
     /////////////////////////////////////////////////////////////
 
 
-    assign opcode = InstrDwire[6:0];
-    assign funct3 = InstrDwire[14:12];
-    assign funct7 = InstrDwire[30];
+    assign opcode = instrE[6:0];
+    assign funct3 = instrE[14:12];
+    assign funct7 = instrE[30];
 
     control control(
         .op_i(opcode),
@@ -118,9 +117,9 @@ module top #(
         .jal_o(JALWire),
         .jalr_o(JALRWire)
     );
-    assign rs1Wire=InstructionWire[19:15];
-    assign rs2Wire=InstructionWire[24:20];
-    assign rdWire=InstructionWire[11:7];
+    assign rs1Wire=instrE[19:15];
+    assign rs2Wire=instrE[24:20];
+    assign rdWire=instrE[11:7];
 
 
     register_file register_file(
@@ -138,7 +137,7 @@ module top #(
         .a0_o(data_out)
     );
 
-    assign ImmediateWire=InstructionWire[31:7];
+    assign ImmediateWire=instrE[31:7];
     
     extend extend(
         .ImmSrc_i(ImmSrcWire),
@@ -148,22 +147,18 @@ module top #(
     );
     
 
-    logic                        RegWriteE_wire;
-    logic                        ResultSrcE_wire;
-    logic                        MemWriteE_wire;
-    logic                        BranchE_wire;
-    logic [3:0]                  ALUCtrlE_wire;
-    logic                        ALUSrcE_wire;
-    logic [2:0]                  ImmSrcE_wire;
-    logic                        JALRD_wire;
-    logic [DATA_WIDTH-1:0]       RD1E_wire;
-    logic [DATA_WIDTH-1:0]       RD2E_wire;
-    logic [DATA_WIDTH-1:0]       PCE_wire;
-    logic [3:0]                  RdE_wire;
-    logic [DATA_WIDTH-1:0]       ImmExtE_wire;
-    logic [DATA_WIDTH-1:0]       PCPlus4E_wire;
-    logic [2:0]                  funct3E_wire;
-    logic [DATA_WIDTH-1:0]       AddrSelE_wire;
+    logic                        resultSrcE_2;
+    logic                        memWriteDE_2;
+    logic [DATA_WIDTH-1:0]       addrSelectDE_2;
+    logic                        branchSrcDE_2;
+    logic [3:0]                  ALUctrlDE_2;
+    logic                        JALE_2;
+    logic                        JALRE_2;
+    logic [DATA_WIDTH-1:0]       PCE_2;
+    logic [DATA_WIDTH-1:0]       RD1E_2;
+    logic [DATA_WIDTH-1:0]       SrcBE_2;
+    logic [DATA_WIDTH-1:0]       RD2E_2;
+    logic [DATA_WIDTH-1:0]       ImmExtE_2;
 
     decode_reg_file decode_reg_file (
         .clk(clk),
@@ -197,6 +192,8 @@ module top #(
         .funct3D_o(funct3E_wire),
         .AddrSelE_o(AddrSelE_wire)
     );
+
+    assign branch_PC=PC_wire + ImmediateExtendWire;
 
     /////////////////////////////////////////////////////////////
     ///////////               EXECUTE                 ///////////
