@@ -146,7 +146,7 @@ module top #(
 
         .ImmExt_o(ImmediateExtendWire)
     );
-    assign Aluop2Wire=ALUsrcWire ? ImmediateExtendWire : RD2Wire;
+    
 
     logic                        RegWriteE_wire;
     logic                        ResultSrcE_wire;
@@ -162,6 +162,7 @@ module top #(
     logic [3:0]                  RdE_wire;
     logic [DATA_WIDTH-1:0]       ImmExtE_wire;
     logic [DATA_WIDTH-1:0]       PCPlus4E_wire;
+    logic [2:0]                  funct3E_wire;
 
     decode_reg_file decode_reg_file (
         .clk(clk),
@@ -177,6 +178,7 @@ module top #(
         .RdD_i(rdWire),
         .ImmExtD_i(ImmediateExtendWire),
         .PCPlus4D_i(PCPlus4Dwire),
+        .funct3D_i (funct3),
 
         .RegWriteE_o(RegWriteE_wire),
         .ResultSrcE_o(ResultSrcE_wire),
@@ -189,30 +191,32 @@ module top #(
         .PCE_o (PCE_wire),
         .RdE_o (RdE_wire),
         .ImmExtE_o (ImmExtE_wire),
-        .PCPlus4E_o (PCPlus4Ewire)
-
+        .PCPlus4E_o (PCPlus4Ewire),
+        .funct3D_o(funct3E_wire)
     );
 
     /////////////////////////////////////////////////////////////
     ///////////               EXECUTE                 ///////////
     /////////////////////////////////////////////////////////////
 
+    assign Aluop2Wire = ALUSrcE_wire ? ImmExtE_wire : RD2E_wire;
 
     ALU ALU(
-        .SrcA_i(RD1Wire),
+        .SrcA_i(RD1E_wire),
         .SrcB_i(Aluop2Wire),
-        .ALUctrl_i(ALUctrlWire),
-        .BranchCtrl_i(funct3),
+        .ALUctrl_i(ALUSrcE_wire),
+        .BranchCtrl_i(funct3E_wire),
         
         .ALUResult_o(ALUResultWire),
         .Branch_o(branchWire)
     );
 
-    assign PCsrcWire = BranchSrcWire ? branchWire : 1'b0;
 
     /////////////////////////////////////////////////////////////
     ///////////                 MEMORY                ///////////
     /////////////////////////////////////////////////////////////
+
+    assign PCsrcWire = BranchSrcWire ? branchWire : 1'b0;
 
     ram ram(
         .clk_i(clk),
