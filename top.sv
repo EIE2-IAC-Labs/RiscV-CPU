@@ -163,6 +163,7 @@ module top #(
     logic [DATA_WIDTH-1:0]       ImmExtE_wire;
     logic [DATA_WIDTH-1:0]       PCPlus4E_wire;
     logic [2:0]                  funct3E_wire;
+    logic [DATA_WIDTH-1:0]       AddrSelE_wire;
 
     decode_reg_file decode_reg_file (
         .clk(clk),
@@ -179,6 +180,7 @@ module top #(
         .ImmExtD_i(ImmediateExtendWire),
         .PCPlus4D_i(PCPlus4Dwire),
         .funct3D_i (funct3),
+        .AddrSelD_i(addrSelectWire)
 
         .RegWriteE_o(RegWriteE_wire),
         .ResultSrcE_o(ResultSrcE_wire),
@@ -192,7 +194,8 @@ module top #(
         .RdE_o (RdE_wire),
         .ImmExtE_o (ImmExtE_wire),
         .PCPlus4E_o (PCPlus4Ewire),
-        .funct3D_o(funct3E_wire)
+        .funct3D_o(funct3E_wire),
+        .AddrSelE_o(AddrSelE_wire)
     );
 
     /////////////////////////////////////////////////////////////
@@ -211,12 +214,13 @@ module top #(
         .Branch_o(branchWire)
     );
 
+    assign PCsrcWire = BranchE_wire ? branchWire : 1'b0;
 
     /////////////////////////////////////////////////////////////
     ///////////                 MEMORY                ///////////
     /////////////////////////////////////////////////////////////
 
-    assign PCsrcWire = BranchSrcWire ? branchWire : 1'b0;
+    
 
     ram ram(
         .clk_i(clk),

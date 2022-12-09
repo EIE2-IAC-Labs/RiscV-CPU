@@ -2,13 +2,15 @@ module execute_reg_file #(
     parameter DATA_WIDTH = 32
 )(
 input logic                     clk,
-input logic                     RegWriteE_i
+input logic                     JALRD_i,
 input logic                     ResultSrcE_i
 input logic                     MemWriteE_i
 input logic [DATA_WIDTH-1:0]    ALUResult_i
 input logic [DATA_WIDTH-1:0]    WriteDataE_i
 input logic [3:0]               RdE_i
 input logic [DATA_WIDTH-1:0]    PcPlus4E_i
+
+output logic                     JALRD_i,
 
 output logic                    RegWriteM_o
 output logic                    ResultSrcM_o

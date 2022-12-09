@@ -19,6 +19,9 @@ module decode_reg_file #(
     input logic [DATAWIDTH-1:0]         ImmExtD_i,
     input logic [DATAWIDTH-1:0]         PCPlus4D_i,
 
+    input logic [DATA_WIDTH-1:0]        AddrSelD_i,
+    output logic [DATA_WIDTH-1:0]       AddrSelE_o,
+
     input logic [2:0]                   funct3D_i,
     output logic [2:0]                  funct3D_o,
 
@@ -53,7 +56,8 @@ always_ff @(posedge clk) begin
     RdE_o <= RdD_i;
     ImmExtE_o <= ImmExtD_i;
     PCPlus4E_o <= PCPlus4D_i;
-    funct3D_o <= funct3D_i
+    funct3D_o <= funct3D_i;
+    AddrSelE_o <= AddrSelD_i;
 end
 
 endmodule
