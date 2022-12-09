@@ -77,9 +77,9 @@ module top #(
     );
 
     //wires to leave regfile
-    logic [DATA_WIDTH-1:0]       InstrD_o,
-    logic [DATA_WIDTH-1:0]       PCD_o,
-    logic [DATA_WIDTH-1:0]       PCPlus4D_o
+    logic [DATA_WIDTH-1:0]       InstrDwire;
+    logic [DATA_WIDTH-1:0]       PCDwire;
+    logic [DATA_WIDTH-1:0]       PCPlus4Dwire;
 
     fetch_reg_file fetch_reg_file(
         .clk(clk).
@@ -98,9 +98,9 @@ module top #(
     /////////////////////////////////////////////////////////////
 
 
-    assign opcode = InstrD_o[6:0];
-    assign funct3 = InstrD_o[14:12];
-    assign funct7 = InstrD_o[30];
+    assign opcode = InstrDwire[6:0];
+    assign funct3 = InstrDwire[14:12];
+    assign funct7 = InstrDwire[30];
 
     control control(
         .op_i(opcode),
@@ -147,6 +147,51 @@ module top #(
         .ImmExt_o(ImmediateExtendWire)
     );
     assign Aluop2Wire=ALUsrcWire ? ImmediateExtendWire : RD2Wire;
+
+    logic                        RegWriteE_wire;
+    logic                        ResultSrcE_wire;
+    logic                        MemWriteE_wire;
+    logic                        BranchE_wire;
+    logic [3:0]                  ALUCtrlE_wire;
+    logic                        ALUSrcE_wire;
+    logic [2:0]                  ImmSrcE_wire;
+    logic                        JALRD_wire;
+    logic [DATA_WIDTH-1:0]       RD1E_wire;
+    logic [DATA_WIDTH-1:0]       RD2E_wire;
+    logic [DATA_WIDTH-1:0]       PCE_wire;
+    logic [3:0]                  RdE_wire;
+    logic [DATA_WIDTH-1:0]       ImmExtE_wire;
+    logic [DATA_WIDTH-1:0]       PCPlus4E_wire;
+
+    decode_reg_file decode_reg_file (
+        .clk(clk),
+        .RegWriteD_i(regWrite_enWire),
+        .ResultSrcD_i(ResultSrcWire),
+        .MemWriteD_i (memWrite_enWire),
+        .BranchD_i(BranchSrcWire),
+        .ALUCtrlD_i(ALUctrlWire),
+        .ALUSrcD_i(ALUsrcWire),
+        .RD1_i(RD1Wire),
+        .RD2_i(RD2Wire),
+        .PCD_i(PCDwire),
+        .RdD_i(rdWire),
+        .ImmExtD_i(ImmediateExtendWire),
+        .PCPlus4D_i(PCPlus4Dwire),
+
+        .RegWriteE_o(RegWriteE_wire),
+        .ResultSrcE_o(ResultSrcE_wire),
+        .MemWriteE_o(MemWriteE_wire),
+        .BranchE_o (BranchE_wire),
+        .ALUControlE_o (ALUCtrlE_Wire),
+        .ALUSrcE_o (ALUSrcE_wire),
+        .RD1E_o (RD1E_wire),
+        .RD2E_o (RD2E_wire),
+        .PCE_o (PCE_wire),
+        .RdE_o (RdE_wire),
+        .ImmExtE_o (ImmExtE_wire),
+        .PCPlus4E_o (PCPlus4Ewire)
+
+    );
 
     /////////////////////////////////////////////////////////////
     ///////////               EXECUTE                 ///////////
