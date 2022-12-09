@@ -160,46 +160,45 @@ module top #(
     logic [DATA_WIDTH-1:0]       RD2E_2;
     logic [DATA_WIDTH-1:0]       ImmExtE_2;
 
+    assign Aluop2Wire = ALUSrcE_wire ? ImmExtE_wire : RD2E_wire;
+
     decode_reg_file decode_reg_file (
         .clk(clk),
-        .RegWriteD_i(regWrite_enWire),
-        .ResultSrcD_i(ResultSrcWire),
-        .MemWriteD_i (memWrite_enWire),
-        .BranchD_i(BranchSrcWire),
-        .ALUCtrlD_i(ALUctrlWire),
-        .ALUSrcD_i(ALUsrcWire),
-        .RD1_i(RD1Wire),
-        .RD2_i(RD2Wire),
-        .PCD_i(PCDwire),
-        .RdD_i(rdWire),
+        .resultSrcD_i(ResultSrcWire),
+        .memWriteD_i(memWrite_enWire),
+        .addrSelectD_i (addrSelectWire),
+        .branchSrcD_i(BranchSrcWire),
+        .ALUctrlD_i(ALUctrlWire),
+        .JALD_i (JALWire),
+        .JALRD_i (JALRWire),
+        .PCD_i(PCE),
+        .RD1D_i(RD1Wire),
+        .SrcBD_i(Aluop2Wire),
+        .RD2D_i(RD2Wire),
         .ImmExtD_i(ImmediateExtendWire),
-        .PCPlus4D_i(PCPlus4Dwire),
-        .funct3D_i (funct3),
-        .AddrSelD_i(addrSelectWire)
+        
 
-        .RegWriteE_o(RegWriteE_wire),
-        .ResultSrcE_o(ResultSrcE_wire),
-        .MemWriteE_o(MemWriteE_wire),
-        .BranchE_o (BranchE_wire),
-        .ALUControlE_o (ALUCtrlE_Wire),
-        .ALUSrcE_o (ALUSrcE_wire),
-        .RD1E_o (RD1E_wire),
-        .RD2E_o (RD2E_wire),
-        .PCE_o (PCE_wire),
-        .RdE_o (RdE_wire),
-        .ImmExtE_o (ImmExtE_wire),
-        .PCPlus4E_o (PCPlus4Ewire),
-        .funct3D_o(funct3E_wire),
-        .AddrSelE_o(AddrSelE_wire)
+        .resultSrcE_o(resultSrcE_2),
+        .memWriteE_o(memWriteDE_2),
+        .addrSelectE_o(addrSelectDE_2),
+        .branchSrcE_o (branchSrcDE_2),
+        .ALUctrlE_o (ALUctrlDE_2),
+        .JALE_o (JALE_2),
+        .JALRE_o (JALRE_2),
+        .PCE_o (PCE_2),
+        .RD1E_o (RD1E_2),
+        .SrcBE_o (SrcBE_2),
+        .RD2E_o (RD2E_2),
+        .ImmExtE_o (ImmExtE_2)
     );
 
-    assign branch_PC=PC_wire + ImmediateExtendWire;
+    
 
     /////////////////////////////////////////////////////////////
     ///////////               EXECUTE                 ///////////
     /////////////////////////////////////////////////////////////
 
-    assign Aluop2Wire = ALUSrcE_wire ? ImmExtE_wire : RD2E_wire;
+    assign branch_PC=PC_wire + ImmediateExtendWire;
 
     ALU ALU(
         .SrcA_i(RD1E_wire),
