@@ -23,7 +23,7 @@ initial begin
         register_array[i] = 32'b0;
     end
 end
-always_ff @(posedge clk) begin
+always_ff @(negedge clk) begin
     if (WE3_i) register_array[AD3_i] <= WD3_i;
     if(TRIGGER_i == 1'b1) register_array[5] <= 1;
 end
