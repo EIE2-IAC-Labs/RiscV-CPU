@@ -38,9 +38,9 @@ always_comb begin
         2'b10:
             case (memsign_i)
                 1'b0: 
-                    rd_o = whichbyte_i[1] ?  {{rd_i[31:16]}, {16{1'b0}}} : {{16{rd_i[15]}}, rd_i[15:0]};
+                    rd_o = whichbyte_i[1] ? {{16{rd_i[31]}}, rd_i[31:16]} : {{16{rd_i[15]}}, rd_i[15:0]};
                 1'b1:
-                    rd_o = whichbyte_i[1] ?  {{rd_i[31:16]}, {16{1'b0}}} : {{16{1'b0}}, rd_i[15:0]};
+                    rd_o = whichbyte_i[1] ? {{16{1'b0}}, rd_i[31:16]} : {{16{1'b0}}, rd_i[15:0]};
             endcase
     
         

@@ -26,7 +26,7 @@ always_comb begin
             endcase
 
         2'b10:  
-            wd_o = whichbyte_i[1] ? {wd_i[31:16], rd_i[15:0]} : {rd_i[31:16], wd_i[15:0]};
+            wd_o = whichbyte_i[1] ? {wd_i[15:0], rd_i[15:0]} : {rd_i[31:16], wd_i[15:0]};
         default: wd_o = wd_i;
 
     endcase

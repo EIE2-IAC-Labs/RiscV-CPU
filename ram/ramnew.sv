@@ -11,8 +11,7 @@ module ramnew #(
 );
 
     logic [DATA_W-1:0] ram_array [17'h1FFFF : 17'h0]; 
-    //logic [WIDTH-1:0] a_ii,
-    //assign a_ii = {a_i[31:2], {2'b0}};
+
 
     initial begin 
         $display  ("Loading ram.");
@@ -28,8 +27,10 @@ module ramnew #(
             ram_array[a_i[16:0] + 1] <= wd_i[15:8];
             ram_array[a_i[16:0] + 2] <= wd_i[23:16];
             ram_array[a_i[16:0] + 3] <= wd_i[31:24];
+            $display(*);
             $display(ram_array[a_i[16:0] + 3],ram_array[a_i[16:0] + 2],ram_array[a_i[16:0] + 1],ram_array[a_i[16:0]]);
-            
+            $display(*);
+
         end
     end 
 
