@@ -1,5 +1,5 @@
 module top #(
-    parameter DW=32,
+    parameter DW=32
 ) (
     input logic rst,
     input logic trigger_i,
@@ -149,7 +149,6 @@ module top #(
     logic                        addrSelectE_2;
     logic                        branchSrcE_2;
     logic [3:0]                  ALUctrlDE_2;
-    logic                        JALE_2;
     logic                        JALRE_2;
     logic [DW-1:0]       PCE_2;
     logic [DW-1:0]       RD1E_2;
@@ -167,7 +166,6 @@ module top #(
         .addrSelectD_i (addrSelectWire),
         .branchSrcD_i(BranchSrcWire),
         .ALUCtrlD_i(ALUctrlWire),
-        .JALD_i (JALWire),
         .JALRD_i (JALRWire),
         .PCD_i(PCE),
         .RD1D_i(RD1Wire),
@@ -181,7 +179,6 @@ module top #(
         .addrSelectE_o(addrSelectE_2),
         .branchSrcE_o (branchSrcE_2),
         .ALUctrlE_o (ALUctrlDE_2),
-        .JALE_o (JALE_2),
         .JALRE_o (JALRE_2),
         .PCE_o (PCE_2),
         .RD1E_o (RD1E_2),
@@ -224,7 +221,7 @@ module top #(
     logic [DW-1:0] RD2E_3;
     logic addrSelectE_3;
 
-    assign branch_PC=PC_wire + ImmediateExtendWire;
+    assign branch_PC=PCE_2 + ImmExtE_2;
     assign jump_PC = JALRE_2 ? ALUResultWire : branch_PC;
     assign PCsrcWire = branchSrcE_2 ? branchWire : 1'b0;
 
