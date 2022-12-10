@@ -1,62 +1,65 @@
 module top #(
-    parameter DW=32
+    parameter DW = 32
 ) (
-    input logic rst,
-    input logic trigger_i,
-    input logic clk,
-
-    output logic [DW-1:0]       data_out  
+    input logic             rst,
+    input logic             trigger_i,
+    input logic             clk,
+    output logic [DW-1:0]   data_out  
 
 );
    
     //pc wires
-    logic [DW-1:0]        inc_PC;
-    logic [DW-1:0]     branch_PC;
-    logic [DW-1:0]       next_PC;
-    logic [DW-1:0]       jump_PC;
-    logic [DW-1:0]       PC_wire;
-    logic              PCsrcWire;
+    logic [DW-1:0]  inc_PC;
+    logic [DW-1:0]  branch_PC;
+    logic [DW-1:0]  next_PC;
+    logic [DW-1:0]  jump_PC;
+    logic [DW-1:0]  PC_wire;
+    logic           PCsrcWire;
+
     //alu wires
-    logic [DW-1:0]       RD1Wire;
-    logic [DW-1:0]       Aluop2Wire;
-    logic [DW-1:0]       ALUResultWire;
-    logic [DW-1:0]       RD2Wire;
-    logic             branchWire;
+    logic [DW-1:0]  RD1Wire;
+    logic [DW-1:0]  Aluop2Wire;
+    logic [DW-1:0]  ALUResultWire;
+    logic [DW-1:0]  RD2Wire;
+    logic           branchWire;
     
     // rom wires
-    logic [DW-1:0] InstructionWire;
+    logic [DW-1:0]  InstructionWire;
+
     // control wires
-    logic [6:0] opcode;
-    logic [2:0] funct3;
-    logic funct7;
-    logic memWrite_enWire;
-    logic regWrite_enWire;
-    logic [3:0] ALUctrlWire;
-    logic ALUsrcWire;
-    logic [2:0] ImmSrcWire;
-    logic BranchSrcWire;
-    logic addrSelectWire;
-    logic ResultSrcWire;
-    logic JALWire;
-    logic JALRWire;
+    logic [6:0]     opcode;
+    logic [2:0]     funct3;
+    logic           funct7;
+    logic           memWrite_enWire;
+    logic           regWrite_enWire;
+    logic [3:0]     ALUctrlWire;
+    logic           ALUsrcWire;
+    logic [2:0]     ImmSrcWire;
+    logic           BranchSrcWire;
+    logic           ResultSrcWire;
+    logic           JALWire;
+    logic           JALRWire;
+    logic [1:0]     memTypeWire;
+    logic           memSignWire;
 
     // register wires
-    logic [4:0] rs1Wire;
-    logic [4:0] rs2Wire;
-    logic [4:0] rdWire;
-    logic [DW-1:0] wd3Wire;
-    logic [DW-1:0]       wd3Wire0; 
+    logic [4:0]     rs1Wire;
+    logic [4:0]     rs2Wire;
+    logic [4:0]     rdWire;
+    logic [DW-1:0]  wd3Wire;
+    logic [DW-1:0]  wd3Wire0; 
+
     // extend wire
-    logic [DW-8:0] ImmediateWire;
-    logic [DW-1:0] ImmediateExtendWire;
-    // ram wire
-    logic [DW-1:0] RamOutWire;
+    logic [DW-8:0]  ImmediateWire;
+    logic [DW-1:0]  ImmediateExtendWire;
+
+    // memory wires
+    logic [DW-1:0]  RamOutWire;
 
 
-
-    assign branch_PC=PC_wire + ImmediateExtendWire;
+    assign branch_PC = PC_wire + ImmediateExtendWire;
     assign jump_PC = JALRWire ? ALUResultWire : branch_PC;
-    assign inc_PC = PC_wire+4;
+    assign inc_PC = PC_wire + 4;
     assign next_PC = PCsrcWire ? jump_PC : inc_PC;
     
     PC PC(
@@ -69,7 +72,6 @@ module top #(
 
     rom rom(
         .a_i(PC_wire),
-
         .rd_o(InstructionWire)
     );
 
@@ -81,14 +83,14 @@ module top #(
         .op_i(opcode),
         .funct3_i(funct3),
         .funct7bit_i(funct7),
-
         .memWrite_en_o(memWrite_enWire),
+        .memType_o(memTypeWire),
+        .memSign_o(memSignWire),
         .regWrite_en_o(regWrite_enWire),
         .ALUctrl_o(ALUctrlWire),
         .ALUsrc_o(ALUsrcWire),
         .ImmSrc_o(ImmSrcWire),
         .BranchSrc_o(BranchSrcWire),
-        .addrSelect_o(addrSelectWire),
         .ResultSrc_o(ResultSrcWire),
         .jal_o(JALWire),
         .jalr_o(JALRWire)
@@ -106,10 +108,8 @@ module top #(
         .WE3_i(regWrite_enWire),
         .WD3_i(wd3Wire),
         .TRIGGER_i(trigger_i),
-
         .RD1_o(RD1Wire),
         .RD2_o(RD2Wire),
-        
         .a0_o(data_out)
     );
 
@@ -128,25 +128,23 @@ module top #(
         .SrcB_i(Aluop2Wire),
         .ALUctrl_i(ALUctrlWire),
         .BranchCtrl_i(funct3),
-        
         .ALUResult_o(ALUResultWire),
         .Branch_o(branchWire)
     );
 
     assign PCsrcWire = BranchSrcWire ? branchWire : 1'b0;
 
-    ram ram(
+    memory memory(
         .clk_i(clk),
         .write_en_i(memWrite_enWire),
         .a_i(ALUResultWire),
-        .AddrsCtrl_i(addrSelectWire),
         .wd_i(RD2Wire),
-
-        .rd_o(RamOutWire)
-
+        .rd_o(RamOutWire),
+        .memtype_i(memTypeWire),
+        .memsign_i(memSignWire)
     );
 
     assign wd3Wire0 = ResultSrcWire ? RamOutWire : ALUResultWire ;
-    assign wd3Wire = JALWire ? inc_PC :wd3Wire0;
+    assign wd3Wire = JALWire ? inc_PC : wd3Wire0;
 
 endmodule

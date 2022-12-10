@@ -1,4 +1,4 @@
-module ram_top # (
+module memory # (
     parameter WIDTH = 32
               
 )(
@@ -26,7 +26,7 @@ ram_i ram_i (
     
 );
 
-ramnew ramnew(
+ram ram(
     .write_en_i(write_en_i),
     .clk_i(clk_i),
     .a_i(a_ii),
