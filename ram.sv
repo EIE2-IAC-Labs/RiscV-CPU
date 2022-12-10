@@ -27,7 +27,7 @@ module ram #(
             ram_array[a_i[16:0] + 1] <= wd_i[15:8];
             ram_array[a_i[16:0] + 2] <= wd_i[23:16];
             ram_array[a_i[16:0] + 3] <= wd_i[31:24];
-            $display(ram_array[a_i[16:0] + 3],ram_array[a_i[16:0] + 2],ram_array[a_i[16:0] + 1],ram_array[a_i[16:0]]);
+            $display(ram_array[a_i[16:0] + 3], ram_array[a_i[16:0] + 2], ram_array[a_i[16:0] + 1], ram_array[a_i[16:0]]);
 
         end
     end 
