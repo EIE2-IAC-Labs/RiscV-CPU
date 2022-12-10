@@ -84,6 +84,17 @@ ram_o:
     .rd_i(RDWire),
     .rd_o(rd_o)
     
+`clk_i` -> 1 bit
+`memtype_i` -> 2 bits
+`memsign_i` -> 1 bit
+`write_en_i` -> 1 bit
+`wd_i` -> 32 bits
+`a_i' -> 32 bits
+`a_ii` -> 2 bits
+`rd_o` -> 32 bits
+`WDWire' -> 32 bits
+`RDWire` -> 32 bits
+    
 #### Testing:
 
 Done by using `ram_new.cpp`(different values for all the inputs and controls) and different versions of `data.mem`.
