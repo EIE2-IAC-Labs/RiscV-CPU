@@ -70,15 +70,18 @@ module top #(
     logic [2:0]             funct3;
     logic                   funct7;
     logic                   memWrite_enWire;
+    logic [1:0]             memTypeWire;
+    logic                   memSignWire;
     logic                   regWrite_enWire;
     logic [3:0]             ALUctrlWire;
     logic                   ALUsrcWire;
     logic [2:0]             ImmSrcWire;
     logic                   BranchSrcWire;
-    logic                   addrSelectWire;
+    //logic                   addrSelectWire;
     logic                   ResultSrcWire;
     logic                   JALWire;
     logic                   JALRWire;
+    logic                   AUIPCWire;
 
     assign opcode = instrE[6:0];
     assign funct3 = instrE[14:12];
@@ -88,17 +91,21 @@ module top #(
         .op_i(opcode),
         .funct3_i(funct3),
         .funct7bit_i(funct7),
-
+        .memType_o(memTypeWire),
+        .memSign_o(memSignWire),
         .memWrite_en_o(memWrite_enWire),
         .regWrite_en_o(regWrite_enWire),
         .ALUctrl_o(ALUctrlWire),
         .ALUsrc_o(ALUsrcWire),
         .ImmSrc_o(ImmSrcWire),
         .BranchSrc_o(BranchSrcWire),
-        .addrSelect_o(addrSelectWire),
+
+      //.addrSelect_o(addrSelectWire),
         .ResultSrc_o(ResultSrcWire),
         .jal_o(JALWire),
-        .jalr_o(JALRWire)
+        .jalr_o(JALRWire),
+        .auipc_o(AUIPCWire)
+
     );
 
     ///////////////        REGISTER FILE        ///////////////
@@ -146,7 +153,9 @@ module top #(
 
     logic                        resultSrcE_2;
     logic                        memWriteE_2;
-    logic                        addrSelectE_2;
+    logic [0:1]                  memTypeWireE_2;
+    logic                        memSignWireE_2;
+  //logic                        addrSelectE_2;
     logic                        branchSrcE_2;
     logic [3:0]                  ALUctrlDE_2;
     logic                        JALRE_2;
@@ -163,7 +172,9 @@ module top #(
         .clk(clk),
         .resultSrcD_i(ResultSrcWire),
         .memWriteD_i(memWrite_enWire),
-        .addrSelectD_i (addrSelectWire),
+        .memTypeD_i (memTypeWire),
+        .memSignD_i (memSignWire),
+      //.addrSelectD_i (addrSelectWire),
         .branchSrcD_i(BranchSrcWire),
         .ALUCtrlD_i(ALUctrlWire),
         .JALRD_i (JALRWire),
@@ -176,7 +187,9 @@ module top #(
         
         .resultSrcE_o(resultSrcE_2),
         .memWriteE_o(memWriteE_2),
-        .addrSelectE_o(addrSelectE_2),
+        .memTypeE_o (memTypeWireE_2),
+        .memSignE_o (memSignWireE_2),
+      //.addrSelectE_o(addrSelectE_2),
         .branchSrcE_o (branchSrcE_2),
         .ALUctrlE_o (ALUctrlDE_2),
         .JALRE_o (JALRE_2),
@@ -219,7 +232,9 @@ module top #(
     logic memWriteE_3;
     logic [DW-1:0] ALUResultE_3;
     logic [DW-1:0] RD2E_3;
-    logic addrSelectE_3;
+    //logic addrSelectE_3;
+    logic [0:1] memTypeWireE_3;
+    logic memSignWireE_3;
 
     assign branch_PC=PCE_2 + ImmExtE_2;
     assign jump_PC = JALRE_2 ? ALUResultWire : branch_PC;
@@ -229,13 +244,17 @@ module top #(
         .clk(clk),
         .resultSRCD_i(resultSrcE_2),
         .memWriteD_i(memWriteE_2),
-        .addrSelectD_i(addrSelectE_2),
+        .memTypeD_i (memTypeWireE_2),
+        .memSignD_i (memSignWireE_2),
+     // .addrSelectD_i(addrSelectE_2),
         .ALUresultD_i(ALUResultWire),
         .RD2D_i (RD2E_2),
 
         .resultSRCE_o (resultSrcE_3),
         .memWriteE_o (memWriteE_3),
-        .addrSelectE_o (addrSelectE_3),
+        .memTypeE_o (memTypeWireE_3),
+        .memSignE_o (memSignWireE_3),
+       // .addrSelectE_o (addrSelectE_3),
         .ALUresultE_o (ALUResultE_3),
         .RD2E_o (RD2E_3)
     );
@@ -247,21 +266,30 @@ module top #(
     ///////////////           RAM BLOCK           ///////////////
     logic [DW-1:0]          RamOutWire;
 
-    ram ram(
+    memory memory(
         .clk_i(clk),
         .write_en_i(memWriteE_3),
         .a_i(ALUResultE_3),
-        .AddrsCtrl_i(addrSelectE_3),
         .wd_i(RD2E_3),
-
-        .rd_o(RamOutWire)
-
+        .rd_o(RamOutWire),
+        .memtype_i(memTypeWireE_3),
+        .memsign_i(memSignWireE_3)
     );
+    //ram ram(
+    //    .clk_i(clk),
+    //    .write_en_i(memWriteE_3),
+    //    .a_i(ALUResultE_3),
+    //    .AddrsCtrl_i(addrSelectE_3),
+    //    .wd_i(RD2E_3),
+
+    //    .rd_o(RamOutWire)
+
+   // );
 
     ///////////////        PIPELINING BLOCK       ///////////////
     logic [DW-1:0]      ALUResultE_4;
     logic [DW-1:0]      RamOutWireE_4;
-    logic                       resultSrcE_4;
+    logic               resultSrcE_4;
 
     mem_reg_file mem_reg_file(
         .clk(clk),
@@ -281,6 +309,7 @@ module top #(
     /////////////////////////////////////////////////////////////
 
     assign wd3Wire0 = resultSrcE_4 ? RamOutWireE_4 : ALUResultE_4;
-    
+    assign wd3Wire1 = AUIPCWire ? branch_PC : wd3Wire0;
+    assign wd3Wire = JALWire ? inc_PC : wd3Wire1;
 
 endmodule
