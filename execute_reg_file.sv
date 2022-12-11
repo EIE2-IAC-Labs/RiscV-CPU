@@ -21,8 +21,8 @@ module execute_reg_file #(
 
 always_ff @(negedge clk) begin
     resultSRCE_o <= resultSRCD_i;
-    memTypeE_o <= memWriteD_i;
-    memSignE_o <= memTypeD_i;
+    memTypeE_o <= memTypeD_i;
+    memSignE_o <= memSignD_i;
     memWriteE_o <= memWriteD_i;
     //   addrSelectE_o <= addrSelectD_i;
     ALUresultE_o <= ALUresultD_i;

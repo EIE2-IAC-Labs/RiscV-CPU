@@ -153,7 +153,7 @@ module top #(
 
     logic                        resultSrcE_2;
     logic                        memWriteE_2;
-    logic [0:1]                  memTypeWireE_2;
+    logic [1:0]                  memTypeWireE_2;
     logic                        memSignWireE_2;
   //logic                        addrSelectE_2;
     logic                        branchSrcE_2;
@@ -233,7 +233,7 @@ module top #(
     logic [DW-1:0] ALUResultE_3;
     logic [DW-1:0] RD2E_3;
     //logic addrSelectE_3;
-    logic [0:1] memTypeWireE_3;
+    logic [1:0] memTypeWireE_3;
     logic memSignWireE_3;
 
     assign branch_PC=PCE_2 + ImmExtE_2;
