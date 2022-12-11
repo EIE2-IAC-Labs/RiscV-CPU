@@ -3,10 +3,12 @@ module decode_reg_file #(
 )(
     //decode stage to branch
     //if so, emtpy just loaded instruction as it might be the wrong instruction
+    //remove addr wire
     input logic                         clk,
     input logic                         resultSrcD_i,
     input logic                         memWriteD_i,
-    input logic                         addrSelectD_i,
+    input logic [1:0]                   memTypeWireD_i,
+    input logic                         AUIPCWireD_i,
     input logic                         branchSrcD_i,
     input logic [3:0]                   ALUCtrlD_i,
     input logic                         JALRD_i,
@@ -16,10 +18,12 @@ module decode_reg_file #(
     input logic [DATA_WIDTH-1:0]        RD2D_i,
     input logic [DATA_WIDTH-1:0]        ImmExtD_i,
     input logic [2:0]                   funct3D_i,
+    input logic                         memSignWireD_i,
 
+    output logic                        AUIPCWireE_o,
+    output logic [1:0]                  memTypeWireE_o,
     output logic                        resultSrcE_o,
     output logic                        memWriteE_o,
-    output logic                           addrSelectE_o,
     output logic                        branchSrcE_o,
     output logic [3:0]                  ALUctrlE_o,
     output logic                        JALRE_o,
@@ -28,13 +32,13 @@ module decode_reg_file #(
     output logic [DATA_WIDTH-1:0]       SrcBE_o,
     output logic [DATA_WIDTH-1:0]       RD2E_o,
     output logic [DATA_WIDTH-1:0]       ImmExtE_o,
-    output logic [2:0]                  funct3E_o
+    output logic [2:0]                  funct3E_o,
+    output logic                        memSignWireE_o
 );
 
 always_ff @(negedge clk) begin
     resultSrcE_o <= resultSrcD_i;
     memWriteE_o <= memWriteD_i;
-    addrSelectE_o <= addrSelectD_i;
     branchSrcE_o <= branchSrcD_i;
     ALUctrlE_o <= ALUCtrlD_i;
     JALRE_o <= JALRD_i;
@@ -44,6 +48,10 @@ always_ff @(negedge clk) begin
     RD2E_o <= RD2D_i;
     ImmExtE_o <= ImmExtD_i;
     funct3E_o <= funct3D_i;
+    memTypeWireE_o <= memTypeWireD_i;
+    memSignWireE_o <= memSignWireD_i;
+    AUIPCWireE_o <= AUIPCWireD_i;
+    
 end
 
 endmodule

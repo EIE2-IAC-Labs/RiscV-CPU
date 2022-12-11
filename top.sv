@@ -75,8 +75,12 @@ module top #(
     logic                   ALUsrcWire;
     logic [2:0]             ImmSrcWire;
     logic                   BranchSrcWire;
-    logic                   addrSelectWire;
+    
     logic                   ResultSrcWire;
+    logic                   AUIPCWire;
+    logic [1:0]             memTypeWire;
+    logic                   memSignWire;
+
     logic                   JALWire;
     logic                   JALRWire;
 
@@ -88,17 +92,21 @@ module top #(
         .op_i(opcode),
         .funct3_i(funct3),
         .funct7bit_i(funct7),
-
         .memWrite_en_o(memWrite_enWire),
+
+        .memType_o(memTypeWire),
+        .memSign_o(memSignWire),
+
         .regWrite_en_o(regWrite_enWire),
         .ALUctrl_o(ALUctrlWire),
         .ALUsrc_o(ALUsrcWire),
         .ImmSrc_o(ImmSrcWire),
         .BranchSrc_o(BranchSrcWire),
-        .addrSelect_o(addrSelectWire),
         .ResultSrc_o(ResultSrcWire),
         .jal_o(JALWire),
-        .jalr_o(JALRWire)
+        .jalr_o(JALRWire),
+
+        .auipc_o(AUIPCWire)
     );
 
     ///////////////        REGISTER FILE        ///////////////
@@ -146,7 +154,6 @@ module top #(
 
     logic                        resultSrcE_2;
     logic                        memWriteE_2;
-    logic                        addrSelectE_2;
     logic                        branchSrcE_2;
     logic [3:0]                  ALUctrlDE_2;
     logic                        JALRE_2;
@@ -156,6 +163,9 @@ module top #(
     logic [DW-1:0]       RD2E_2;
     logic [DW-1:0]       ImmExtE_2;
     logic [2:0]                  funct3E_2;
+    logic [1:0]                 memTypeWireE_2;
+    logic                       memSignWireE_2;
+    logic                       AUIPCE_2;
 
     assign Aluop2Wire = ALUsrcWire ? ImmediateExtendWire : RD2Wire;
 
@@ -163,7 +173,6 @@ module top #(
         .clk(clk),
         .resultSrcD_i(ResultSrcWire),
         .memWriteD_i(memWrite_enWire),
-        .addrSelectD_i (addrSelectWire),
         .branchSrcD_i(BranchSrcWire),
         .ALUCtrlD_i(ALUctrlWire),
         .JALRD_i (JALRWire),
@@ -173,6 +182,9 @@ module top #(
         .RD2D_i(RD2Wire),
         .ImmExtD_i(ImmediateExtendWire),
         .funct3D_i(funct3),
+        .memTypeWireD_i (memTypeWire),
+        .memSignWireD_i (memSignWire),
+        .AUIPCWireD_i (AUIPCWire),
         
         .resultSrcE_o(resultSrcE_2),
         .memWriteE_o(memWriteE_2),
@@ -185,7 +197,10 @@ module top #(
         .SrcBE_o (SrcBE_2),
         .RD2E_o (RD2E_2),
         .ImmExtE_o (ImmExtE_2),
-        .funct3E_o(funct3E_2)
+        .funct3E_o(funct3E_2),
+        .memTypeWireE_o (memTypeWireE_2),
+        .memSignWireE_o (memSignWireE_2),
+        .AUIPCWireE_o (AUIPCE_2)
     );
 
     
@@ -219,7 +234,9 @@ module top #(
     logic memWriteE_3;
     logic [DW-1:0] ALUResultE_3;
     logic [DW-1:0] RD2E_3;
-    logic addrSelectE_3;
+    logic [1:0]                 memTypeWireE_3;
+    logic                       memSignWireE_3;
+    logic                       AUIPCE_3;
 
     assign branch_PC=PCE_2 + ImmExtE_2;
     assign jump_PC = JALRE_2 ? ALUResultWire : branch_PC;
@@ -229,15 +246,19 @@ module top #(
         .clk(clk),
         .resultSRCD_i(resultSrcE_2),
         .memWriteD_i(memWriteE_2),
-        .addrSelectD_i(addrSelectE_2),
         .ALUresultD_i(ALUResultWire),
         .RD2D_i (RD2E_2),
+        .memTypeD_i (memTypeWireE_2),
+        .memSignD_i (memSignWireE_2),
+        .AUIPCD_i (AUIPCE_2),
 
         .resultSRCE_o (resultSrcE_3),
         .memWriteE_o (memWriteE_3),
-        .addrSelectE_o (addrSelectE_3),
         .ALUresultE_o (ALUResultE_3),
         .RD2E_o (RD2E_3)
+        .memTypeE_o (memTypeWireE_3),
+        .memSignE_o (memSignWireE_3),
+        .AUIPCE_o (AUIPCE_3)
     );
 
     /////////////////////////////////////////////////////////////
