@@ -27,6 +27,7 @@ void display(Vcontrol* top){
     cout << "ResultSrc_o: \t" << bitset<1>(top->ResultSrc_o) << endl;
     cout << "jal_o:   \t" << bitset<1>(top->jal_o) << endl;
     cout << "jalr_o: \t" << bitset<1>(top->jalr_o) << endl;
+    cout << "auipc_o: \t" << bitset<1>(top->auipc_o) << endl;
 }
 
 int main(int argc, char **argv, char **env){
@@ -106,7 +107,16 @@ int main(int argc, char **argv, char **env){
     top->eval();
     display(top);
 
+    cout << "\n \n +++++++++ UPPER IMM INSTRUCTIONS ++++++++++ \n \n " << endl;
+
+    top->op_i = 0b0010111;  // auipc
     top->eval();
+    display(top);
+
+    top->op_i = 0b0110111; // lui
+    top->eval();
+    display(top);
+
     exit(0);
 }
 

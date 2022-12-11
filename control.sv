@@ -12,17 +12,19 @@ module control (
     output logic [1:0]                  memType_o,      // memory address type
     output logic                        memSign_o,      // determines signed or unsigned memory addressing
     output logic                        jal_o,          // overrides WD3
-    output logic                        jalr_o          // overrides WD3 and PCbranch
+    output logic                        jalr_o,          // overrides WD3 and PCbranch
+    output logic                        auipc_o         // overrides WD3 with immext + pc
 );
 
     always_comb begin
         memWrite_en_o = (op_i ==  7'b0100011) ? 1'b1 : 1'b0;
         BranchSrc_o = ((op_i == 7'b1100011) || (op_i == 7'b1100111) || (op_i == 7'b1101111)) ? 1'b1 : 1'b0;
         ALUsrc_o = ((op_i == 7'b0010011) || (op_i == 7'b0000011) || (op_i == 7'b1100111) || (op_i == 7'b1101111)) ? 1'b1 : 1'b0; 
-        regWrite_en_o = ((op_i == 7'b0110011) || (op_i == 7'b0010011) || (op_i == 7'b0000011) || (op_i == 7'b1100111) || (op_i == 7'b1101111)) ? 1'b1 : 1'b0;
+        regWrite_en_o = ((op_i == 7'b0110011) || (op_i == 7'b0010011) || (op_i == 7'b0000011) || (op_i == 7'b1100111) || (op_i == 7'b1101111) || (op_i == 7'b0010111) || (op_i == 7'b0110111)) ? 1'b1 : 1'b0;
         ResultSrc_o = (op_i == 7'b0000011) ? 1'b1 : 1'b0;
         jal_o = ((op_i == 7'b1100111) || (op_i == 7'b1101111)) ? 1'b1 : 1'b0;
         jalr_o = (op_i == 7'b1100111) ? 1'b1 : 1'b0;
+        auipc_o = (op_i == 7'b0010111) ? 1'b1 : 1'b0;
     end
 
     always_comb begin
@@ -103,8 +105,15 @@ module control (
                 endcase
             end 
             
-            // 7'b0010111: // Add Upper Immediate to PC
-            // 7'b0110111: // Load Upper Immediate
+            7'b0010111: begin // Add Upper Immediate to PC
+                ImmSrc_o = 3'b011;
+                ALUctrl_o = 4'b0000; // realistically this is a don't care but preventing errors
+            end
+
+            7'b0110111: begin // Load Upper Immediate
+                ImmSrc_o = 3'b011;
+                ALUctrl_o = 4'b0000;
+            end
 
             7'b1100111: begin // Jump and Link Register
                 ImmSrc_o = 3'b000;
