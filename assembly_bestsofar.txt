@@ -11,7 +11,7 @@ right shift (unsigned) r6 r5 by 5. // save the 5th bit
 andi r7 r5 (5'b11111)              // getting rid of the 5th bit
 right shift (unsigned) r7 by 4,    // save just the 4t bit
 xor r8, r6, r7                     // XOR the bits
-addi r8, r8 (1'b1)                 // we just want the least signifucant bit (the XOR bit)
+andi r8, r8 (1'b1)                 // we just want the least signifucant bit (the XOR bit)
 left shift (unsigned) r5 by 1      // we left shift the previous number one bit so we can just add the XOR bit at the end
 add r5, r5, r8                     // add the XOR bit at the end
 
