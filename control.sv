@@ -36,7 +36,7 @@ module control (
                 case (funct3_i) // switch-casing funct3, as this determines the ops
                     3'b000:
                         if (funct7bit_i) begin // bit 5 of funct7
-                            ALUctrl_o = 4'b0001; // sub
+                            if (op_i == 7'b0110011) ALUctrl_o = 4'b0001; // sub
                         end else begin
                             ALUctrl_o = 4'b0000; // add
                         end    
