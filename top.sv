@@ -5,7 +5,6 @@ module top #(
     input logic             trigger_i,
     input logic             clk,
     output logic [DW-1:0]   data_out  
-
 );
    
     //pc wires
@@ -39,6 +38,7 @@ module top #(
     logic           ResultSrcWire;
     logic           JALWire;
     logic           JALRWire;
+    logic           AUIPCWire;
     logic [1:0]     memTypeWire;
     logic           memSignWire;
 
@@ -48,6 +48,7 @@ module top #(
     logic [4:0]     rdWire;
     logic [DW-1:0]  wd3Wire;
     logic [DW-1:0]  wd3Wire0; 
+    logic [DW-1:0]  wd3Wire1;
 
     // extend wire
     logic [DW-8:0]  ImmediateWire;
@@ -55,12 +56,6 @@ module top #(
 
     // memory wires
     logic [DW-1:0]  RamOutWire;
-
-
-    assign branch_PC = PC_wire + ImmediateExtendWire;
-    assign jump_PC = JALRWire ? ALUResultWire : branch_PC;
-    assign inc_PC = PC_wire + 4;
-    assign next_PC = PCsrcWire ? jump_PC : inc_PC;
     
     PC PC(
         .clk(clk),
@@ -74,10 +69,6 @@ module top #(
         .a_i(PC_wire),
         .rd_o(InstructionWire)
     );
-
-    assign opcode = InstructionWire[6:0];
-    assign funct3 = InstructionWire[14:12];
-    assign funct7 = InstructionWire[30];
 
     control control(
         .op_i(opcode),
@@ -93,12 +84,9 @@ module top #(
         .BranchSrc_o(BranchSrcWire),
         .ResultSrc_o(ResultSrcWire),
         .jal_o(JALWire),
-        .jalr_o(JALRWire)
+        .jalr_o(JALRWire),
+        .auipc_o(AUIPCWire)
     );
-    assign rs1Wire=InstructionWire[19:15];
-    assign rs2Wire=InstructionWire[24:20];
-    assign rdWire=InstructionWire[11:7];
-
 
     register_file register_file(
         .clk(clk),
@@ -113,16 +101,13 @@ module top #(
         .a0_o(data_out)
     );
 
-    assign ImmediateWire=InstructionWire[31:7];
-    
     extend extend(
         .ImmSrc_i(ImmSrcWire),
         .Imm_i(ImmediateWire),
 
         .ImmExt_o(ImmediateExtendWire)
     );
-    assign Aluop2Wire=ALUsrcWire ? ImmediateExtendWire : RD2Wire;
-
+    
     ALU ALU(
         .SrcA_i(RD1Wire),
         .SrcB_i(Aluop2Wire),
@@ -131,8 +116,6 @@ module top #(
         .ALUResult_o(ALUResultWire),
         .Branch_o(branchWire)
     );
-
-    assign PCsrcWire = BranchSrcWire ? branchWire : 1'b0;
 
     memory memory(
         .clk_i(clk),
@@ -144,7 +127,27 @@ module top #(
         .memsign_i(memSignWire)
     );
 
-    assign wd3Wire0 = ResultSrcWire ? RamOutWire : ALUResultWire ;
-    assign wd3Wire = JALWire ? inc_PC : wd3Wire0;
+    always_comb begin
+        opcode = InstructionWire[6:0];
+        funct3 = InstructionWire[14:12];
+        funct7 = InstructionWire[30];
+        
+        rs1Wire = InstructionWire[19:15];
+        rs2Wire = InstructionWire[24:20];
+        rdWire = InstructionWire[11:7];
+
+        ImmediateWire = InstructionWire[31:7];
+        Aluop2Wire = ALUsrcWire ? ImmediateExtendWire : RD2Wire;
+
+        PCsrcWire = BranchSrcWire ? branchWire : 1'b0;
+        branch_PC = PC_wire + ImmediateExtendWire;
+        jump_PC = JALRWire ? ALUResultWire : branch_PC;
+        inc_PC = PC_wire + 4;
+        next_PC = PCsrcWire ? jump_PC : inc_PC;
+
+        wd3Wire0 = ResultSrcWire ? RamOutWire : ALUResultWire;
+        wd3Wire1 = AUIPCWire ? branch_PC : wd3Wire0;
+        wd3Wire = JALWire ? inc_PC : wd3Wire1;
+    end
 
 endmodule
