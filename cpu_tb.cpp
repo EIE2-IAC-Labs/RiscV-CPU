@@ -7,7 +7,7 @@
 #include <sstream>
 
 #include "vbuddy.cpp"     // include vbuddy code
-#define MAX_SIM_CYC 250
+#define MAX_SIM_CYC 1000
 
 int main(int argc, char **argv, char **env) {
   int simcyc;     // simulation clock count
@@ -29,7 +29,8 @@ int main(int argc, char **argv, char **env) {
 
   // initialize simulation inputs
   top->clk = 0;
-  top->rst=0;
+  top->rst = 0;
+  top->trigger_i = 0;
  
   // run simulation for MAX_SIM_CYC clock cycles
   for (simcyc=0; simcyc<MAX_SIM_CYC; simcyc++) {
@@ -40,16 +41,20 @@ int main(int argc, char **argv, char **env) {
       top->clk = !top->clk;
       top->eval ();
     }
-    top->trigger_i=vbdFlag();
     vbdCycle(simcyc);
-    std::cout << "a0 : " << top->data_out << std::endl;
-    // assert reset for 1st cycle
-    vbdBar(top->data_out & 0xFF);
-    vbdHex(3,(int(top->data_out)>>8)&0xF);
-    vbdHex(2,(int(top->data_out)>>4)&0xF);
-    vbdHex(1,int(top->data_out)&0xF);
 
+    if (simcyc > 3000){
+      vbdPlot(int(top->data_out), 0, 255);
+    }
+
+
+    // assert reset for 1st cycle
+    // vbdBar(top->data_out & 0xFF);
+    // vbdHex(3,(int(top->data_out)>>8)&0xF);
+    // vbdHex(2,(int(top->data_out)>>4)&0xF);
+    // vbdHex(1,int(top->data_out)&0xF);
 }
+
 vbdClose();     // ++++
 tfp->close(); 
 exit(0);

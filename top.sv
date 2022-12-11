@@ -104,7 +104,6 @@ module top #(
     extend extend(
         .ImmSrc_i(ImmSrcWire),
         .Imm_i(ImmediateWire),
-
         .ImmExt_o(ImmediateExtendWire)
     );
     

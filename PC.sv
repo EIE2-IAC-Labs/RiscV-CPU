@@ -11,7 +11,7 @@ module PC #(
     always_ff @(posedge clk ) begin
         if (rst) PC_o<=32'b0;
         else PC_o<=PC_i;
-        $display (PC_o);
+        // $display (PC_o);
     end
 
 endmodule 
