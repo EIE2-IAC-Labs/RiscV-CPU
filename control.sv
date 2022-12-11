@@ -19,7 +19,7 @@ module control (
     always_comb begin
         memWrite_en_o = (op_i ==  7'b0100011) ? 1'b1 : 1'b0;
         BranchSrc_o = ((op_i == 7'b1100011) || (op_i == 7'b1100111) || (op_i == 7'b1101111)) ? 1'b1 : 1'b0;
-        ALUsrc_o = ((op_i == 7'b0010011) || (op_i == 7'b0000011) || (op_i == 7'b1100111) || (op_i == 7'b1101111) || (op_i == 7'b0110111)) ? 1'b1 : 1'b0; 
+        ALUsrc_o = ((op_i == 7'b0010011) || (op_i == 7'b0000011) || (op_i == 7'b1100111) || (op_i == 7'b1101111) || (op_i == 7'b0110111) || (op_i == 7'b0100011)) ? 1'b1 : 1'b0; 
         regWrite_en_o = ((op_i == 7'b0110011) || (op_i == 7'b0010011) || (op_i == 7'b0000011) || (op_i == 7'b1100111) || (op_i == 7'b1101111) || (op_i == 7'b0010111) || (op_i == 7'b0110111)) ? 1'b1 : 1'b0;
         ResultSrc_o = (op_i == 7'b0000011) ? 1'b1 : 1'b0;
         jal_o = ((op_i == 7'b1100111) || (op_i == 7'b1101111)) ? 1'b1 : 1'b0;
@@ -63,23 +63,23 @@ module control (
                 case (funct3_i)
                     3'b000: begin // lb
                         memType_o = 2'b01;
-                        memSign_o = 1;
+                        memSign_o = 0;
                     end
                     3'b001: begin // lh
                         memType_o = 2'b10;
-                        memSign_o = 1;
+                        memSign_o = 0;
                     end
                     3'b010: begin // lw
                         memType_o = 2'b00;
-                        memSign_o = 1;
+                        memSign_o = 0;
                     end
                     3'b100: begin // lbu
                         memType_o = 2'b01;
-                        memSign_o = 0;
+                        memSign_o = 1;
                     end
                     3'b101: begin // lhu
                         memType_o = 2'b10;
-                        memSign_o = 0;
+                        memSign_o = 1;
                     end
                     default: ;
                 endcase

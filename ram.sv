@@ -15,7 +15,7 @@ module ram #(
 
     initial begin 
         $display  ("Loading ram.");
-        $readmemh("sine.mem", ram_array, 17'h0);
+        $readmemh("sine.mem", ram_array, 17'h10000);
         $display ("ram finished loading !!!!");
     end;
 

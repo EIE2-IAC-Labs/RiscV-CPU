@@ -7,7 +7,7 @@
 #include <sstream>
 
 #include "vbuddy.cpp"     // include vbuddy code
-#define MAX_SIM_CYC 1000
+#define MAX_SIM_CYC 41000
 
 int main(int argc, char **argv, char **env) {
   int simcyc;     // simulation clock count
@@ -43,7 +43,7 @@ int main(int argc, char **argv, char **env) {
     }
     vbdCycle(simcyc);
 
-    if (simcyc > 3000){
+    if (simcyc > 38000){
       vbdPlot(int(top->data_out), 0, 255);
     }
 
