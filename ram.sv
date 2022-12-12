@@ -15,7 +15,7 @@ module ram #(
 
     initial begin 
         $display  ("Loading ram.");
-        $readmemh("triangle.mem", ram_array, 17'h10000);
+        $readmemh("gaussian.mem", ram_array, 17'h10000);
         $display ("ram finished loading !!!!");
     end;
 
