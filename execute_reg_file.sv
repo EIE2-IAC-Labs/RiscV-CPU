@@ -1,5 +1,6 @@
 module execute_reg_file #(
-    parameter DATA_WIDTH = 32
+    parameter DATA_WIDTH = 32,
+    REGISTER_ADDRESS_WIDTH = 5
 )(
     input logic                     clk,
     input logic                     resultSRCD_i,
@@ -9,6 +10,9 @@ module execute_reg_file #(
     input logic [1:0]               memTypeD_i,
     input logic                     memSignD_i,
     input logic                     AUIPCD_i,
+    input logic                     regWriteD_i,
+    input logic [REGISTER_ADDRESS_WIDTH-1:0] AD3D_i,
+
 
     output logic                    resultSRCE_o,
     output logic                    memWriteE_o,
@@ -16,7 +20,10 @@ module execute_reg_file #(
     output logic [DATA_WIDTH-1:0]   RD2E_o,
     output logic [1:0]              memTypeE_o,
     output logic                    memSignE_o,
-    output logic                    AUIPCE_o
+    output logic                    AUIPCE_o,
+    output logic                    regWriteE_o,
+    output logic [REGISTER_ADDRESS_WIDTH-1:0] AD3E_o
+
 );
 
 always_ff @(negedge clk) begin
@@ -27,6 +34,8 @@ always_ff @(negedge clk) begin
     memTypeE_o <= memTypeD_i;
     memSignE_o <= memSignD_i;
     AUIPCE_o <= AUIPCD_i;
+    regWriteE_o <= regWriteD_i;
+    AD3E_o <= AD3D_i;
 end
 
 endmodule

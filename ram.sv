@@ -15,14 +15,14 @@ module ram #(
 
     initial begin 
         $display  ("Loading ram.");
-        $readmemh("gaussian.mem", ram_array, 17'h10000);
+        $readmemh("test.mem", ram_array, 17'h10000);
         $display ("ram finished loading !!!!");
     end;
 
     assign rd_o = {ram_array[a_i[16:0] + 3],ram_array[a_i[16:0] + 2],ram_array[a_i[16:0] + 1],ram_array[a_i[16:0]]};
         
 
-    always_ff @(posedge clk_i) begin
+    always_ff @(negedge clk_i) begin
         if (write_en_i) begin
             ram_array[a_i[16:0]] <= wd_i[7:0];
             ram_array[a_i[16:0] + 1] <= wd_i[15:8];
