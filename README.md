@@ -6,6 +6,18 @@
 
 ![sinepdf](/images/sinepdf.jpg)
 
+### PDF of gaussian.mem:
+
+![gaussianpdf](/images/gaussianpdf.jpg)
+
+### PDF of triangle.mem:
+
+![trianglepdf](/images/trianglepdf.jpg)
+
+### PDF of noisy.mem:
+
+![noisypdf](/images/noisypdf.jpg)
+
 Please also find the ReferenceProgram.vcd trace file for the sine.mem pdf. 
 
 ### Instructions not implemented:
