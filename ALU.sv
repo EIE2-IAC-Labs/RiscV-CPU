@@ -119,7 +119,7 @@ always_comb begin
 end
 
 always_comb begin
-    if ((ALUctrl_i == 4'b1011) || (ALUctrl_i == 4'b1100) || (ALUctrl_i == 4'b1111)) overwrite_branch_o = 1;
+    if ((ALUctrl_i == 4'b1011) || (ALUctrl_i == 4'b1100)) overwrite_branch_o = 1;
     else overwrite_branch_o = 0;
 end
 
