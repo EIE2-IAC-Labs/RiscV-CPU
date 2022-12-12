@@ -1,48 +1,153 @@
 main:
-  addi a2 ,zero,10
-  beq a2,a3, errorbeq
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi a2, zero, 10
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  beq a2, a3, errorbeq
   addi a1, zero, 10
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
   beq a2, a1, beqwork
 errorbeq:
-  addi a3,zero,1
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi a3, zero, 1
   jal ra, end
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
 beqwork:
-  bne a2,a1, errorbne
-  addi a1,zero,0
-  bne a2,a1, bnework
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  bne a2, a1, errorbne
+  addi a1, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  bne a2, a1, bnework
 errorbne:
-  addi a3,zero,2
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi a3, zero, 2
   jal ra, end
 bnework:
-  blt a2,a1,  errorblt
-  addi a4,zero, 20
-  sub a2,a2,a4
-  blt a2,a1,bltwork
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  blt a2, a1, errorblt
+  addi a4, zero, 20
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  sub a2, a2, a4
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  blt a2, a1, bltwork
 errorblt:
-  addi a3,zero,3
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi a3, zero, 3
   jal ra, end
 bltwork:
-  bge a2,a1, errorbge
-  addi a4,zero,20
-  sub a1,a1,a4
-  bge a1,a1, bgework
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  bge a2, a1, errorbge
+  addi a4, zero, 20
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  sub a1, a1, a4
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  bge a1, a1, bgework
 errorbge:
-  addi a3,zero,4
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi a3, zero, 4
   jal ra, end
 bgework:
-  addi a1,zero,10
-  addi a2,zero,20
-  bltu a2,a1,errorbltu
-  bltu a1,a2,bltuwork
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi a1, zero, 10
+  addi a2, zero, 20
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  bltu a2, a1, errorbltu
+  bltu a1, a2, bltuwork
 errorbltu:
-  addi a3,zero,5
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi a3, zero, 5
   jal ra, end
 bltuwork:
-  bgeu a1,a2, errorbgeu
-  bgeu a2,a1,end
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  bgeu a1, a2, errorbgeu
+  bgeu a2, a1, end
 errorbgeu:
-  addi a3,zero,5
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi zero, zero, 0
+  addi a3, zero, 5
   jal ra, end
 end:
-  addi zero,zero,0
+  addi zero, zero, 0
 
