@@ -7,7 +7,7 @@
 #include <sstream>
 
 #include "vbuddy.cpp"     // include vbuddy code
-#define MAX_SIM_CYC 400000
+#define MAX_SIM_CYC 1000000
 
 int main(int argc, char **argv, char **env) {
   int simcyc;     // simulation clock count
@@ -41,19 +41,26 @@ int main(int argc, char **argv, char **env) {
       top->clk = !top->clk;
       top->eval ();
     }
-    // vbdCycle(simcyc);
 
-    if (simcyc > 330000){
-      vbdPlot(int(top->data_out), 0, 255);
-      vbdCycle(simcyc);
-    }
+    ////////////////////////////////////////////
+    ///// UNCOMMENT FOR REFERENCE PROGRAM //////
+    ////////////////////////////////////////////
 
+    // if (simcyc > 330000){
+    //   vbdPlot(int(top->data_out), 0, 255);
+    //   vbdCycle(simcyc);
+    // }
 
-    // assert reset for 1st cycle
-    // vbdBar(top->data_out & 0xFF);
-    // vbdHex(3,(int(top->data_out)>>8)&0xF);
-    // vbdHex(2,(int(top->data_out)>>4)&0xF);
-    // vbdHex(1,int(top->data_out)&0xF);
+    ////////////////////////////////////////////
+    //////// UNCOMMENT FOR F1 PROGRAM //////////
+    ////////////////////////////////////////////
+
+    vbdCycle(simcyc);
+    top->trigger_i = vbdFlag();
+    vbdBar(top->data_out & 0xFF);
+    vbdHex(3,(int(top->data_out)>>8)&0xF);
+    vbdHex(2,(int(top->data_out)>>4)&0xF);
+    vbdHex(1,int(top->data_out)&0xF);
 }
 
 vbdClose();     // ++++

@@ -4,19 +4,19 @@
 
 ### PDF of sine.mem:
 
-![sinepdf](/images/sinepdf.jpg)
+![sinepdf](/evidence/sinepdf.jpg)
 
 ### PDF of gaussian.mem:
 
-![gaussianpdf](/images/gaussianpdf.jpg)
+![gaussianpdf](/evidence/gaussianpdf.jpg)
 
 ### PDF of triangle.mem:
 
-![trianglepdf](/images/trianglepdf.jpg)
+![trianglepdf](/evidence/trianglepdf.jpg)
 
 ### PDF of noisy.mem:
 
-![noisypdf](/images/noisypdf.jpg)
+![noisypdf](/evidence/noisypdf.jpg)
 
 Please also find the ReferenceProgram.vcd trace file for the sine.mem pdf. 
 
