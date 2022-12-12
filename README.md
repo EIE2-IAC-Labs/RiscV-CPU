@@ -20,10 +20,18 @@
 
 Please also find the ReferenceProgram.vcd trace file for the sine.mem pdf. 
 
-### Instructions not implemented:
+---
+
+## F1 Program:
+
+Please find inside the evidence folder, 2 videos showing 2 different delays with the F1 program. It was difficult to make this into one video that was lower in size but please observe that the clock count matches up in both of them. F1.vcd is also provided in this repo. 
+
+---
+
+## Instructions not implemented:
 SH, LH, LHU. 
 
-### pdf.s changes made
+## pdf.s changes made
 ---
 In order for the program to run correctly, a few changes needed to be made to the instructions. 
 
