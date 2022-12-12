@@ -57,7 +57,7 @@ module control (
 
             7'b1100011: begin
 		ImmSrc_o = 3'b010;
-		ALUCtrl_o = 4'b1111; // B-Type instructions
+		ALUctrl_o = 4'b1111; // B-Type instructions
 	    end
 
             7'b0000011: begin // I-type load instructions
