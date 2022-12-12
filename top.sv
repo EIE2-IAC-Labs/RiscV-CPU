@@ -7,10 +7,7 @@ module top #(
 
     output logic [DW-1:0]       data_out  
 
-);
-
-    //write enable bring it through the pipeline aswell
-   
+);   
     /////////////////////////////////////////////////////////////
     ///////////               FETCH                   ///////////
     /////////////////////////////////////////////////////////////
@@ -118,7 +115,7 @@ module top #(
     logic [DW-1:0]              wd3Wire;
     logic [DW-1:0]              wd3Wire0; 
 
-    assign wd3Wire = JALWire ? incPCE :wd3Wire0;
+    assign wd3Wire = JALE_4 ? incPCE :wd3Wire0;
     assign rs1Wire = instrE[19:15];
     assign rs2Wire = instrE[24:20];
     assign rdWire = instrE[11:7];
@@ -159,6 +156,7 @@ module top #(
     logic                        branchSrcE_2;
     logic [3:0]                  ALUctrlDE_2;
     logic                        JALRE_2;
+    logic                        JALE_2;
     logic [DW-1:0]       PCE_2;
     logic [DW-1:0]       RD1E_2;
     logic [DW-1:0]       SrcBE_2;
@@ -191,6 +189,7 @@ module top #(
         .AUIPCWireD_i (AUIPCWire),
         .regWriteD_i(regWrite_enWire),
         .AD3D_i(rdWire),
+        .JALD_i(JALWire),
         
         .resultSrcE_o(resultSrcE_2),
         .memWriteE_o(memWriteE_2),
@@ -207,7 +206,8 @@ module top #(
         .memSignWireE_o (memSignWireE_2),
         .AUIPCWireE_o (AUIPCE_2),
         .regWriteE_o(regWriteWireE_2),
-        .AD3E_o(AD3E_2)
+        .AD3E_o(AD3E_2),
+        .JALE_o(JALE_2)
     );
 
     
@@ -246,6 +246,7 @@ module top #(
     logic                       AUIPCE_3;
     logic                       regWriteWireE_3;
     logic [4:0]                 AD3E_3;
+    logic                       JALE_3;
 
     assign branch_PC=PCE_2 + ImmExtE_2;
     assign jump_PC = JALRE_2 ? ALUResultWire : branch_PC;
@@ -262,6 +263,7 @@ module top #(
         .AUIPCD_i (AUIPCE_2),
         .regWriteD_i (regWriteWireE_2),
         .AD3D_i(AD3E_2),
+        .JALD_i (JALE_2),
 
         .resultSRCE_o (resultSrcE_3),
         .memWriteE_o (memWriteE_3),
@@ -271,7 +273,8 @@ module top #(
         .memSignE_o (memSignWireE_3),
         .AUIPCE_o (AUIPCE_3),
         .regWriteE_o(regWriteWireE_3),
-        .AD3E_o(AD3E_3)
+        .AD3E_o(AD3E_3),
+        .JALE_o(JALE_3)
     );
 
     /////////////////////////////////////////////////////////////
@@ -297,6 +300,7 @@ module top #(
     logic                       resultSrcE_4;
     logic                       regWriteWireE_4;
     logic [4:0]                 AD3E_4;
+    logic                       JALE_4;
 
     mem_reg_file mem_reg_file(
         .clk(clk),
@@ -305,12 +309,14 @@ module top #(
         .ResultSrcD_i (resultSrcE_3),
         .regWriteD_i(regWriteWireE_3),
         .AD3D_i (AD3E_3),
+        .JALD_i(JALE_3),
 
         .ALUResultE_o (ALUResultE_4),
         .RD2E_o (RamOutWireE_4),
         .ResultSrcE_o (resultSrcE_4),
         .regWriteE_o(regWriteWireE_4),
-        .AD3E_o(AD3E_4)
+        .AD3E_o(AD3E_4),
+        .JALE_o (JALE_4)
     );
 
 
