@@ -188,7 +188,6 @@ module top #(
         
         .resultSrcE_o(resultSrcE_2),
         .memWriteE_o(memWriteE_2),
-        .addrSelectE_o(addrSelectE_2),
         .branchSrcE_o (branchSrcE_2),
         .ALUctrlE_o (ALUctrlDE_2),
         .JALRE_o (JALRE_2),
@@ -255,7 +254,7 @@ module top #(
         .resultSRCE_o (resultSrcE_3),
         .memWriteE_o (memWriteE_3),
         .ALUresultE_o (ALUResultE_3),
-        .RD2E_o (RD2E_3)
+        .RD2E_o (RD2E_3),
         .memTypeE_o (memTypeWireE_3),
         .memSignE_o (memSignWireE_3),
         .AUIPCE_o (AUIPCE_3)
@@ -268,15 +267,14 @@ module top #(
     ///////////////           RAM BLOCK           ///////////////
     logic [DW-1:0]          RamOutWire;
 
-    ram ram(
+    memory memory(
         .clk_i(clk),
-        .write_en_i(memWriteE_3),
-        .a_i(ALUResultE_3),
-        .AddrsCtrl_i(addrSelectE_3),
-        .wd_i(RD2E_3),
-
-        .rd_o(RamOutWire)
-
+        .write_en_i(memWrite_enWire),
+        .a_i(ALUResultWire),
+        .wd_i(RD2Wire),
+        .rd_o(RamOutWire),
+        .memtype_i(memTypeWire),
+        .memsign_i(memSignWire)
     );
 
     ///////////////        PIPELINING BLOCK       ///////////////

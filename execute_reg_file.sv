@@ -13,7 +13,7 @@ module execute_reg_file #(
     output logic                    resultSRCE_o,
     output logic                    memWriteE_o,
     output logic [DATA_WIDTH-1:0]   ALUresultE_o,
-    output logic [DATA_WIDTH-1:0]   RD2E_o
+    output logic [DATA_WIDTH-1:0]   RD2E_o,
     output logic [1:0]              memTypeE_o,
     output logic                    memSignE_o,
     output logic                    AUIPCE_o
