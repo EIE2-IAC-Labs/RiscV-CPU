@@ -22,11 +22,10 @@ always_ff @(posedge clk) begin
         if (WE3_i) register_array[AD3_i] <= WD3_i;
     end
     if(TRIGGER_i == 1'b1) register_array[5] <= 1;
-   
 end
-always_comb begin
+always_comb begin 
     RD1_o = register_array[AD1_i];
-    RD2_o = register_array[AD2_i];
+    RD2_o = register_array[AD2_i];    
 end
 
 assign  a0_o = register_array[10];
