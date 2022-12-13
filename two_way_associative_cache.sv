@@ -7,6 +7,7 @@ module two_way_associative_cache #(
 )(
     input logic                                 clk,
     input logic [DATA_WIDTH-1:0]                dataWord_i,
+    input logic [DATA_WIDTH-1:0]                instructionWord_i,
 
     output logic [DATA_WIDTH-1:0]               dataWord_o,
     output logic                                hit_o
@@ -36,8 +37,8 @@ logic [SET_WIDTH-1:0] data_set;
 logic [TAG_WIDTH-1:0] data_tag;
 
 
-assign data_tag = dataWord_i[DATA_WIDTH-1:DATA_WIDTH-TAG_WIDTH];
-assign data_set = dataWord_i[SET_WIDTH+1:2];
+assign data_tag = instructionWord_i[DATA_WIDTH-1:DATA_WIDTH-TAG_WIDTH];
+assign data_set = instructionWord_i[SET_WIDTH+1:2];
 
 //hit logic implementationS
 logic hit0;
