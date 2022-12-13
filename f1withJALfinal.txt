@@ -11,7 +11,8 @@ label:
 	andi x11, x11, 1                 
 	slli x15, x15, 1      
 	add x15, x15, x11 #//10
-        add x12, x15, x0
+	#if we want to limit the number we need to execute andi x15, (the number which is written just with ones in binary)
+    add x12, x15, x0
 
 #/* the eight lights */
 
