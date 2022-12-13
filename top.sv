@@ -199,7 +199,6 @@ module top #(
         .AD3D_i(rdWire),
         .JALD_i(JALWire),
         .incPC2_i(incPCE),
-        .instrD_i(instrE),
         
         .resultSrcE_o(resultSrcE_2),
         .memWriteE_o(memWriteE_2),
@@ -219,7 +218,6 @@ module top #(
         .AD3E_o(AD3E_2),
         .JALE_o(JALE_2),
         .incPC3_o(incPC3),
-        .instrE_o(instrE_2)
     );
 
     
@@ -280,7 +278,6 @@ module top #(
         .AD3D_i(AD3E_2),
         .JALD_i (JALE_2),
         .incPC3_i(incPC3),
-        .instrD_i(instrE_2),
 
         .resultSRCE_o (resultSrcE_3),
         .memWriteE_o (memWriteE_3),
@@ -293,7 +290,6 @@ module top #(
         .AD3E_o(AD3E_3),
         .JALE_o(JALE_3),
         .incPC4_o(incPC4),
-        .instrE_o(instrE_3)
     );
 
     /////////////////////////////////////////////////////////////
@@ -327,7 +323,7 @@ module top #(
 
     two_way_associative_cache two_way_associative_cache (
         .clk(clk),
-        .dataWord_i(instrE_3),
+        .dataWord_i(), //ADDRESS GOES IN HERE
 
         .dataWord_o(CacheOutWire),
         .hit_o(hitWire)

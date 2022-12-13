@@ -15,7 +15,6 @@ module execute_reg_file #(
     input logic [REGISTER_ADDRESS_WIDTH-1:0] AD3D_i,
     input logic                     JALD_i,
     input logic [DATA_WIDTH-1:0]    incPC3_i,
-    input logic [DATA_WIDTH-1:0]    instrD_i,
 
 
     output logic                    resultSRCE_o,
@@ -29,7 +28,6 @@ module execute_reg_file #(
     output logic [REGISTER_ADDRESS_WIDTH-1:0] AD3E_o,
     output logic                    JALE_o,
     output logic [DATA_WIDTH-1:0]   incPC4_o,
-    output logic [DATA_WIDTH-1:0]   instrE_o
 
 );
 
@@ -46,7 +44,6 @@ always_ff @(negedge clk) begin
         AD3E_o <= AD3D_i;
         JALE_o <= JALD_i;
         incPC4_o <= incPC3_i;
-        instrE_o <= instrD_i;
     end
 end
 

@@ -25,7 +25,6 @@ module decode_reg_file #(
     input logic [REGISTER_ADDRESS_WIDTH-1:0] AD3D_i,
     input logic                         JALD_i,
     input logic [DATA_WIDTH-1:0]        incPC2_i,
-    input logic [DATA_WIDTH-1:0]        instrD_i,
 
     output logic                        AUIPCWireE_o,
     output logic [1:0]                  memTypeWireE_o,
@@ -45,7 +44,6 @@ module decode_reg_file #(
     output logic [REGISTER_ADDRESS_WIDTH-1:0] AD3E_o,
     output logic                        JALE_o,
     output logic [DATA_WIDTH-1:0]       incPC3_o,
-    output logic [DATA_WIDTH-1:0]       instrE_o
 
 );
 
@@ -69,7 +67,6 @@ always_ff @(negedge clk) begin
         AD3E_o <= AD3D_i;
         JALE_o <= JALD_i;
         incPC3_o <= incPC2_i;
-        instrE_o <= instrD_i;
     end
 end
 
