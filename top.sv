@@ -4,14 +4,16 @@ module top #(
     input logic                                 clk,
     input logic [DATA_WIDTH-1:0]                dataWord_i,
 
-    output logic [DATA_WIDTH-1:0]               dataWord_o     
+    output logic [DATA_WIDTH-1:0]               dataWord_o,
+    output logic                                hit_o   
 );
 
 direct_mapped_cache direct_mapped_cache(
     .clk (clk),
     .dataWord_i(dataWord_i),
 
-    .dataWord_o(dataWord_o)
+    .dataWord_o(dataWord_o),
+    .hit_o(hit_o)
 );
 
 endmodule

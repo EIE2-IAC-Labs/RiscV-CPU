@@ -20,7 +20,9 @@ int main(int argc, char **argv, char **env) {
  
 
   // initialize simulation inputs
-  top->clk = 1;
+  top->clk = 0;
+  top->dataWord_i = 357913949;
+  //1555555D
   
   // run simulation for MAX_SIM_CYC clock cycles
   for (simcyc=0; simcyc<MAX_SIM_CYC; simcyc++) {
@@ -30,7 +32,22 @@ int main(int argc, char **argv, char **env) {
       top->clk = !top->clk;
       top->eval ();
     }
-
+    if(simcyc == 1){
+      top->dataWord_i = 357913945;
+      //15555559
+    }
+    if(simcyc == 2){
+      top->dataWord_i = 357913949;
+      //1555555D, HIT
+    }
+    if(simcyc == 3){
+      top->dataWord_i = 290805085;
+      //1155555D, NO HIT
+    }
+    if(simcyc == 4){
+      top->dataWord_i = 290805085;
+      //1155555D, HIT
+    }
     
 
     if (Verilated::gotFinish())  exit(0);
