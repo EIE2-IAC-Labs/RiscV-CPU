@@ -41,7 +41,7 @@ end
 always_ff @(negedge clk) begin
     if(overwrite) begin
         Tag [data_set] <= data_tag;
-        Data[data_set] <= instructionWord_i;
+        Data[data_set] <= dataWord_i;
         overwrite = 0'b0;
         V [data_set] <= 1'b1;
     end
