@@ -8,7 +8,7 @@ module top #(
     output logic                                hit_o   
 );
 
-direct_mapped_cache direct_mapped_cache(
+two_way_associative_cache two_way_associative_cache(
     .clk (clk),
     .dataWord_i(dataWord_i),
 

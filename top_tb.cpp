@@ -41,10 +41,19 @@ int main(int argc, char **argv, char **env) {
       //1555555D, HIT
     }
     if(simcyc == 3){
-      top->dataWord_i = 290805085;
-      //1155555D, NO HIT
+      top->dataWord_i = 357813949;
+      //1553CEBD, 
     }
     if(simcyc == 4){
+      top->dataWord_i = 357913945;
+      //15555559, HIT
+    }
+
+    if(simcyc == 5){
+      top->dataWord_i = 357945021;
+      //1555CEBD, NO HIT, put into data_1
+    }
+    if(simcyc == 6){
       top->dataWord_i = 290805085;
       //1155555D, HIT
     }
