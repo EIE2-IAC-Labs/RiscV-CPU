@@ -16,6 +16,7 @@ module two_way_associative_cache #(
 //combine into one memory block
 //check combinational logic warning
 //check it is of the correct type (i.e correct parts are combinational and vice versa)
+//remove overwrite if needed, check if required
 
 
 //logic [DATA_WIDTH-1:0] cache_memory_1 [DATA_WIDTH+TAG_WIDTH:0];
@@ -26,14 +27,13 @@ logic [TAG_WIDTH-1:0] tag_1 [CACHE_LENGTH-1:0];
 logic [DATA_WIDTH-1:0] data_1 [CACHE_LENGTH-1:0];
 
 //cache way 0
-logic V_1 [CACHE_LENGTH-1:0];
+logic V_0 [CACHE_LENGTH-1:0];
 logic [TAG_WIDTH-1:0] tag_0 [CACHE_LENGTH-1:0];
 logic [DATA_WIDTH-1:0] data_0 [CACHE_LENGTH-1:0];
 
 //current input data
 logic [SET_WIDTH-1:0] data_set;
 logic [TAG_WIDTH-1:0] data_tag;
-logic overwrite;
 
 
 assign data_tag = dataWord_i[DATA_WIDTH-1:DATA_WIDTH-TAG_WIDTH];
@@ -53,31 +53,34 @@ logic evict [CACHE_LENGTH-1:0];
 
 always_comb begin
     if(hit_o)begin
-        if(data_tag == tag_1[data_set]) dataWord_o = data_1[data_set];
-        else if(data_tag == tag_0[data_set]) dataWord_o = data_0[data_set];
-    else overwrite = 1'b1;        
+        if(data_tag == tag_1[data_set]) begin
+            dataWord_o = data_1[data_set];
+            evict [data_set] = 0;
+        end
+        else if(data_tag == tag_0[data_set]) begin
+            dataWord_o = data_0[data_set];
+            evict [data_set] = 1;
+        end
+    end
 end
 
 always_ff @(negedge clk) begin
-    if(overwrite) begin
-        if((V_0 == 1'b0) && (V_1 == 1'b0)) begin
+    if((data_tag != tag_0[data_set]) && (V_1 [data_set] == 1'b0)) begin
+        if((V_0 [data_set] == 1'b0) && (V_1 [data_set] == 1'b0)) begin
             tag_0 [data_set] <= data_tag;
             data_0[data_set] <= dataWord_i;
-            overwrite = 0'b0;
             V_0 [data_set] <= 1'b1;
             evict [data_set] <= 1;
         end
         else if (evict[data_set] == 1'b0) begin
             tag_0 [data_set] <= data_tag;
             data_0[data_set] <= dataWord_i;
-            overwrite = 0'b0;
             V_0 [data_set] <= 1'b1;
             evict [data_set] <= 1;
         end
         else if (evict[data_set] == 1'b1) begin
             tag_1 [data_set] <= data_tag;
             data_1[data_set] <= dataWord_i;
-            overwrite = 0'b0;
             V_1 [data_set] <= 1'b1;
             evict [data_set] <= 0;
         end
