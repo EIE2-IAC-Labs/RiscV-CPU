@@ -17,12 +17,6 @@ module register_file #(
 
 logic [DATA_WIDTH-1:0] register_array [2**ADDRESS_WIDTH-1:0];
 
-
-initial begin
-    for (int i = 0; i < $size(register_array); i++) begin
-        register_array[i] = 32'b0;
-    end
-end
 always_ff @(posedge clk) begin
     if(AD3_i != {{ADDRESS_WIDTH-1}{1'b0}}) begin
         if (WE3_i) register_array[AD3_i] <= WD3_i;
