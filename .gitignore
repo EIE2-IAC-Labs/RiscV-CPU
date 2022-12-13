@@ -2,3 +2,4 @@
 /images
 register_file.vcd
 top.vcd
+hazard.sv
