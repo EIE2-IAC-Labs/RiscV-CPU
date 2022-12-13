@@ -291,12 +291,12 @@ module top #(
 
     memory memory(
         .clk_i(clk),
-        .write_en_i(memWrite_enWire),
-        .a_i(ALUResultWire),
-        .wd_i(RD2Wire),
+        .write_en_i(memWriteE_3),
+        .a_i(ALUResultE_3),
+        .wd_i(RD2E_3),
         .rd_o(RamOutWire),
-        .memtype_i(memTypeWire),
-        .memsign_i(memSignWire)
+        .memtype_i(memTypeWireE_3),
+        .memsign_i(memSignWireE_3)
     );
 
     ///////////////        PIPELINING BLOCK       ///////////////
