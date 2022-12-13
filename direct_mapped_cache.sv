@@ -7,6 +7,7 @@ module direct_mapped_cache #(
 )(
     input logic                                 clk,
     input logic [DATA_WIDTH-1:0]                dataWord_i,
+    input logic [DATA_WIDTH-1:0]                instructionWord_i,
 
     output logic [DATA_WIDTH-1:0]               dataWord_o,
     output logic                                hit_o
@@ -28,8 +29,8 @@ logic [TAG_WIDTH-1:0] data_tag;
 
 logic overwrite;
 
-assign data_tag = dataWord_i[DATA_WIDTH-1:DATA_WIDTH-TAG_WIDTH];
-assign data_set = dataWord_i[SET_WIDTH+1:2];
+assign data_tag = instructionWord_i[DATA_WIDTH-1:DATA_WIDTH-TAG_WIDTH];
+assign data_set = instructionWord_i[SET_WIDTH+1:2];
 assign hit_o = (Tag[data_set] == data_tag) && V [data_set];
 
 always_comb begin
@@ -40,7 +41,7 @@ end
 always_ff @(negedge clk) begin
     if(overwrite) begin
         Tag [data_set] <= data_tag;
-        Data[data_set] <= dataWord_i;
+        Data[data_set] <= instructionWord_i;
         overwrite = 0'b0;
         V [data_set] <= 1'b1;
     end
