@@ -25,6 +25,7 @@ module top #(
 
     PC PC(
         .clk(clk),
+        .en_i(en_progression),
         .rst(rst),
         .PC_i(next_PC),
 
@@ -50,6 +51,7 @@ module top #(
 
     fetch_reg_file fetch_reg_file(
         .clk(clk),
+        .en_i(en_progression),
         .instrD_i(InstructionWire),
         .PCD_i(PC_wire),
         .incPCD_i(inc_PC),
@@ -168,11 +170,13 @@ module top #(
     logic                       AUIPCE_2;
     logic                       regWriteWireE_2;
     logic [4:0]                 AD3E_2;
+    logic [DW-1:0]      instrE_2;
 
     assign Aluop2Wire = ALUsrcWire ? ImmediateExtendWire : RD2Wire;
 
     decode_reg_file decode_reg_file (
         .clk(clk),
+        .en_i(en_progression),
         .resultSrcD_i(ResultSrcWire),
         .memWriteD_i(memWrite_enWire),
         .branchSrcD_i(BranchSrcWire),
@@ -191,6 +195,7 @@ module top #(
         .AD3D_i(rdWire),
         .JALD_i(JALWire),
         .incPC2_i(incPCE),
+        .instrD_i(instrE),
         
         .resultSrcE_o(resultSrcE_2),
         .memWriteE_o(memWriteE_2),
@@ -209,7 +214,8 @@ module top #(
         .regWriteE_o(regWriteWireE_2),
         .AD3E_o(AD3E_2),
         .JALE_o(JALE_2),
-        .incPC3_o(incPC3)
+        .incPC3_o(incPC3),
+        .instrE_o(instrE_2)
     );
 
     
@@ -250,6 +256,7 @@ module top #(
     logic [4:0]                 AD3E_3;
     logic                       JALE_3;
     logic [DW-1:0]              incPC3;
+    logic [DW-1:0]              instrE_3;
 
     assign branch_PC=PCE_2 + ImmExtE_2;
     assign jump_PC = JALRE_2 ? ALUResultWire : branch_PC;
@@ -257,6 +264,7 @@ module top #(
 
     execute_reg_file execute_reg_file(
         .clk(clk),
+        .en_i(en_progression),
         .resultSRCD_i(resultSrcE_2),
         .memWriteD_i(memWriteE_2),
         .ALUresultD_i(ALUResultWire),
@@ -268,6 +276,7 @@ module top #(
         .AD3D_i(AD3E_2),
         .JALD_i (JALE_2),
         .incPC3_i(incPC3),
+        .instrD_i(instrE_2),
 
         .resultSRCE_o (resultSrcE_3),
         .memWriteE_o (memWriteE_3),
@@ -279,7 +288,8 @@ module top #(
         .regWriteE_o(regWriteWireE_3),
         .AD3E_o(AD3E_3),
         .JALE_o(JALE_3),
-        .incPC4_o(incPC4)
+        .incPC4_o(incPC4),
+        .instrE_o(instrE_3)
     );
 
     /////////////////////////////////////////////////////////////
@@ -299,9 +309,34 @@ module top #(
         .memsign_i(memSignWireE_3)
     );
 
+    ///////////////          CACHE BLOCK          ///////////////
+    //we have to disable the pc and disable the other registers to prevent the pipeline from moving on if NOT A HIT
+    //else just take it from the cache
+    //if hit, take Data Out Wire from CACHE and freeze one block to update
+    logic [DW-1:0]              DataOutWire;
+    logic [DW-1:0]              CacheOutWire;
+    logic                       hitWire;
+
+    //if this is high, we are reading from RAM.
+    //add block to wait for new RAM read
+    assign en_progression = ~hitWire;
+
+    two_way_associative_cache two_way_associative_cache (
+        .clk(clk),
+        .en_i(en_progression),
+        .dataWord_i(instrE_3),
+
+        .dataWord_o(CacheOutWire),
+        .hit_o(hitWire)
+    );
+
+    //check this is the correct way round
+    //currently just blocking until it is in the CACHE, definitely faster way, costs us potentially an extra cycle
+    DataOutWire = en_progression ? CacheOutWire : RamOutWire;
+
     ///////////////        PIPELINING BLOCK       ///////////////
     logic [DW-1:0]      ALUResultE_4;
-    logic [DW-1:0]      RamOutWireE_4;
+    logic [DW-1:0]      DataE_4;
     logic                       resultSrcE_4;
     logic                       regWriteWireE_4;
     logic [4:0]                 AD3E_4;
@@ -310,8 +345,9 @@ module top #(
 
     mem_reg_file mem_reg_file(
         .clk(clk),
+        .en_i(en_progression),
         .ALUResultD_i(ALUResultE_3),
-        .RD2D_i (RamOutWire),
+        .RD2D_i (DataOutWire),
         .ResultSrcD_i (resultSrcE_3),
         .regWriteD_i(regWriteWireE_3),
         .AD3D_i (AD3E_3),
@@ -319,7 +355,7 @@ module top #(
         .incPC4_i(incPC4),
 
         .ALUResultE_o (ALUResultE_4),
-        .RD2E_o (RamOutWireE_4),
+        .RD2E_o (DataE_4),
         .ResultSrcE_o (resultSrcE_4),
         .regWriteE_o(regWriteWireE_4),
         .AD3E_o(AD3E_4),
@@ -334,7 +370,7 @@ module top #(
     /////////////////////////////////////////////////////////////
     logic [DW-1:0]              incPC5;
 
-    assign wd3Wire0 = resultSrcE_4 ? RamOutWireE_4 : ALUResultE_4;
+    assign wd3Wire0 = resultSrcE_4 ? DataE_4 : ALUResultE_4;
     
 
 endmodule

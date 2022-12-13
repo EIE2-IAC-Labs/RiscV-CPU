@@ -3,6 +3,7 @@ module execute_reg_file #(
     REGISTER_ADDRESS_WIDTH = 5
 )(
     input logic                     clk,
+    input logic                     en_i,
     input logic                     resultSRCD_i,
     input logic                     memWriteD_i,
     input logic [DATA_WIDTH-1:0]    ALUresultD_i,
@@ -14,6 +15,7 @@ module execute_reg_file #(
     input logic [REGISTER_ADDRESS_WIDTH-1:0] AD3D_i,
     input logic                     JALD_i,
     input logic [DATA_WIDTH-1:0]    incPC3_i,
+    input logic [DATA_WIDTH-1:0]    instrD_i,
 
 
     output logic                    resultSRCE_o,
@@ -26,22 +28,26 @@ module execute_reg_file #(
     output logic                    regWriteE_o,
     output logic [REGISTER_ADDRESS_WIDTH-1:0] AD3E_o,
     output logic                    JALE_o,
-    output logic [DATA_WIDTH-1:0]   incPC4_o
+    output logic [DATA_WIDTH-1:0]   incPC4_o,
+    output logic [DATA_WIDTH-1:0]   instrE_o
 
 );
 
 always_ff @(negedge clk) begin
-    resultSRCE_o <= resultSRCD_i;
-    memWriteE_o <= memWriteD_i;
-    ALUresultE_o <= ALUresultD_i;
-    RD2E_o <= RD2D_i;
-    memTypeE_o <= memTypeD_i;
-    memSignE_o <= memSignD_i;
-    AUIPCE_o <= AUIPCD_i;
-    regWriteE_o <= regWriteD_i;
-    AD3E_o <= AD3D_i;
-    JALE_o <= JALD_i;
-    incPC4_o <= incPC3_i;
+    if (en_i) begin
+        resultSRCE_o <= resultSRCD_i;
+        memWriteE_o <= memWriteD_i;
+        ALUresultE_o <= ALUresultD_i;
+        RD2E_o <= RD2D_i;
+        memTypeE_o <= memTypeD_i;
+        memSignE_o <= memSignD_i;
+        AUIPCE_o <= AUIPCD_i;
+        regWriteE_o <= regWriteD_i;
+        AD3E_o <= AD3D_i;
+        JALE_o <= JALD_i;
+        incPC4_o <= incPC3_i;
+        instrE_o <= instrD_i;
+    end
 end
 
 endmodule
