@@ -20,8 +20,12 @@ module top #(
     logic [DW-1:0]       PC_wire;
     logic              PCsrcWire;
 
+    logic               en_progression;
+
     assign inc_PC = PC_wire + 4;
     assign next_PC = PCsrcWire ? jump_PC : inc_PC;
+
+    assign en_progression = ~hitWire;
 
     PC PC(
         .clk(clk),
@@ -319,11 +323,10 @@ module top #(
 
     //if this is high, we are reading from RAM.
     //add block to wait for new RAM read
-    assign en_progression = ~hitWire;
+    
 
     two_way_associative_cache two_way_associative_cache (
         .clk(clk),
-        .en_i(en_progression),
         .dataWord_i(instrE_3),
 
         .dataWord_o(CacheOutWire),
@@ -332,7 +335,7 @@ module top #(
 
     //check this is the correct way round
     //currently just blocking until it is in the CACHE, definitely faster way, costs us potentially an extra cycle
-    DataOutWire = en_progression ? CacheOutWire : RamOutWire;
+    assign DataOutWire = hitWire ? CacheOutWire : RamOutWire;
 
     ///////////////        PIPELINING BLOCK       ///////////////
     logic [DW-1:0]      ALUResultE_4;
