@@ -55,10 +55,10 @@ module control (
                     default: ;
                 endcase
 
-            7'b1100011: begin // B-Type instructions
-                ImmSrc_o = 3'b010; 
-                ALUctrl_o = 4'b1111; 
-            end 
+            7'b1100011: begin
+		ImmSrc_o = 3'b010;
+		ALUctrl_o = 4'b1111; // B-Type instructions
+	    end
 
             7'b0000011: begin // I-type load instructions
                 ALUctrl_o = 4'b0000;

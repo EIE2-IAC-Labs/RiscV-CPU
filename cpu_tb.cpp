@@ -7,7 +7,7 @@
 #include <sstream>
 
 #include "vbuddy.cpp"     // include vbuddy code
-#define MAX_SIM_CYC 400000
+#define MAX_SIM_CYC 10000
 
 int main(int argc, char **argv, char **env) {
   int simcyc;     // simulation clock count
@@ -22,7 +22,10 @@ int main(int argc, char **argv, char **env) {
   top->trace (tfp, 99);
   tfp->open ("top.vcd");
  
-       // Flag mode set to one-shot
+  // init Vbuddy
+  if (vbdOpen()!=1) return(-1);
+  vbdHeader("CPU!");
+  vbdSetMode(1);        // Flag mode set to one-shot
 
   // initialize simulation inputs
   top->clk = 0;
@@ -39,14 +42,28 @@ int main(int argc, char **argv, char **env) {
       top->eval ();
     }
 
+    ////////////////////////////////////////////
+    ///// UNCOMMENT FOR REFERENCE PROGRAM //////
+    ////////////////////////////////////////////
 
-    // assert reset for 1st cycle
-    // vbdBar(top->data_out & 0xFF);
-    // vbdHex(3,(int(top->data_out)>>8)&0xF);
-    // vbdHex(2,(int(top->data_out)>>4)&0xF);
-    // vbdHex(1,int(top->data_out)&0xF);
+    // if (simcyc > 330000){
+    //   vbdPlot(int(top->data_out), 0, 255);
+    //   vbdCycle(simcyc);
+    // }
+
+    ////////////////////////////////////////////
+    //////// UNCOMMENT FOR F1 PROGRAM //////////
+    ////////////////////////////////////////////
+
+    vbdCycle(simcyc);
+    top->trigger_i = vbdFlag();
+    vbdBar(top->data_out & 0xFF);
+    vbdHex(3,(int(top->data_out)>>8)&0xF);
+    vbdHex(2,(int(top->data_out)>>4)&0xF);
+    vbdHex(1,int(top->data_out)&0xF);
 }
 
+vbdClose();     // ++++
 tfp->close(); 
 exit(0);
 }
