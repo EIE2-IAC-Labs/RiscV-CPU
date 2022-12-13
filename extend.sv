@@ -19,7 +19,7 @@ always_comb begin
         0'b010: ImmExt_o = {{20{Imm_i[31]}}, Imm_i[7], Imm_i[30:25], Imm_i[11:8], 1'b0};
 
         //instruction[31:12]
-        0'b011: ImmExt_o = {{13{Imm_i[31]}}, Imm_i[30:12]};
+        0'b011: ImmExt_o = {Imm_i[31:12], {12{1'b0}}};
         
         //instruction[31], instruction[19:12], instruction[20]instruction [30:21]
         0'b100: ImmExt_o = {{12{Imm_i[31]}}, Imm_i[19:12], Imm_i[20], Imm_i[30:21], 1'b0};
