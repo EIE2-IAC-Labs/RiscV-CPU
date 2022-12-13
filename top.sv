@@ -323,7 +323,7 @@ module top #(
 
     two_way_associative_cache two_way_associative_cache (
         .clk(clk),
-        .dataWord_i(), //ADDRESS GOES IN HERE
+        .dataWord_i(), //ADDRESS OF MEMORY WE WANT GOES IN HERE, IF NOT IN CACHE hit -> 0, so then read from RAM
 
         .dataWord_o(CacheOutWire),
         .hit_o(hitWire)
