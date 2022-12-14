@@ -22,7 +22,7 @@ module two_way_associative_cache #(
 
 
 
-logic [OFFSET_ONE_WAY+OFFSET_ONE_WAY:0] cache_memory [CACHE_LENGTH-1:0];
+logic [OFFSET_ONE_WAY+OFFSET_ONE_WAY-1:0] cache_memory [CACHE_LENGTH-1:0];
 
 //current input data
 logic [SET_WIDTH-1:0] data_set;
