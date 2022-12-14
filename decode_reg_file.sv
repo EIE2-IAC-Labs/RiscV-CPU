@@ -6,7 +6,6 @@ module decode_reg_file #(
     //if so, emtpy just loaded instruction as it might be the wrong instruction
     //remove addr wire
     input logic                         clk,
-    input logic                         en_i,
     input logic                         resultSrcD_i,
     input logic                         memWriteD_i,
     input logic [1:0]                   memTypeWireD_i,
@@ -48,26 +47,24 @@ module decode_reg_file #(
 );
 
 always_ff @(negedge clk) begin
-    if(en_i) begin
-        resultSrcE_o <= resultSrcD_i;
-        memWriteE_o <= memWriteD_i;
-        branchSrcE_o <= branchSrcD_i;
-        ALUctrlE_o <= ALUCtrlD_i;
-        JALRE_o <= JALRD_i;
-        PCE_o <= PCD_i;
-        RD1E_o <= RD1D_i;
-        SrcBE_o <= SrcBD_i;
-        RD2E_o <= RD2D_i;
-        ImmExtE_o <= ImmExtD_i;
-        funct3E_o <= funct3D_i;
-        memTypeWireE_o <= memTypeWireD_i;
-        memSignWireE_o <= memSignWireD_i;
-        AUIPCWireE_o <= AUIPCWireD_i;
-        regWriteE_o <= regWriteD_i; 
-        AD3E_o <= AD3D_i;
-        JALE_o <= JALD_i;
-        incPC3_o <= incPC2_i;
-    end
+    resultSrcE_o <= resultSrcD_i;
+    memWriteE_o <= memWriteD_i;
+    branchSrcE_o <= branchSrcD_i;
+    ALUctrlE_o <= ALUCtrlD_i;
+    JALRE_o <= JALRD_i;
+    PCE_o <= PCD_i;
+    RD1E_o <= RD1D_i;
+    SrcBE_o <= SrcBD_i;
+    RD2E_o <= RD2D_i;
+    ImmExtE_o <= ImmExtD_i;
+    funct3E_o <= funct3D_i;
+    memTypeWireE_o <= memTypeWireD_i;
+    memSignWireE_o <= memSignWireD_i;
+    AUIPCWireE_o <= AUIPCWireD_i;
+    regWriteE_o <= regWriteD_i; 
+    AD3E_o <= AD3D_i;
+    JALE_o <= JALD_i;
+    incPC3_o <= incPC2_i;
 end
 
 endmodule

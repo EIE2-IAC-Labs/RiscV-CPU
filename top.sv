@@ -20,16 +20,15 @@ module top #(
     logic [DW-1:0]       PC_wire;
     logic              PCsrcWire;
 
-    logic               en_progression;
+    // logic               1'b1;  // cache
 
     assign inc_PC = PC_wire + 4;
     assign next_PC = PCsrcWire ? jump_PC : inc_PC;
 
-    assign en_progression = ~hitWire;
+    // assign 1'b1 = hitWire;     // cache
 
     PC PC(
         .clk(clk),
-        .en_i(en_progression),
         .rst(rst),
         .PC_i(next_PC),
 
@@ -55,7 +54,6 @@ module top #(
 
     fetch_reg_file fetch_reg_file(
         .clk(clk),
-        .en_i(en_progression),
         .instrD_i(InstructionWire),
         .PCD_i(PC_wire),
         .incPCD_i(inc_PC),
@@ -110,7 +108,6 @@ module top #(
         .ResultSrc_o(ResultSrcWire),
         .jal_o(JALWire),
         .jalr_o(JALRWire),
-
         .auipc_o(AUIPCWire)
     );
 
@@ -180,7 +177,6 @@ module top #(
 
     decode_reg_file decode_reg_file (
         .clk(clk),
-        .en_i(en_progression),
         .resultSrcD_i(ResultSrcWire),
         .memWriteD_i(memWrite_enWire),
         .branchSrcD_i(BranchSrcWire),
@@ -266,7 +262,6 @@ module top #(
 
     execute_reg_file execute_reg_file(
         .clk(clk),
-        .en_i(en_progression),
         .resultSRCD_i(resultSrcE_2),
         .memWriteD_i(memWriteE_2),
         .ALUresultD_i(ALUResultWire),
@@ -323,8 +318,8 @@ module top #(
 
     two_way_associative_cache two_way_associative_cache (
         .clk(clk),
-        .dataWord_i(), //CONTENT OF MEMORY WE WANT GOES IN HERE
-        .addressWord_i() // address of memory we want goes in here, IF NOT IN CACHE hit -> 0, so then read from RAM
+        .dataWord_i(RamOutWire), // TODO: CONTENT OF MEMORY WE WANT GOES IN HERE
+        .addressWord_i(ALUResultE_3), // TODO: address of memory we want goes in here, IF NOT IN CACHE hit -> 0, so then read from RAM
 
         .dataWord_o(CacheOutWire),
         .hit_o(hitWire)
@@ -332,7 +327,7 @@ module top #(
 
     //check this is the correct way round
     //currently just blocking until it is in the CACHE, definitely faster way, costs us potentially an extra cycle
-    assign DataOutWire = hitWire ? CacheOutWire : RamOutWire;
+    assign DataOutWire = hitWire ? CacheOutWire : RamOutWire;  
 
     ///////////////        PIPELINING BLOCK       ///////////////
     logic [DW-1:0]      ALUResultE_4;
@@ -345,7 +340,6 @@ module top #(
 
     mem_reg_file mem_reg_file(
         .clk(clk),
-        .en_i(en_progression),
         .ALUResultD_i(ALUResultE_3),
         .RD2D_i (DataOutWire),
         .ResultSrcD_i (resultSrcE_3),
@@ -369,7 +363,6 @@ module top #(
     ///////////               FINAL STAGE             ///////////
     /////////////////////////////////////////////////////////////
     logic [DW-1:0]              incPC5;
-
     assign wd3Wire0 = resultSrcE_4 ? DataE_4 : ALUResultE_4;
     
 

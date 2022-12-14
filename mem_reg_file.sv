@@ -3,7 +3,6 @@ module mem_reg_file #(
     REGISTER_ADDRESS_WIDTH = 5
 )(
     input logic                             clk,
-    input logic                             en_i,
     input logic [DATA_WIDTH-1:0]            ALUResultD_i,
     input logic [DATA_WIDTH-1:0]            RD2D_i,
     input logic                             ResultSrcD_i,
@@ -24,15 +23,13 @@ module mem_reg_file #(
 );
 
 always_ff @(negedge clk) begin
-    if (en_i) begin
-        ALUResultE_o <= ALUResultD_i;
-        RD2E_o <= RD2D_i;
-        ResultSrcE_o <= ResultSrcD_i;
-        regWriteE_o <= regWriteD_i;
-        AD3E_o <= AD3D_i;
-        JALE_o <= JALD_i;
-        incPC5_o <= incPC4_i;
-    end
+    ALUResultE_o <= ALUResultD_i;
+    RD2E_o <= RD2D_i;
+    ResultSrcE_o <= ResultSrcD_i;
+    regWriteE_o <= regWriteD_i;
+    AD3E_o <= AD3D_i;
+    JALE_o <= JALD_i;
+    incPC5_o <= incPC4_i;
 end
 
 endmodule

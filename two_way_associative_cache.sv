@@ -46,7 +46,7 @@ logic hit1;
 
 assign hit0 = (tag_0[data_set] == data_tag) && V_0[data_set];
 assign hit1 = (tag_1[data_set] == data_tag) && V_1[data_set];
-assign hit_o = hit0 ^ hit1;
+assign hit_o = hit0 || hit1;
 
 //logic evict
 //1 means evict cache location 1 and vice versa
