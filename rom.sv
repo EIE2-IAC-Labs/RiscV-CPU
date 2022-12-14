@@ -17,7 +17,7 @@ initial begin
 end;
 
 always_comb begin 
-    rd_o = {rom_array[a_i- 32'hBFC00000],rom_array[(a_i + 1) - 32'hBFC00000],rom_array[(a_i+ 2) - 32'hBFC00000],rom_array[(a_i+ 3) - 32'hBFC00000]}; // I do concatenation to get 32 bits( the instruction) from 8 bit parts
+    rd_o = {rom_array[(a_i + 3)- 32'hBFC00000],rom_array[(a_i + 2) - 32'hBFC00000],rom_array[(a_i+ 1) - 32'hBFC00000],rom_array[a_i - 32'hBFC00000]}; // I do concatenation to get 32 bits( the instruction) from 8 bit parts
 end
 
 endmodule

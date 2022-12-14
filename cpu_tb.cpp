@@ -7,7 +7,8 @@
 #include <sstream>
 
 #include "vbuddy.cpp"     // include vbuddy code
-#define MAX_SIM_CYC 1000000
+#define MAX_SIM_CYC 10000000  // PDF max simulation cycles
+// #define MAX_SIM_CYC 2000 // F1 max simulation cycles
 
 int main(int argc, char **argv, char **env) {
   int simcyc;     // simulation clock count
@@ -24,7 +25,7 @@ int main(int argc, char **argv, char **env) {
  
   // init Vbuddy
   if (vbdOpen()!=1) return(-1);
-  vbdHeader("CPU!");
+  vbdHeader("Group 14 CPU!");
   vbdSetMode(1);        // Flag mode set to one-shot
 
   // initialize simulation inputs
@@ -46,10 +47,9 @@ int main(int argc, char **argv, char **env) {
     ///// UNCOMMENT FOR REFERENCE PROGRAM //////
     ////////////////////////////////////////////
 
-    if (simcyc > 800000){
+    if (simcyc > 800000 && simcyc % 4 == 0){  // plot every 4th, convenient for pipelining due to nops in display
       vbdPlot(int(top->data_out), 0, 255);
       vbdCycle(simcyc);
-      std::cout << top->data_out << std::endl;
     }
 
     ////////////////////////////////////////////
