@@ -22,7 +22,7 @@ int main(int argc, char **argv, char **env) {
   // initialize simulation inputs
   top->clk = 0;
   top->addressWord_i = 357913949;
-  top->dataWord_i = 1;
+  top->dataWord_i = 4294967295;
   //1555555D
   
   // run simulation for MAX_SIM_CYC clock cycles
@@ -36,33 +36,28 @@ int main(int argc, char **argv, char **env) {
     if(simcyc == 1){
       top->addressWord_i = 357913945;
       //15555559
-      top->addressWord_i = 0;
     }
     if(simcyc == 2){
       top->addressWord_i = 357913949;
       //1555555D, HIT
-      top->addressWord_i = 0;
+      top->dataWord_i = 78;
     }
-    if(simcyc == 3){
-      top->addressWord_i = 357813949;
-      //1553CEBD, 
-      top->addressWord_i = 0;
-    }
+    
     if(simcyc == 4){
       top->addressWord_i = 357913945;
       //15555559, HIT
-      top->addressWord_i = 4;
+      top->dataWord_i = 4;
     }
 
     if(simcyc == 5){
       top->addressWord_i = 357945021;
       //1555CEBD, NO HIT, put into data_1
-      top->addressWord_i = 0;
+      top->dataWord_i = 0;
     }
     if(simcyc == 6){
       top->addressWord_i = 290805085;
       //1155555D, HIT
-      top->addressWord_i = 0;
+      top->dataWord_i = 0;
     }
     
 
