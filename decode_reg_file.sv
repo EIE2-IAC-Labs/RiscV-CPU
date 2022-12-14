@@ -42,7 +42,7 @@ module decode_reg_file #(
     output logic                        regWriteE_o,
     output logic [REGISTER_ADDRESS_WIDTH-1:0] AD3E_o,
     output logic                        JALE_o,
-    output logic [DATA_WIDTH-1:0]       incPC3_o,
+    output logic [DATA_WIDTH-1:0]       incPC3_o
 
 );
 

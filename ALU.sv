@@ -18,7 +18,7 @@ logic                        overwrite_branch_o;
 assign SrcA_Signed = SrcA_i;
 assign SrcB_Signed = SrcB_i;
 
-always_comb begin
+always_latch begin
     if(overwrite_branch_o == 1'b0)begin
         case (BranchCtrl_i)
             //Equal
@@ -62,7 +62,7 @@ always_comb begin
     end
 end
 
-always_comb begin
+always_latch begin
     case (ALUctrl_i)
         //add
         4'b0000: ALUResult_o = SrcA_i + SrcB_i;

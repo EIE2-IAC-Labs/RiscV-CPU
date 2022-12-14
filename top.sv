@@ -1,10 +1,9 @@
 module top #(
     parameter DW=32
 ) (
-    input logic rst,
-    input logic trigger_i,
-    input logic clk,
-
+    input logic                 rst,
+    input logic                 trigger_i,
+    input logic                 clk,
     output logic [DW-1:0]       data_out  
 
 );   
@@ -12,41 +11,29 @@ module top #(
     ///////////               FETCH                   ///////////
     /////////////////////////////////////////////////////////////
 
-    ///////////////           PC BLOCK            ///////////////
-    logic [DW-1:0]        inc_PC;
-    logic [DW-1:0]     branch_PC;
-    logic [DW-1:0]       next_PC;
-    logic [DW-1:0]       jump_PC;
-    logic [DW-1:0]       PC_wire;
-    logic              PCsrcWire;
-
-    // logic               1'b1;  // cache
+    logic [DW-1:0]          inc_PC;
+    logic [DW-1:0]          branch_PC;
+    logic [DW-1:0]          next_PC;
+    logic [DW-1:0]          jump_PC;
+    logic [DW-1:0]          PC_wire;
+    logic                   PCsrcWire;
 
     assign inc_PC = PC_wire + 4;
     assign next_PC = PCsrcWire ? jump_PC : inc_PC;
-
-    // assign 1'b1 = hitWire;     // cache
 
     PC PC(
         .clk(clk),
         .rst(rst),
         .PC_i(next_PC),
-
         .PC_o(PC_wire)
     );
 
-
-    ///////////////           ROM BLOCK          ///////////////
     logic [DW-1:0]          InstructionWire;
 
     rom rom(
         .a_i(PC_wire),
-
         .rd_o(InstructionWire)
     );
-
-
-    ///////////////        PIPELINING BLOCK      ///////////////
 
     logic [DW-1:0]       instrE;
     logic [DW-1:0]       incPCE;
@@ -68,7 +55,6 @@ module top #(
     ///////////               DECODE                  ///////////
     /////////////////////////////////////////////////////////////
 
-    ///////////////         CONTROL BLOCK         ///////////////
     logic [6:0]             opcode;
     logic [2:0]             funct3;
     logic                   funct7;
@@ -111,12 +97,12 @@ module top #(
         .auipc_o(AUIPCWire)
     );
 
-    ///////////////        REGISTER FILE        ///////////////
     logic [4:0]                 rs1Wire;
     logic [4:0]                 rs2Wire;
     logic [4:0]                 rdWire;
     logic [DW-1:0]              wd3Wire;
     logic [DW-1:0]              wd3Wire0; 
+    logic [DW-1:0]              wd3Wire1;
 
     assign wd3Wire = JALE_4 ? incPC5 : wd3Wire0;
     assign rs1Wire = instrE[19:15];
@@ -131,14 +117,11 @@ module top #(
         .WE3_i(regWriteWireE_4),
         .WD3_i(wd3Wire),
         .TRIGGER_i(trigger_i),
-
         .RD1_o(RD1Wire),
         .RD2_o(RD2Wire),
-        
         .a0_o(data_out)
     );
 
-    ///////////////         EXTEND BLOCK          ///////////////
     logic [DW-8:0]          ImmediateWire;
     logic [DW-1:0]          ImmediateExtendWire;
 
@@ -147,31 +130,26 @@ module top #(
     extend extend(
         .ImmSrc_i(ImmSrcWire),
         .Imm_i(ImmediateWire),
-
         .ImmExt_o(ImmediateExtendWire)
     );
-
-    ///////////////        PIPELINE BLOCK        ///////////////
     
-
-    logic                        resultSrcE_2;
-    logic                        memWriteE_2;
-    logic                        branchSrcE_2;
-    logic [3:0]                  ALUctrlDE_2;
-    logic                        JALRE_2;
-    logic                        JALE_2;
-    logic [DW-1:0]       PCE_2;
-    logic [DW-1:0]       RD1E_2;
-    logic [DW-1:0]       SrcBE_2;
-    logic [DW-1:0]       RD2E_2;
-    logic [DW-1:0]       ImmExtE_2;
-    logic [2:0]                  funct3E_2;
+    logic                       resultSrcE_2;
+    logic                       memWriteE_2;
+    logic                       branchSrcE_2;
+    logic [3:0]                 ALUctrlDE_2;
+    logic                       JALRE_2;
+    logic                       JALE_2;
+    logic [DW-1:0]              PCE_2;
+    logic [DW-1:0]              RD1E_2;
+    logic [DW-1:0]              SrcBE_2;
+    logic [DW-1:0]              RD2E_2;
+    logic [DW-1:0]              ImmExtE_2;
+    logic [2:0]                 funct3E_2;
     logic [1:0]                 memTypeWireE_2;
     logic                       memSignWireE_2;
     logic                       AUIPCE_2;
     logic                       regWriteWireE_2;
     logic [4:0]                 AD3E_2;
-    logic [DW-1:0]      instrE_2;
 
     assign Aluop2Wire = ALUsrcWire ? ImmediateExtendWire : RD2Wire;
 
@@ -213,40 +191,32 @@ module top #(
         .regWriteE_o(regWriteWireE_2),
         .AD3E_o(AD3E_2),
         .JALE_o(JALE_2),
-        .incPC3_o(incPC3),
+        .incPC3_o(incPC3)
     );
-
-    
 
     /////////////////////////////////////////////////////////////
     ///////////               EXECUTE                 ///////////
     /////////////////////////////////////////////////////////////
 
-    ///////////////           ALU BLOCK           ///////////////
-
-    //alu wires
-    logic [DW-1:0]       RD1Wire;
-    logic [DW-1:0]       Aluop2Wire;
-    logic [DW-1:0]       ALUResultWire;
-    logic [DW-1:0]       RD2Wire;
-    logic                branchWire;
+    logic [DW-1:0]              RD1Wire;
+    logic [DW-1:0]              Aluop2Wire;
+    logic [DW-1:0]              ALUResultWire;
+    logic [DW-1:0]              RD2Wire;
+    logic                       branchWire;
 
     ALU ALU(
         .SrcA_i(RD1E_2),
         .SrcB_i(SrcBE_2),
         .ALUctrl_i(ALUctrlDE_2),
         .BranchCtrl_i(funct3E_2),
-        
         .ALUResult_o(ALUResultWire),
         .Branch_o(branchWire)
     );
 
-    ///////////////        PIPELINING BLOCK       ///////////////
-
-    logic resultSrcE_3;
-    logic memWriteE_3;
-    logic [DW-1:0] ALUResultE_3;
-    logic [DW-1:0] RD2E_3;
+    logic                       resultSrcE_3;
+    logic                       memWriteE_3;
+    logic [DW-1:0]              ALUResultE_3;
+    logic [DW-1:0]              RD2E_3;
     logic [1:0]                 memTypeWireE_3;
     logic                       memSignWireE_3;
     logic                       AUIPCE_3;
@@ -254,9 +224,8 @@ module top #(
     logic [4:0]                 AD3E_3;
     logic                       JALE_3;
     logic [DW-1:0]              incPC3;
-    logic [DW-1:0]              instrE_3;
 
-    assign branch_PC=PCE_2 + ImmExtE_2;
+    assign branch_PC = PCE_2 + ImmExtE_2;
     assign jump_PC = JALRE_2 ? ALUResultWire : branch_PC;
     assign PCsrcWire = branchSrcE_2 ? branchWire : 1'b0;
 
@@ -284,14 +253,13 @@ module top #(
         .regWriteE_o(regWriteWireE_3),
         .AD3E_o(AD3E_3),
         .JALE_o(JALE_3),
-        .incPC4_o(incPC4),
+        .incPC4_o(incPC4)
     );
 
     /////////////////////////////////////////////////////////////
     ///////////                 MEMORY                ///////////
     /////////////////////////////////////////////////////////////
 
-    ///////////////           RAM BLOCK           ///////////////
     logic [DW-1:0]          RamOutWire;
 
     memory memory(
@@ -308,34 +276,29 @@ module top #(
     //we have to disable the pc and disable the other registers to prevent the pipeline from moving on if NOT A HIT
     //else just take it from the cache
     //if hit, take Data Out Wire from CACHE and freeze one block to update
+
     logic [DW-1:0]              DataOutWire;
     logic [DW-1:0]              CacheOutWire;
     logic                       hitWire;
-
-    //if this is high, we are reading from RAM.
-    //add block to wait for new RAM read
     
-
     two_way_associative_cache two_way_associative_cache (
         .clk(clk),
-        .dataWord_i(RamOutWire), // TODO: CONTENT OF MEMORY WE WANT GOES IN HERE
-        .addressWord_i(ALUResultE_3), // TODO: address of memory we want goes in here, IF NOT IN CACHE hit -> 0, so then read from RAM
-
+        .dataWord_i(RamOutWire), 
+        .addressWord_i(ALUResultE_3), 
         .dataWord_o(CacheOutWire),
         .hit_o(hitWire)
     );
 
-    //check this is the correct way round
-    //currently just blocking until it is in the CACHE, definitely faster way, costs us potentially an extra cycle
     assign DataOutWire = hitWire ? CacheOutWire : RamOutWire;  
+    // if hit, read from cache. Else read from RAM.
 
-    ///////////////        PIPELINING BLOCK       ///////////////
-    logic [DW-1:0]      ALUResultE_4;
-    logic [DW-1:0]      DataE_4;
+    logic [DW-1:0]              ALUResultE_4;
+    logic [DW-1:0]              DataE_4;
     logic                       resultSrcE_4;
     logic                       regWriteWireE_4;
     logic [4:0]                 AD3E_4;
     logic                       JALE_4;
+    logic                       AUIPCE_4;
     logic [DW-1:0]              incPC4;
 
     mem_reg_file mem_reg_file(
@@ -344,6 +307,7 @@ module top #(
         .RD2D_i (DataOutWire),
         .ResultSrcD_i (resultSrcE_3),
         .regWriteD_i(regWriteWireE_3),
+        .AUIPCD_i(AUIPCE_3),
         .AD3D_i (AD3E_3),
         .JALD_i(JALE_3),
         .incPC4_i(incPC4),
@@ -352,18 +316,18 @@ module top #(
         .RD2E_o (DataE_4),
         .ResultSrcE_o (resultSrcE_4),
         .regWriteE_o(regWriteWireE_4),
+        .AUIPCE_o(AUIPCE_4),
         .AD3E_o(AD3E_4),
         .JALE_o (JALE_4),
         .incPC5_o(incPC5)
     );
 
-
-
     /////////////////////////////////////////////////////////////
     ///////////               FINAL STAGE             ///////////
     /////////////////////////////////////////////////////////////
-    logic [DW-1:0]              incPC5;
-    assign wd3Wire0 = resultSrcE_4 ? DataE_4 : ALUResultE_4;
-    
 
+    logic [DW-1:0]              incPC5;
+    assign wd3Wire1 = resultSrcE_4 ? DataE_4 : ALUResultE_4;
+    assign wd3Wire0 = AUIPCE_4 ? branch_PC : wd3Wire1;
+    
 endmodule
