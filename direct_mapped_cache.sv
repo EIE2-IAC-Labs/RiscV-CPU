@@ -19,31 +19,28 @@ module direct_mapped_cache #(
 //check it is of the correct type (i.e correct parts are combinational and vice versa)
 
 
-logic [DATA_WIDTH-1:0] cache_memory [DATA_WIDTH+TAG_WIDTH:0];
-logic V [CACHE_LENGTH-1:0];
-logic [TAG_WIDTH-1:0] Tag [CACHE_LENGTH-1:0];
-logic [DATA_WIDTH-1:0] Data [CACHE_LENGTH-1:0];
+logic [DATA_WIDTH-1:0] cache_memory [0:CACHE_LENGTH-1][0:2];
+
 
 logic [SET_WIDTH-1:0] data_set;
 logic [TAG_WIDTH-1:0] data_tag;
-
 logic overwrite;
 
 assign data_tag = addressWord_i[DATA_WIDTH-1:DATA_WIDTH-TAG_WIDTH];
 assign data_set = addressWord_i[SET_WIDTH+1:2];
-assign hit_o = (Tag[data_set] == data_tag) && V [data_set];
+assign hit_o = (cache_memory[data_set][1][TAG_WIDTH-1:0] == data_tag) && cache_memory[data_set][0][0];
 
 always_comb begin
-    if(hit_o) dataWord_o = Data[data_set];
+    if(hit_o) dataWord_o = cache_memory[data_set][2];
     else overwrite = 1'b1;        
 end
 
 always_ff @(negedge clk) begin
     if(overwrite) begin
-        Tag [data_set] <= data_tag;
-        Data[data_set] <= dataWord_i;
+        cache_memory[data_set][1][TAG_WIDTH-1:0] <= data_tag;
+        cache_memory[data_set][2] <= dataWord_i;
         overwrite = 0'b0;
-        V [data_set] <= 1'b1;
+        cache_memory[data_set][0][0] <= 1'b1;
     end
 end
 
