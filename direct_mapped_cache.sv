@@ -26,9 +26,17 @@ logic [SET_WIDTH-1:0] data_set;
 logic [TAG_WIDTH-1:0] data_tag;
 logic overwrite;
 
+
+logic [TAG_WIDTH-1:0] debug_tag;
+logic [DATA_WIDTH-1:0] debug_data;
+logic debug_V;
+
 assign data_tag = addressWord_i[DATA_WIDTH-1:DATA_WIDTH-TAG_WIDTH];
 assign data_set = addressWord_i[SET_WIDTH+1:2];
 assign hit_o = ((cache_memory [data_set] [TAG_WIDTH+DATA_WIDTH-1:DATA_WIDTH]) == data_tag) && (cache_memory [data_set] [DATA_WIDTH+TAG_WIDTH]);
+assign debug_tag = cache_memory [data_set] [TAG_WIDTH+DATA_WIDTH-1:DATA_WIDTH];
+assign debug_data = cache_memory [data_set] [DATA_WIDTH-1:0];
+assign debug_V = cache_memory [data_set] [DATA_WIDTH+TAG_WIDTH];
 
 always_comb begin
     if(hit_o) dataWord_o = cache_memory[data_set] [DATA_WIDTH-1:0];
@@ -37,10 +45,8 @@ end
 
 always_ff @(negedge clk) begin
     if(overwrite) begin
-        cache_memory [data_set] [TAG_WIDTH+DATA_WIDTH-1:DATA_WIDTH] <= data_tag;
-        cache_memory [data_set] [DATA_WIDTH-1:0] <= dataWord_i;
+        cache_memory [data_set] <= {1'b1, data_tag, dataWord_i};
         overwrite = 0'b0;
-        cache_memory [data_set] [DATA_WIDTH+TAG_WIDTH] <= 1'b1;
     end
 end
 
