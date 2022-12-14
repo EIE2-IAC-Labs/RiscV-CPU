@@ -1,8 +1,8 @@
 module two_way_associative_cache #(
-    parameter SET_WIDTH = 3,
-    TAG_WIDTH = 27,
+    parameter SET_WIDTH = 2,
+    TAG_WIDTH = 28,
     DATA_WIDTH = 32,
-    CACHE_LENGTH = 8
+    CACHE_LENGTH = 4
 
 )(
     input logic                                 clk,
@@ -20,17 +20,8 @@ module two_way_associative_cache #(
 //remove overwrite if needed, check if required
 
 
-//logic [DATA_WIDTH-1:0] cache_memory_1 [DATA_WIDTH+TAG_WIDTH:0];
 
-//cache way 1
-logic V_1 [CACHE_LENGTH-1:0];
-logic [TAG_WIDTH-1:0] tag_1 [CACHE_LENGTH-1:0];
-logic [DATA_WIDTH-1:0] data_1 [CACHE_LENGTH-1:0];
-
-//cache way 0
-logic V_0 [CACHE_LENGTH-1:0];
-logic [TAG_WIDTH-1:0] tag_0 [CACHE_LENGTH-1:0];
-logic [DATA_WIDTH-1:0] data_0 [CACHE_LENGTH-1:0];
+logic [DATA_WIDTH-1:0] cache_memory [0:CACHE_LENGTH-1][0:6];
 
 //current input data
 logic [SET_WIDTH-1:0] data_set;
@@ -44,46 +35,53 @@ assign data_set = addressWord_i[SET_WIDTH+1:2];
 logic hit0;
 logic hit1;
 
-assign hit0 = (tag_0[data_set] == data_tag) && V_0[data_set];
-assign hit1 = (tag_1[data_set] == data_tag) && V_1[data_set];
+
+//tag_0[data_set]-> cache_memory[data_set][1][DATA_WIDTH-1:DATA_WIDTH-TAG_WIDTH]
+//V_0-> cache_memory[data_set][0][0]
+//tag_1[data_set]-> cache_memory[data_set][4][DATA_WIDTH-1:DATA_WIDTH-TAG_WIDTH]
+//V_1-> cache_memory[data_set][3][0]
+//data_0[data_set]-> cache_memory[data_set][2]
+//data_1[data_set]-> cache_memory[data_set][5]
+
+
+assign hit0 = (cache_memory[data_set][1][DATA_WIDTH-1:DATA_WIDTH-TAG_WIDTH] == data_tag) && cache_memory[data_set][0][0];
+assign hit1 = (cache_memory[data_set][4][DATA_WIDTH-1:DATA_WIDTH-TAG_WIDTH] == data_tag) && cache_memory[data_set][3][0];
 assign hit_o = hit0 ^ hit1;
 
-//logic evict
-//1 means evict cache location 1 and vice versa
-logic evict [CACHE_LENGTH-1:0];
+
 
 always_comb begin
     if(hit_o)begin
-        if(data_tag == tag_1[data_set]) begin
-            dataWord_o = data_1[data_set];
-            evict [data_set] = 0;
+        if(data_tag == cache_memory[data_set][4][DATA_WIDTH-1:DATA_WIDTH-TAG_WIDTH]) begin
+            dataWord_o = cache_memory[data_set][5];
+            cache_memory[data_set][6][0] = 0;
         end
-        else if(data_tag == tag_0[data_set]) begin
-            dataWord_o = data_0[data_set];
-            evict [data_set] = 1;
+        else if(data_tag == cache_memory[data_set][1][DATA_WIDTH-1:DATA_WIDTH-TAG_WIDTH]) begin
+            dataWord_o = cache_memory[data_set][2];
+            cache_memory[data_set][6][0] = 1;
         end
     end
 end
 
 always_ff @(negedge clk) begin
-    if((data_tag != tag_0[data_set]) && (V_1 [data_set] == 1'b0)) begin
-        if((V_0 [data_set] == 1'b0) && (V_1 [data_set] == 1'b0)) begin
-            tag_0 [data_set] <= data_tag;
-            data_0[data_set] <= dataWord_i;
-            V_0 [data_set] <= 1'b1;
-            evict [data_set] <= 1;
+    if((data_tag != cache_memory[data_set][1][DATA_WIDTH-1:DATA_WIDTH-TAG_WIDTH]) && (cache_memory[data_set][3][0] == 1'b0)) begin
+        if((cache_memory[data_set][0][0] == 1'b0) && (cache_memory[data_set][3][0] == 1'b0)) begin
+            cache_memory[data_set][1][DATA_WIDTH-1:DATA_WIDTH-TAG_WIDTH] <= data_tag;
+            cache_memory[data_set][2] <= dataWord_i;
+            cache_memory[data_set][0][0] <= 1'b1;
+            cache_memory[data_set][6][0] <= 1; //evict
         end
         else if (evict[data_set] == 1'b0) begin
-            tag_0 [data_set] <= data_tag;
-            data_0[data_set] <= dataWord_i;
-            V_0 [data_set] <= 1'b1;
-            evict [data_set] <= 1;
+            cache_memory[data_set][1][DATA_WIDTH-1:DATA_WIDTH-TAG_WIDTH] [data_set] <= data_tag;
+            cache_memory[data_set][2] <= dataWord_i;
+            cache_memory[data_set][0][0] <= 1'b1;
+            cache_memory[data_set][6][0] <= 1; //evict
         end
         else if (evict[data_set] == 1'b1) begin
-            tag_1 [data_set] <= data_tag;
-            data_1[data_set] <= dataWord_i;
-            V_1 [data_set] <= 1'b1;
-            evict [data_set] <= 0;
+            cache_memory[data_set][4][DATA_WIDTH-1:DATA_WIDTH-TAG_WIDTH] <= data_tag;
+            cache_memory[data_set][5] <= dataWord_i;
+            cache_memory[data_set][3][0] <= 1'b1;
+            cache_memory[data_set][6][0] <= 0; //evict
         end
     end
 end
