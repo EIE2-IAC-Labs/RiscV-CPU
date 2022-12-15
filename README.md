@@ -40,6 +40,7 @@
 | top.sv (pipeline) |p |x |x |
 | cpu_tb.cpp |x | |x |
 | F1Assembly.s |x | | |x
+
 LEGEND :       `x` = full responsibility;  `p` = partial contribution; 
 
 ---
