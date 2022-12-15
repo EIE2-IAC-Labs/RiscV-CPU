@@ -21,17 +21,22 @@ We need 4 registers to divide the CPU into the 4 pipelined states:
 | --- | --- |
 | resultSrcD_i | resultSrcE_o |
 | memWriteD_i | memWriteE_o |
-| addrSelectD_i | addrSelectE_o |
+| memTypeWireD_i | memTypeWireE_o |
+| AUIPCWireD_i | AUIPCWireE_o |
 | branchSrcD_i | branchSrcE_o |
-| ALUctrlD_i | ALUctrlE_o |
+| ALUCtrlD_i | ALUCtrlE_o |
 | JALRD_i | JALRE_o |
 | PCD_i | PCE_o |
 | RD1D_i | RD1E_o |
 | SrcBD_i | SrcBE_o |
 | RD2D_i | RD2E_o |
 | ImmExtD_i | ImmExtE_o |
+| funct3D_i | funct3E_o |
+| memSignWireD_i | memSignWireE_o |
+| regWriteD_i | regWriteE_o |
+| AD3D_i | AD3E_o |
 | JALD_i | JALE_o |
-
+| incPC2_i | incPC3_o |
 
 
 ### execute_reg_file
@@ -39,9 +44,17 @@ We need 4 registers to divide the CPU into the 4 pipelined states:
 | --- | --- |
 | resultSRCD_i | resultSRCE_o |
 | memWriteD_i | memWriteE_o |
-| addrSelectD_i | addrSelectE_o |
 | ALUresultD_i | ALUresultE_o |
 | RD2D_i | RD2E_o |
+| memTypeD_i | memTypeE_o |
+| memSignD_i | memSignE_o |
+| AUIPCD_i | AUIPCE_o |
+| regWriteD_i | regWriteE_o |
+| AD3D_i | AD3E_o |
+| JALD_i | JALE_o |
+| incPC3_i | incPC4_o |
+
+
 
 ### memory_reg_file
 
@@ -50,15 +63,7 @@ We need 4 registers to divide the CPU into the 4 pipelined states:
 | ALUResultD_i | ALUResultE_o |
 | RD2D_i | RD2E_o |
 | ResultSrcD_i | ResultSrcE_o |
-
-
-
-
-### Important Details:
-
-- [x] Implement each reg file
-- [x] Check signals that cut over different sections
-- [ ] Find Bitwidths of each input/output
-- [ ] is reg_file correct name for datastructure
-- [x] rename inputs and outputs according to actual CPU
-- [ ] check jal and jalr from top file
+| regWriteD_i | regWriteE_o |
+| AD3D_i | AD3E_o |
+| JALD_i | JALE_o |
+| incPC4_i | incPC5_o |
