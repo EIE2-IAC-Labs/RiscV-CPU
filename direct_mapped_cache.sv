@@ -44,9 +44,9 @@ always_comb begin
 end
 
 always_ff @(negedge clk) begin
-    if(!hit_o) begin
+    if(overwrite) begin
         cache_memory [data_set] <= {1'b1, data_tag, dataWord_i};
-        //overwrite = 0'b0;
+        overwrite = 0'b0;
     end
 end
 
