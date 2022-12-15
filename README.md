@@ -71,6 +71,8 @@ LEGEND :       `x` = full responsibility;  `p` = partial contribution;
 
 ## Evidence
 
+> Apologies for the shaky video.
+
 PDF: 
 
 https://user-images.githubusercontent.com/106165200/207968492-e1e6efba-45ab-4864-8c6d-bbfddae923c9.mp4
