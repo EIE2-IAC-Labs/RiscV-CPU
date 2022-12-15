@@ -13,12 +13,12 @@ module top #(
     /////////////////////////////////////////////////////////////
 
     ///////////////           PC BLOCK            ///////////////
-    logic [DW-1:0]        inc_PC;
-    logic [DW-1:0]     branch_PC;
-    logic [DW-1:0]       next_PC;
-    logic [DW-1:0]       jump_PC;
-    logic [DW-1:0]       PC_wire;
-    logic              PCsrcWire;
+    logic [DW-1:0]                  inc_PC;
+    logic [DW-1:0]                  branch_PC;
+    logic [DW-1:0]                  next_PC;
+    logic [DW-1:0]                  jump_PC;
+    logic [DW-1:0]                  PC_wire;
+    logic                           PCsrcWire;
 
     assign inc_PC = PC_wire + 4;
     assign next_PC = PCsrcWire ? jump_PC : inc_PC;
@@ -113,9 +113,11 @@ module top #(
     logic [4:0]                 rs2Wire;
     logic [4:0]                 rdWire;
     logic [DW-1:0]              wd3Wire;
-    logic [DW-1:0]              wd3Wire0; 
+    logic [DW-1:0]              wd3Wire0;
+    logic [DW-1:0]              wd3Wire1; 
 
     assign wd3Wire = JALE_4 ? incPC5 : wd3Wire0;
+    assign wd3Wire0 = AUIPCE_4 ? branch_PC : wd3Wire1;
     assign rs1Wire = instrE[19:15];
     assign rs2Wire = instrE[24:20];
     assign rdWire = instrE[11:7];
@@ -151,18 +153,18 @@ module top #(
     ///////////////        PIPELINE BLOCK        ///////////////
     
 
-    logic                        resultSrcE_2;
-    logic                        memWriteE_2;
-    logic                        branchSrcE_2;
-    logic [3:0]                  ALUctrlDE_2;
-    logic                        JALRE_2;
-    logic                        JALE_2;
-    logic [DW-1:0]       PCE_2;
-    logic [DW-1:0]       RD1E_2;
-    logic [DW-1:0]       SrcBE_2;
-    logic [DW-1:0]       RD2E_2;
-    logic [DW-1:0]       ImmExtE_2;
-    logic [2:0]                  funct3E_2;
+    logic                       resultSrcE_2;
+    logic                       memWriteE_2;
+    logic                       branchSrcE_2;
+    logic [3:0]                 ALUctrlDE_2;
+    logic                       JALRE_2;
+    logic                       JALE_2;
+    logic [DW-1:0]              PCE_2;
+    logic [DW-1:0]              RD1E_2;
+    logic [DW-1:0]              SrcBE_2;
+    logic [DW-1:0]              RD2E_2;
+    logic [DW-1:0]              ImmExtE_2;
+    logic [2:0]                 funct3E_2;
     logic [1:0]                 memTypeWireE_2;
     logic                       memSignWireE_2;
     logic                       AUIPCE_2;
@@ -251,7 +253,7 @@ module top #(
     logic                       JALE_3;
     logic [DW-1:0]              incPC3;
 
-    assign branch_PC=PCE_2 + ImmExtE_2;
+    assign branch_PC = PCE_2 + ImmExtE_2;
     assign jump_PC = JALRE_2 ? ALUResultWire : branch_PC;
     assign PCsrcWire = branchSrcE_2 ? branchWire : 1'b0;
 
@@ -314,6 +316,7 @@ module top #(
         .RD2D_i (RamOutWire),
         .ResultSrcD_i (resultSrcE_3),
         .regWriteD_i(regWriteWireE_3),
+        .AUIPCD_i(AUIPCE_3),
         .AD3D_i (AD3E_3),
         .JALD_i(JALE_3),
         .incPC4_i(incPC4),
@@ -322,6 +325,7 @@ module top #(
         .RD2E_o (RamOutWireE_4),
         .ResultSrcE_o (resultSrcE_4),
         .regWriteE_o(regWriteWireE_4),
+        .AUIPCE_o(AUIPCE_4),
         .AD3E_o(AD3E_4),
         .JALE_o (JALE_4),
         .incPC5_o(incPC5)
@@ -333,8 +337,9 @@ module top #(
     ///////////               FINAL STAGE             ///////////
     /////////////////////////////////////////////////////////////
     logic [DW-1:0]              incPC5;
+    logic                       AUIPCE_4;
 
-    assign wd3Wire0 = resultSrcE_4 ? RamOutWireE_4 : ALUResultE_4;
+    assign wd3Wire1 = resultSrcE_4 ? RamOutWireE_4 : ALUResultE_4;
     
 
 endmodule
