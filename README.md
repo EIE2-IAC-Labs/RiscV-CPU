@@ -10,7 +10,7 @@
 ---
 ## Quick summary
 
-A fully pipelined RV32I CPU. Caching was attempted, but due to time constraints we did not manage to fully implement it. You can, however, find evidence of this work on the repository in the corresponding branches ([see below](#structure)). 
+The result of this coursework is two CPUs: a pipelined, and a single-cycle CPU. Here you will find a fully pipelined RV32I CPU. For the Single-Cycle version, please see the `VERSION-2-SINGLE-CYCLE` branch. Caching was attempted, but due to time constraints we did not manage to fully implement it. You can, however, find evidence of this work on the repository in the corresponding branches ([see below](#structure)). 
 
 ## Group Details
 
