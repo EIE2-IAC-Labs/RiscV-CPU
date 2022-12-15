@@ -52,7 +52,7 @@ LEGEND :       `x` = full responsibility;  `p` = partial contribution;
 
 * A new branch for each new feature
 
-* a `playground` branch for each version. Changes are made in separate branches and the playground is updated using either merges or cherry-picks.
+* a `playground` branch for each version. This is the branch where the tinkering and debugging is done in. Major required changes are made in separate branches and the playground is updated using either merges or cherry-picks.
 
 * Once a version has been completed, the playground is branched out to a `VERSION-<NUMBER>-<NAME>` branch and to a new playground for the subsequent version.
 
