@@ -4,15 +4,17 @@ module top #(
     input logic                                 clk,
     input logic [DATA_WIDTH-1:0]                dataWord_i,
     input logic [DATA_WIDTH-1:0]                addressWord_i,
+    input logic                                 overwrite_i,
 
     output logic [DATA_WIDTH-1:0]               dataWord_o,
     output logic                                hit_o   
 );
 
-direct_mapped_cache direct_mapped_cache(
+two_way_associative_cache_version2 two_way_associative_cache_version2(
     .clk (clk),
     .dataWord_i(dataWord_i),
     .addressWord_i(addressWord_i),
+    .overwrite_i(overwrite_i),
 
     .dataWord_o(dataWord_o),
     .hit_o(hit_o)

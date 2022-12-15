@@ -9,6 +9,7 @@ module two_way_associative_cache #(
     input logic                                 clk,
     input logic [DATA_WIDTH-1:0]                dataWord_i,
     input logic [DATA_WIDTH-1:0]                addressWord_i,
+    input logic                                 overwrite_i,
 
     output logic [DATA_WIDTH-1:0]               dataWord_o,
     output logic                                hit_o
@@ -58,11 +59,11 @@ end
 always_ff @(negedge clk) begin
     if((data_tag != cache_memory [data_set] [TAG_WIDTH+DATA_WIDTH-1:DATA_WIDTH]) && (data_tag != cache_memory [data_set] [TAG_WIDTH+DATA_WIDTH-1 + OFFSET_ONE_WAY:DATA_WIDTH + OFFSET_ONE_WAY])) begin
         if((cache_memory [data_set] [DATA_WIDTH+TAG_WIDTH] == 1'b0) && (cache_memory [data_set] [DATA_WIDTH+TAG_WIDTH + OFFSET_ONE_WAY] == 1'b0)) begin
-            cache_memory [data_set] <= {cache_memory[data_set][OFFSET_ONE_WAY+OFFSET_ONE_WAY-1:OFFSET_ONE_WAY], 1'b1, data_tag, dataWord_i}
+            cache_memory [data_set] <= {cache_memory[data_set][OFFSET_ONE_WAY+OFFSET_ONE_WAY-1:OFFSET_ONE_WAY], 1'b1, data_tag, dataWord_i};
             evict [data_set] <= 1;
         end
         else if (evict[data_set] == 1'b0) begin
-            cache_memory [data_set] <= {cache_memory[data_set][OFFSET_ONE_WAY+OFFSET_ONE_WAY-1:OFFSET_ONE_WAY], 1'b1, data_tag, dataWord_i}
+            cache_memory [data_set] <= {cache_memory[data_set][OFFSET_ONE_WAY+OFFSET_ONE_WAY-1:OFFSET_ONE_WAY], 1'b1, data_tag, dataWord_i};
             evict [data_set] <= 1;
         end
         else if (evict[data_set] == 1'b1) begin
@@ -70,6 +71,17 @@ always_ff @(negedge clk) begin
             evict [data_set] <= 0;
         end
     end
+    if (overwrite_i) begin
+        if (data_tag == cache_memory[data_set] [OFFSET_ONE_WAY-2:DATA_WIDTH]) begin
+            cache_memory [data_set] <= {cache_memory[data_set][OFFSET_ONE_WAY+OFFSET_ONE_WAY-1:OFFSET_ONE_WAY], 1'b1, data_tag, dataWord_i};
+            evict [data_set] <= 1;
+        end
+        else if (data_tag == cache_memory[data_set] [OFFSET_ONE_WAY+OFFSET_ONE_WAY-2:DATA_WIDTH+OFFSET_ONE_WAY]) begin
+            cache_memory [data_set] <= {1'b1, data_tag, dataWord_i, cache_memory[data_set] [OFFSET_ONE_WAY-1:0]};
+            evict [data_set] <= 0;
+        end
+    end
+
 end
 
 endmodule
