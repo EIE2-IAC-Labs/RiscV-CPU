@@ -23,6 +23,7 @@ module top #(
 
     PC PC(
         .clk(clk),
+        .en(en_pass),
         .rst(rst),
         .PC_i(next_PC),
         .PC_o(PC_wire)
@@ -41,6 +42,7 @@ module top #(
 
     fetch_reg_file fetch_reg_file(
         .clk(clk),
+        .en(en_pass),
         .instrD_i(InstructionWire),
         .PCD_i(PC_wire),
         .incPCD_i(inc_PC),
@@ -155,6 +157,7 @@ module top #(
 
     decode_reg_file decode_reg_file (
         .clk(clk),
+        .en(en_pass),
         .resultSrcD_i(ResultSrcWire),
         .memWriteD_i(memWrite_enWire),
         .branchSrcD_i(BranchSrcWire),
@@ -231,6 +234,7 @@ module top #(
 
     execute_reg_file execute_reg_file(
         .clk(clk),
+        .en(en_pass),
         .resultSRCD_i(resultSrcE_2),
         .memWriteD_i(memWriteE_2),
         .ALUresultD_i(ALUResultWire),
@@ -280,16 +284,20 @@ module top #(
     logic [DW-1:0]              DataOutWire;
     logic [DW-1:0]              CacheOutWire;
     logic                       hitWire;
+    logic                       en_pass;
+    
+    assign en_pass = resultSrcE_3 ? hitWire : 1'b1;
     
     two_way_associative_cache two_way_associative_cache (
         .clk(clk),
         .dataWord_i(RamOutWire), 
+        .overwrite_i(memWriteE_3),
         .addressWord_i(ALUResultE_3), 
         .dataWord_o(CacheOutWire),
         .hit_o(hitWire)
     );
 
-    assign DataOutWire = hitWire ? CacheOutWire : RamOutWire;  
+    assign DataOutWire = CacheOutWire; //hitWire ? CacheOutWire : RamOutWire;  
     // if hit, read from cache. Else read from RAM.
 
     logic [DW-1:0]              ALUResultE_4;
@@ -303,6 +311,7 @@ module top #(
 
     mem_reg_file mem_reg_file(
         .clk(clk),
+        .en(en_pass),
         .ALUResultD_i(ALUResultE_3),
         .RD2D_i (DataOutWire),
         .ResultSrcD_i (resultSrcE_3),

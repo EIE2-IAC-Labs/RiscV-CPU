@@ -2,6 +2,7 @@ module fetch_reg_file #(
     parameter DATA_WIDTH = 32
 )(
     input logic                         clk,
+    input logic                         en,
     input logic [DATA_WIDTH-1:0]        instrD_i,
     input logic [DATA_WIDTH-1:0]        incPCD_i,
     input logic [DATA_WIDTH-1:0]        PCD_i,
@@ -12,9 +13,11 @@ module fetch_reg_file #(
 );
 
 always_ff @(negedge clk) begin
-    instrE_o <= instrD_i;
-    incPCE_o <= incPCD_i;
-    PCE_o <= PCD_i;
+    if(en) begin
+        instrE_o <= instrD_i;
+        incPCE_o <= incPCD_i;
+        PCE_o <= PCD_i;
+    end
 end
 
 endmodule

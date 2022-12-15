@@ -3,6 +3,7 @@ module PC #(
 
 ) (
     input logic             clk,
+    input logic             en,
     input logic             rst,
     input logic   [DW-1:0]  PC_i,
 
@@ -10,8 +11,10 @@ module PC #(
 );
     
     always_ff @(posedge clk) begin
-        if (rst) PC_o<=32'b0;
-        else PC_o<=PC_i;
+        if(en) begin
+            if (rst) PC_o<=32'b0;
+            else PC_o<=PC_i;
+        end
     end
 
 endmodule 

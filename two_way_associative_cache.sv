@@ -1,3 +1,4 @@
+
 module two_way_associative_cache #(
     parameter SET_WIDTH = 3,
     TAG_WIDTH = 27,
@@ -6,8 +7,9 @@ module two_way_associative_cache #(
 
 )(
     input logic                                 clk,
-    input logic [DATA_WIDTH-1:0]                dataWord_i,
     input logic [DATA_WIDTH-1:0]                addressWord_i,
+    input logic [DATA_WIDTH-1:0]                dataWord_i,
+    input logic                                 overwrite_i,
 
     output logic [DATA_WIDTH-1:0]               dataWord_o,
     output logic                                hit_o
@@ -31,6 +33,7 @@ logic [DATA_WIDTH-1:0] data_1 [CACHE_LENGTH-1:0];
 logic V_0 [CACHE_LENGTH-1:0];
 logic [TAG_WIDTH-1:0] tag_0 [CACHE_LENGTH-1:0];
 logic [DATA_WIDTH-1:0] data_0 [CACHE_LENGTH-1:0];
+
 
 //current input data
 logic [SET_WIDTH-1:0] data_set;
@@ -63,17 +66,19 @@ always_comb begin
             evict [data_set] = 1;
         end
     end
+    if(!hit_o) dataWord_o = dataWord_i;
+end
+
+initial begin
+    int i;
+    for(i = 0; i < CACHE_LENGTH; i = i + 1) begin
+        evict [i] = 0;
+    end
 end
 
 always_ff @(negedge clk) begin
-    if((data_tag != tag_0[data_set]) && (V_1 [data_set] == 1'b0)) begin
-        if((V_0 [data_set] == 1'b0) && (V_1 [data_set] == 1'b0)) begin
-            tag_0 [data_set] <= data_tag;
-            data_0[data_set] <= dataWord_i;
-            V_0 [data_set] <= 1'b1;
-            evict [data_set] <= 1;
-        end
-        else if (evict[data_set] == 1'b0) begin
+    if((data_tag != tag_0[data_set]) && (data_tag != tag_1[data_set])) begin
+        if (evict[data_set] == 1'b0) begin
             tag_0 [data_set] <= data_tag;
             data_0[data_set] <= dataWord_i;
             V_0 [data_set] <= 1'b1;
@@ -83,6 +88,18 @@ always_ff @(negedge clk) begin
             tag_1 [data_set] <= data_tag;
             data_1[data_set] <= dataWord_i;
             V_1 [data_set] <= 1'b1;
+            evict [data_set] <= 0;
+        end
+    end
+    if(overwrite_i) begin
+        if(data_tag == tag_0[data_set]) begin
+            tag_0 [data_set] <= data_tag;
+            data_0[data_set] <= dataWord_i;
+            evict [data_set] <= 1;
+        end
+        else if (data_tag == tag_1[data_set]) begin
+            tag_1 [data_set] <= data_tag;
+            data_1[data_set] <= dataWord_i;
             evict [data_set] <= 0;
         end
     end

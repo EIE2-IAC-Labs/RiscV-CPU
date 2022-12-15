@@ -21,7 +21,7 @@ always_ff @(posedge clk) begin
     if(AD3_i != {ADDRESS_WIDTH{1'b0}}) begin
         if (WE3_i) register_array[AD3_i] <= WD3_i;
     end
-    if(TRIGGER_i == 1'b1) register_array[5] <= 1;
+    if(TRIGGER_i == 1'b1) register_array[31] <= 1;
 end
 always_comb begin 
     RD1_o = register_array[AD1_i];
