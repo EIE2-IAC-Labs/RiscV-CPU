@@ -110,6 +110,6 @@ Or likewise for the pdf distribution calculation,
 ```bash
 $ ./pdf.sh
 ```
-Please note that there is one test-bench, but the shell scripts will configure accordingly. 
+Please note that there is one test-bench, but the shell scripts will configure it accordingly. 
 
 >  When testing the PDF function, the default dataset is the gaussian one. To change this, please go to ram.sv >  line 18 and change it manually. 
