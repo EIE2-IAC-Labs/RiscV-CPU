@@ -1,4 +1,5 @@
 
+
 # Group 14 Pipelined RV32I
 
 #### If desired, please skip ahead to:
@@ -8,7 +9,8 @@
 
 ---
 ## Quick summary
-pipelined, caching tried but no implemented correctly due to ....... full 4gb of ram not referenced due to verilator not wanting to take 4GB. 
+
+A fully pipelined RV32I CPU. Caching was attempted, but due to time constraints we did not manage to fully implement it. You can, however, find evidence of this work on the repository in the corresponding branches ([see below](#structure)). 
 
 ## Group Details
 
@@ -71,7 +73,7 @@ LEGEND :       `x` = full responsibility;  `p` = partial contribution;
 
 ## Evidence
 
-> Apologies for the shaky video.
+> Apologies for the shaky video :/
 
 PDF: 
 
@@ -82,7 +84,10 @@ F1:
 
 https://user-images.githubusercontent.com/106165200/207968519-64057ab9-2815-4b46-b02d-79db80c885e3.mp4
 
-Copies of these videos can also be found in the `evidence` folder
+In the `evidence` folder, you can find copies of the following:
+* The above videos (in case they have not loaded properly)
+*  VCD trace files for both the PDF and F1 programs
+
 ---
 
 <div id="test"/>
@@ -108,7 +113,3 @@ $ ./pdf.sh
 Please note that there is one test-bench, but the shell scripts will configure accordingly. 
 
 >  When testing the PDF function, the default dataset is the gaussian one. To change this, please go to ram.sv >  line 18 and change it manually. 
-
-
-
-//todo: add word for partial
