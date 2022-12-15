@@ -10,8 +10,8 @@
 
 ## Group Details
 
-| Name           | CID      | GitHub   | Email                     |
-|----------------|----------|----------|---------------------------|
+| Name           | CID      | GitHub   | Email                     | Link to Personal Statement|
+|----------------|----------|----------|---------------------------|--------------|
 | Nik Lewis      | 02031260 | **nlewxxs**  | nl621@imperial.ac.uk      |
 | Ana Dimoska    | 02061746 | **ADimoska** | ad2121@imperial.ac.uk     |
 | Benedict Short | 02019656 | **BenShort** | benedictnjshort@gmail.com |
@@ -61,10 +61,11 @@ LEGEND :       `x` = full responsibility;  `p` = partial contribution;
 | `VERSION-2-SINGLE-CYCLE` | Full implementation of single cycle processor, no AUIPC
 | `VERSION-3-PIPELINED` | Full Pipelined implementation, all instructions
 
-
 ![branches](/images/branches.jpg)
 
 ---
+
+
 
 <div id="test"/>
 
@@ -72,15 +73,15 @@ LEGEND :       `x` = full responsibility;  `p` = partial contribution;
 
 ## 1. Clone repo and configure _vbuddy.cfg_ file
 
-I will obviously not explain how to do this, but please make sure the correct port is in the config file.
+I will not explain how to do this :)
 
 ## 2. Execute shell script 
 
-This branch has been configured for testing both the F1 and PDF programs in the pipelined processor. To test the F1 program, please run the following shell script:
+This branch has been configured for testing both the **F1** and **PDF** programs in the pipelined processor. To test the **F1** program, please run the following shell script:
 ```bash
 $ ./f1.sh
 ```
-And push the trigger to start it. This will run for a maximum of 2000 cycles. Please note that trigger is mapped to the register t0, within the register file. 
+And push the trigger to start it. This will run for a maximum of 2000 cycles. Please note that trigger is mapped to the register `t0`, within the register file. 
 
 Or likewise for the pdf distribution calculation,
 ```bash
