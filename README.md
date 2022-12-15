@@ -1,5 +1,3 @@
-
-
 # Group 14 Pipelined RV32I
 
 #### If desired, please skip ahead to:
@@ -54,7 +52,7 @@ LEGEND :       `x` = full responsibility;  `p` = partial contribution;
 
 * A new branch for each new feature
 
-* a `playground` branch for each version. Changes are made in separate branches and then either merged or cherry-picked to the playground branch. 
+* a `playground` branch for each version. Changes are made in separate branches and the playground is updated using either merges or cherry-picks.
 
 * Once a version has been completed, the playground is branched out to a `VERSION-<NUMBER>-<NAME>` branch and to a new playground for the subsequent version.
 
@@ -67,6 +65,8 @@ LEGEND :       `x` = full responsibility;  `p` = partial contribution;
 | `VERSION-3-PIPELINED` | Full Pipelined implementation, all instructions
 
 ![branches](/images/branches.jpg)
+
+> Note that merges are not shown on the diagram to make it easier to read. **Control** and **Memory** continued to be worked on even after the Single-Cycle implementation was complete. 
 
 ---
 <div id="evidence"/>
@@ -113,3 +113,5 @@ $ ./pdf.sh
 Please note that there is one test-bench, but the shell scripts will configure it accordingly. 
 
 >  When testing the PDF function, the default dataset is the gaussian one. To change this, please go to ram.sv >  line 18 and change it manually. 
+
+> The assembly code that is run is provided in `F1Assembly.s` and `pdf.s`, but these are not directly linked to the shell scripts. Therefore, if you wish to run alternate code then the `pdf.mem` and `f1.mem` files need to be changed manually, apologies for this. 
