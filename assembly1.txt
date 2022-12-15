@@ -71,6 +71,8 @@ xor r8, r6, r7                     // XOR the bits
 addi r8, r8 (1'b1)                 // we just want the least signifucant bit (the XOR bit)
 left shift (unsigned) r5 by 1      // we left shift the previous number one bit so we can just add the XOR bit at the end
 add r5, r5, r8                     // add the XOR bit at the end
+andi r5, by 6'b111111              // we anding r5 with 63 so it never goes over 63
+add r2, r5, r0                     // r2 is the register that is used for the delay
 
 //random number generation 4th way max 2^33-1 :
  right shift the previous random number by 2 bytes and store the last byte then right shift by one byte and store the last byte.
