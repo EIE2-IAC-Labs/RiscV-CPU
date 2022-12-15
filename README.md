@@ -7,6 +7,8 @@
 3.  [Test instructions](#test)
 
 ---
+## Quick summary
+pipelined, caching tried but no implemented correctly due to ....... full 4gb of ram not referenced due to verilator not wanting to take 4GB. 
 
 ## Group Details
 
@@ -40,6 +42,7 @@
 | top.sv (pipeline) |p |x |x |
 | cpu_tb.cpp |x | |x |
 | F1Assembly.s |x | | |x
+
 LEGEND :       `x` = full responsibility;  `p` = partial contribution; 
 
 ---
@@ -64,8 +67,17 @@ LEGEND :       `x` = full responsibility;  `p` = partial contribution;
 ![branches](/images/branches.jpg)
 
 ---
+<div id="evidence"/>
 
+## Evidence
 
+PDF: 
+![pdf_video](/evidence/pdf_comp.mp4)
+
+F1:
+![f1_video](/evidence/f1_comp.mp4)
+
+---
 
 <div id="test"/>
 
