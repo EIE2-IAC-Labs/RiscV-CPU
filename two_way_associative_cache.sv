@@ -15,15 +15,6 @@ module two_way_associative_cache_version2 #(
     output logic                                hit_o
 );
 
-//add overwrite and when to write V flag
-//combine into one memory block
-//check combinational logic warning
-//check it is of the correct type (i.e correct parts are combinational and vice versa)
-//remove overwrite if needed, check if required
-
-
-//logic [DATA_WIDTH-1:0] cache_memory_1 [DATA_WIDTH+TAG_WIDTH:0];
-
 //cache way 1
 logic V_1 [CACHE_LENGTH-1:0];
 logic [TAG_WIDTH-1:0] tag_1 [CACHE_LENGTH-1:0];

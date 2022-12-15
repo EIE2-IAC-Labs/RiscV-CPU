@@ -22,13 +22,10 @@ logic [DATA_WIDTH-1:0] data [CACHE_LENGTH-1:0];
 logic [SET_WIDTH-1:0] data_set;
 logic [TAG_WIDTH-1:0] data_tag;
 
-
+//assign statements
 assign data_tag = addressWord_i[DATA_WIDTH-1:DATA_WIDTH-TAG_WIDTH];
 assign data_set = addressWord_i[SET_WIDTH+1:2];
 assign hit_o = (tag[data_set] == data_tag) && V[data_set];
-
-
-
 
 always_comb begin
     if(hit_o) dataWord_o = data[data_set];
