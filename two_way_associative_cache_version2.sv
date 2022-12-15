@@ -66,6 +66,7 @@ always_comb begin
             evict [data_set] = 1;
         end
     end
+    if(!hit_o) dataWord_o = dataWord_i;
 end
 
 initial begin
