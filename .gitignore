@@ -2,3 +2,4 @@
 ALU_test.vcd
 top.vcd
 extend.sv
+vbuddy.cfg
