@@ -1,2 +1,4 @@
 /obj_dir
 ALU_test.vcd
+top.vcd
+extend.sv

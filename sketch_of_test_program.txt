@@ -1,6 +1,26 @@
-10101010101010101010101011101 -> test data in
-10101010101010101010101011001
+Write to Register 7 a value,
+write to register 6 a value
+write to register 7 a new address new value
+request first address to ensure that hit works
+write to a register 7 a new address new value
 
-10101010101010101010101011101 -> hit
-10001010101010101010101011101 -> no, hit
-10001010101010101010101011101 -> hit
+ADDRESS: ABABAB5C: 2880154460
+DATA: 12345
+write 12345 to reg 7 way 0
+
+ADDRESS: ABABAB58: 2880154456
+DATA: 12345
+write 12345 to reg 6 way 0
+
+
+ADDRESS: ABCABC5C: 2882190428
+DATA: 67890
+write 67890 to reg 7 way 1
+
+ADDRESS: ABABAB5C: 2880154460
+DATA OUT: 12345
+read 12345 from reg 7 way 0
+
+ADDRESS: ABDABD5C: 2883239260
+DATA IN: 10000
+overwrite reg 7 way 1

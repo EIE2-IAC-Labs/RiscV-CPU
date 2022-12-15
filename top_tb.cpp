@@ -21,8 +21,8 @@ int main(int argc, char **argv, char **env) {
 
   // initialize simulation inputs
   top->clk = 0;
-  top->addressWord_i = 357913949;
-  top->dataWord_i = 4294967295;
+  top->addressWord_i = 2880154460;
+  top->dataWord_i = 12345;
   //1555555D
   
   // run simulation for MAX_SIM_CYC clock cycles
@@ -34,31 +34,29 @@ int main(int argc, char **argv, char **env) {
       top->eval ();
     }
     if(simcyc == 1){
-      top->addressWord_i = 357913945;
+      top->addressWord_i = 2880154456;
+      top->dataWord_i = 12345;
       //15555559
     }
     if(simcyc == 2){
-      top->addressWord_i = 357913949;
+      top->addressWord_i = 2882190428;
       //1555555D, HIT
-      top->dataWord_i = 78;
+      top->dataWord_i = 67890;
     }
     
     if(simcyc == 4){
-      top->addressWord_i = 357913945;
+      top->addressWord_i = 2880154460;
       //15555559, HIT
-      top->dataWord_i = 4;
+      //top->dataWord_i = 4;
+      //hit -> data out 12345
     }
 
     if(simcyc == 5){
-      top->addressWord_i = 357945021;
+      top->addressWord_i = 2883239260;
       //1555CEBD, NO HIT, put into data_1
-      top->dataWord_i = 0;
+      top->dataWord_i = 10000;
     }
-    if(simcyc == 6){
-      top->addressWord_i = 290805085;
-      //1155555D, HIT
-      top->dataWord_i = 0;
-    }
+
     
 
     if (Verilated::gotFinish())  exit(0);

@@ -71,7 +71,7 @@ end
 initial begin
     int i;
     for(i = 0; i < CACHE_LENGTH; i = i + 1) begin
-        evict [i] = 1;
+        evict [i] = 0;
     end
 end
 
