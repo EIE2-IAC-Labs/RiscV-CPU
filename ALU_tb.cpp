@@ -159,7 +159,7 @@ int main(int argc, char **argv, char **env) {
     if(simcyc == 23){
       top->SrcA_i = 2;
       top->SrcB_i = 2;
-      top->BranchCtrl_i = 2;
+      top->BranchCtrl_i = 4;
     } //0
     if(simcyc == 24){
       top->SrcA_i = 3;
@@ -186,7 +186,7 @@ int main(int argc, char **argv, char **env) {
     if(simcyc == 29){
       top->SrcA_i = 2;
       top->SrcB_i = 2;
-      top->BranchCtrl_i = 3;
+      top->BranchCtrl_i = 5;
     } //1
     if(simcyc == 30){
       top->SrcA_i = 3;
@@ -213,7 +213,7 @@ int main(int argc, char **argv, char **env) {
     if(simcyc == 35){
       top->SrcA_i = 2;
       top->SrcB_i = 1;
-      top->BranchCtrl_i = 4;
+      top->BranchCtrl_i = 6;
     } //0
     if(simcyc == 36){
       top->SrcA_i = 2;
@@ -228,7 +228,7 @@ int main(int argc, char **argv, char **env) {
     if(simcyc == 38){
       top->SrcA_i = 2;
       top->SrcB_i = 1;
-      top->BranchCtrl_i = 5;
+      top->BranchCtrl_i = 7;
     } //1
     if(simcyc == 39){
       top->SrcA_i = 2;
@@ -259,20 +259,9 @@ int main(int argc, char **argv, char **env) {
       top->SrcA_i = -10;
     } //-20
 
+    //JAL AND JALR tested in topfile vcd output
 
-    //generic load/store
-    if(simcyc == 44){
-      top->SrcB_i = -10;
-      top->ALUctrl_i = 15;
-    } //-20
-
-
-    //JAL
-    //if(simcyc == 44){
-    //  top->SrcB_i = -10;
-    //  top->ALUctrl_i = 15;
-    //} //-20
-
+    
 
     // either simulation finished, or 'q' is pressed
     if (Verilated::gotFinish()) 
