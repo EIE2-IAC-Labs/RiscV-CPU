@@ -19,10 +19,5 @@
 
 ### Important Details:
 When trigger active, register t0 automatically overwrite to a value of 1.
-
-
-TO ADD:
-- [x] make basic register file structure
-- [ ] add trigger input
-- [ ] test register_file
-- [ ] check if t0 being used by anything
+Register x0 is protected (read only).
+Register file tested and verified to be correct using GTKWave in the top-file.
