@@ -17,6 +17,8 @@
 | Benedict Short | 02019656 | **BenShort** | benedictnjshort@gmail.com |
 | Ahmed Elkouny  | 01902185 | **elkouny**  | ahmedelkouny@hotmail.com  |
 
+---
+
 ## Work Split 
 
 | File Name     |  Ahmed          | Ben        | Nik          | Ana            |
@@ -26,7 +28,7 @@
 | ram_i.sv | | | |x
 | ram_o.sv | | | |x
 | ram.sv | | | |x
-| rom.sv | | | |x
+| rom.sv |p | | |x
 | register_file.sv | |x | |
 | memory.sv | | | |x
 | extend.sv |x |x | |
@@ -35,19 +37,19 @@
 | execute_reg_file.sv | |x | |p
 | mem_reg_file.sv | |x | |
 | top.sv (singlecycle) |x | | |
-| top.sv (pipeline) | |x |x |
+| top.sv (pipeline) |p |x |x |
 | cpu_tb.cpp |x | |x |
 | F1Assembly.s |x | | |x
 LEGEND :       `x` = full responsibility;  `p` = partial contribution; 
 
-
+---
 <div id="structure"/>
 
 ## Repo Structure Explained
 
 * A new branch for each new feature
 
-* a `playground` branch for each version - changes are made in separate branches and then either merged or cherry-picked to the playground branch. 
+* a `playground` branch for each version. Changes are made in separate branches and then either merged or cherry-picked to the playground branch. 
 
 * Once a version has been completed, the playground is branched out to a `VERSION-<NUMBER>-<NAME>` branch and to a new playground for the subsequent version.
 
@@ -55,16 +57,20 @@ LEGEND :       `x` = full responsibility;  `p` = partial contribution;
 
 | Version name | Explanation | 
 | -----------------|-------------|
-| VERSION-1 | Partially implemented single cycle, Upper immediate and SH, LHU, LH not implemented
-| VERSION-2-SINGLE-CYCLE | Full implementation of single cycle processor, no AUIPC
-| VERSION-3-PIPELINED | Full Pipelined implementation, all instructions
+| `VERSION-1` | Partially implemented single cycle, Upper immediate and SH, LHU, LH not implemented (do not test)
+| `VERSION-2-SINGLE-CYCLE` | Full implementation of single cycle processor, no AUIPC
+| `VERSION-3-PIPELINED` | Full Pipelined implementation, all instructions
 
+
+![branches](/images/branches.jpg)
+
+---
 
 <div id="test"/>
 
 # Testing instructions
 
-## 1. Clone repo and configure vbuddy.cfg file
+## 1. Clone repo and configure _vbuddy.cfg_ file
 
 I will obviously not explain how to do this, but please make sure the correct port is in the config file.
 
