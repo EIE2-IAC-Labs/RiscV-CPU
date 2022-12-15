@@ -10,9 +10,9 @@ module rom #(
 logic [DATA_W-1:0] rom_array [32'hBFC00FFF : 32'hBFC00000]; 
 
 initial begin 
-    $display ("Loading rom.");
-    $readmemh("f1instructions.mem", rom_array);
-    $display ("rom done");
+    $display ("LOADING ROM ----");
+    $readmemh("pdf.mem", rom_array);
+    $display ("Finished loading ROM.");
 
 end;
 

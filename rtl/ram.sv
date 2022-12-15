@@ -14,9 +14,9 @@ module ram #(
 
 
     initial begin 
-        $display  ("Loading ram.");
+        $display  ("LOADING RAM ----");
         $readmemh("gaussian.mem", ram_array, 17'h10000);
-        $display ("ram finished loading !!!!");
+        $display ("Finished loading RAM.");
     end;
 
     assign rd_o = {ram_array[a_i[16:0] + 3],ram_array[a_i[16:0] + 2],ram_array[a_i[16:0] + 1],ram_array[a_i[16:0]]};

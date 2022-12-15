@@ -1,2 +1,0 @@
-- [x] test arithmetic pipeline
-- [ ] test jump pipeline

@@ -7,8 +7,7 @@
 #include <sstream>
 
 #include "vbuddy.cpp"     // include vbuddy code
-#define MAX_SIM_CYC 1000000  // PDF max simulation cycles
-// #define MAX_SIM_CYC 2000 // F1 max simulation cycles
+#define MAX_SIM_CYC 1000000  // max simulation cycles
 
 int main(int argc, char **argv, char **env) {
   int simcyc;     // simulation clock count
@@ -25,8 +24,9 @@ int main(int argc, char **argv, char **env) {
  
   // init Vbuddy
   if (vbdOpen()!=1) return(-1);
-  vbdHeader("Group 14 CPU!");
+  vbdHeader("PDF Program");
   vbdSetMode(1);        // Flag mode set to one-shot
+  vbdBar(0); //clear lights
 
   // initialize simulation inputs
   top->clk = 0;
@@ -43,25 +43,25 @@ int main(int argc, char **argv, char **env) {
       top->eval ();
     }
 
-    ////////////////////////////////////////////
-    ///// UNCOMMENT FOR REFERENCE PROGRAM //////
-    ////////////////////////////////////////////
+    //////////////////////////////////////////////////////
+    ///// f1.sh and pdf.sh will format respectively //////
+    //////////////////////////////////////////////////////
 
-    // if (simcyc > 800000 && simcyc % 4 == 0){  // plot every 4th, convenient for pipelining due to nops in display
-    //   vbdPlot(int(top->data_out), 0, 255);
-    //   vbdCycle(simcyc);
-    // }
+    /*pdfstart*/ 
+       if (simcyc > 800000 && simcyc % 4 == 0){  // plot every 4th, convenient for pipelining due to nops in display
+       vbdPlot(int(top->data_out), 0, 255);
+       vbdCycle(simcyc);
+     }
+    /*pdfend*/
 
-    ////////////////////////////////////////////
-    //////// UNCOMMENT FOR F1 PROGRAM //////////
-    ////////////////////////////////////////////
-
+    /*f1startX
     vbdCycle(simcyc);
     top->trigger_i = vbdFlag();
     vbdBar(top->data_out & 0xFF);
     vbdHex(3,(int(top->data_out)>>8)&0xF);
     vbdHex(2,(int(top->data_out)>>4)&0xF);
     vbdHex(1,int(top->data_out)&0xF);
+    Yf1end*/
 }
 
 vbdClose();     // ++++
