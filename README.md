@@ -1,17 +1,7 @@
 # Group 14 IAC Coursework
 ##### Nik Lewis, Benedict Short, Ana Dimoska, Ahmed Elkouny
 
-## File Written By Benedict Short
-
-To start with the project am doing the follow:
-- [x] register file
-- [ ] mux going into SrcB
-- [ ] check that EXTEND works in all cases
-- [ ] check the part of the cycle where read/write occurs is correct for the register file
-- [x] come up ALU control
-- [x] Write testbench for ALU
-- [ ] Write testbench for Extend 
-- [ ] Write testbench for Register 
+## File Written By Benedict Short 
 
 ### Input
 
@@ -24,20 +14,10 @@ To start with the project am doing the follow:
 
 
 ### Input Scheme:
-| ImmSrc | instruction word bits into imm_i | bit size | Use Case | Implemented? | Fully Tested? |
+| ImmSrc | instruction word bits into imm_i | Use Case | Implemented? | Fully Tested? |
 | --- | --- | --- | --- | --- | --- |
-| 000 | instruction[31:20] | [11:0] | I and S type | y | y |
-| 001 | instruction[31:25], instruction[11:7] | [11:5],[4:0] | I and S type | y | y |
-| 010 | instruction[31], instruction[7], instruction[30:25], instruction[11:8] | [12], [11], [10:5], [4:1] | branch offset | y | y |
-| 011 | instruction[31:12] | [19:0] | U and I Type | y | y |
-| 100 | instruction[31], instruction[19:12], instruction[11]instruction [30:21] | [20], [19:12], [11], [10:1] | U and I Type | y | n |
-
-
-TODO:
-- [ ] check if bit 1 from 0b10 goes to 0 (slide 20 L6)
-- [x] decide schema and operations to implement
-- [x] implement schema and operations
-- [x] test schema and operations
-- [ ] rewrite test schema for 010 and 100 to test fully
-
-
+| 000 | instruction[31:20] | I and S type | y | y |
+| 001 | instruction[31:25], instruction[11:7] | I and S type | y | y |
+| 010 | instruction[31], instruction[7], instruction[30:25], instruction[11:8] | branch offset | y | y |
+| 011 | instruction[31:12] | U and I Type | y | y |
+| 100 | instruction[31], instruction[19:12], instruction[20], instruction [30:21] | U and I Type | y | y |

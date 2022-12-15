@@ -67,6 +67,8 @@ int main(int argc, char **argv, char **env) {
       top->Imm_i = 447393518;
     } // out: 0001AAAA
 
+    //100 was tested inside the topfile manually with gtk wave
+
     // either simulation finished, or 'q' is pressed
     if (Verilated::gotFinish()) 
       exit(0);
