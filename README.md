@@ -72,11 +72,15 @@ LEGEND :       `x` = full responsibility;  `p` = partial contribution;
 ## Evidence
 
 PDF: 
-![pdf_video](/evidence/pdf_comp.mp4)
+
+https://user-images.githubusercontent.com/106165200/207968492-e1e6efba-45ab-4864-8c6d-bbfddae923c9.mp4
+
 
 F1:
-![f1_video](/evidence/f1_comp.mp4)
 
+https://user-images.githubusercontent.com/106165200/207968519-64057ab9-2815-4b46-b02d-79db80c885e3.mp4
+
+Copies of these videos can also be found in the `evidence` folder
 ---
 
 <div id="test"/>
