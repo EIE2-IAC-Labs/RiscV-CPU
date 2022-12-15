@@ -7,7 +7,7 @@
 #include <sstream>
 
 #include "vbuddy.cpp"     // include vbuddy code
-#define MAX_SIM_CYC 10000000  // PDF max simulation cycles
+#define MAX_SIM_CYC 1000000  // PDF max simulation cycles
 // #define MAX_SIM_CYC 2000 // F1 max simulation cycles
 
 int main(int argc, char **argv, char **env) {
@@ -47,21 +47,21 @@ int main(int argc, char **argv, char **env) {
     ///// UNCOMMENT FOR REFERENCE PROGRAM //////
     ////////////////////////////////////////////
 
-    if (simcyc > 800000 && simcyc % 4 == 0){  // plot every 4th, convenient for pipelining due to nops in display
-      vbdPlot(int(top->data_out), 0, 255);
-      vbdCycle(simcyc);
-    }
+    // if (simcyc > 800000 && simcyc % 4 == 0){  // plot every 4th, convenient for pipelining due to nops in display
+    //   vbdPlot(int(top->data_out), 0, 255);
+    //   vbdCycle(simcyc);
+    // }
 
     ////////////////////////////////////////////
     //////// UNCOMMENT FOR F1 PROGRAM //////////
     ////////////////////////////////////////////
 
-    // vbdCycle(simcyc);
-    // top->trigger_i = vbdFlag();
-    // vbdBar(top->data_out & 0xFF);
-    // vbdHex(3,(int(top->data_out)>>8)&0xF);
-    // vbdHex(2,(int(top->data_out)>>4)&0xF);
-    // vbdHex(1,int(top->data_out)&0xF);
+    vbdCycle(simcyc);
+    top->trigger_i = vbdFlag();
+    vbdBar(top->data_out & 0xFF);
+    vbdHex(3,(int(top->data_out)>>8)&0xF);
+    vbdHex(2,(int(top->data_out)>>4)&0xF);
+    vbdHex(1,int(top->data_out)&0xF);
 }
 
 vbdClose();     // ++++
