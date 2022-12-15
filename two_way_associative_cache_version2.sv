@@ -49,7 +49,7 @@ logic hit1;
 
 assign hit0 = (tag_0[data_set] == data_tag) && V_0[data_set];
 assign hit1 = (tag_1[data_set] == data_tag) && V_1[data_set];
-assign hit_o = hit0 ^ hit1;
+assign hit_o = hit0 || hit1;
 
 //logic evict
 //1 means evict cache location 1 and vice versa
@@ -82,14 +82,12 @@ always_ff @(negedge clk) begin
             data_0[data_set] <= dataWord_i;
             V_0 [data_set] <= 1'b1;
             evict [data_set] <= 1;
-            overwrite_internal = 0;
         end
         else if (evict[data_set] == 1'b1) begin
             tag_1 [data_set] <= data_tag;
             data_1[data_set] <= dataWord_i;
             V_1 [data_set] <= 1'b1;
             evict [data_set] <= 0;
-            overwrite_internal = 0;
         end
     end
     if(overwrite_i) begin
