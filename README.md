@@ -2,9 +2,6 @@
 ##### Nik Lewis, Benedict Short, Ana Dimoska, Ahmed Elkouny
 ## Components Written by Benedict Short
 
-# DO NOT MERGE, work in progress
-
-
 ## Details:
 We need 4 registers to divide the CPU into the 4 pipelined states:
 
