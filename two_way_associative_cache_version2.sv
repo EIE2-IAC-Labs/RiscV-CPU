@@ -76,18 +76,20 @@ initial begin
 end
 
 always_ff @(negedge clk) begin
-    if((data_tag != tag_0[data_set]) && (V_1 [data_set] == 1'b0)) begin
+    if((data_tag != tag_0[data_set]) && (data_tag != tag_1[data_set])) begin
         if (evict[data_set] == 1'b0) begin
             tag_0 [data_set] <= data_tag;
             data_0[data_set] <= dataWord_i;
             V_0 [data_set] <= 1'b1;
             evict [data_set] <= 1;
+            overwrite_internal = 0;
         end
         else if (evict[data_set] == 1'b1) begin
             tag_1 [data_set] <= data_tag;
             data_1[data_set] <= dataWord_i;
             V_1 [data_set] <= 1'b1;
             evict [data_set] <= 0;
+            overwrite_internal = 0;
         end
     end
     if(overwrite_i) begin
