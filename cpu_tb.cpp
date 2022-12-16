@@ -7,7 +7,7 @@
 #include <sstream>
 
 #include "vbuddy.cpp"     // include vbuddy code
-#define MAX_SIM_CYC 1000000  // max simulation cycles
+#define MAX_SIM_CYC 1300000  // max simulation cycles
 
 int main(int argc, char **argv, char **env) {
   int simcyc;     // simulation clock count
@@ -48,7 +48,7 @@ int main(int argc, char **argv, char **env) {
     //////////////////////////////////////////////////////
 
     /*pdfstart*/ 
-       if (simcyc > 800000 && simcyc % 8 == 0){  // plot every 4th, convenient for pipelining due to nops in display
+       if (simcyc > 1100000 && simcyc % 8 == 0){  // plot every 4th, convenient for pipelining due to nops in display
        vbdPlot(int(top->data_out), 0, 255);
        vbdCycle(simcyc);
      }

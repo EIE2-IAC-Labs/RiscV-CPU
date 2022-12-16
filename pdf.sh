@@ -1,6 +1,6 @@
 
 # Formatting the testbench
-sed -i 's/2000/1000000/' cpu_tb.cpp
+sed -i 's/2000/1300000/' cpu_tb.cpp
 sed -i 's/F1 Program/PDF Program/' cpu_tb.cpp
 sed -i 's/pdfstartX/pdfstart\*\//' cpu_tb.cpp
 sed -i 's/Ypdfend/\/\*pdfend/' cpu_tb.cpp
