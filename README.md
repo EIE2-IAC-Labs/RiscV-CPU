@@ -66,7 +66,7 @@ LEGEND :       `x` = full responsibility;  `p` = partial contribution;
 | `VERSION-2-SINGLE-CYCLE` | Full implementation of single cycle processor, no AUIPC
 | `VERSION-3-PIPELINED` | Full Pipelined implementation, all instructions
 
-![branches](/images/branches.jpg)
+![branches](statements/images/branches.jpg)
 
 > Note that merges are not shown on the diagram to make it easier to read. **Control** and **Memory** continued to be worked on even after the Single-Cycle implementation was complete. 
 
