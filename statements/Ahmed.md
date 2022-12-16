@@ -3,7 +3,7 @@
 
 ---
 
-# Creating the [top.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/top.sv) file
+# Creating the [top.sv]([https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/top.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/rtl/top.sv)) file
 
 First, Nik and I designed the overall architecture of the CPU, including the registers, the control unit, the instruction and data memory, and the ALU. 
 
@@ -17,12 +17,12 @@ Using the schematic drawn by Nik I wired all the componented and added the requi
 ![Changes highlighted](https://i.postimg.cc/DzHYVypz/Changes.jpg)
 
  1. A multiplexer with `JAL` as the selector bit. When high it will store our current
-    instruction   adress into  [regfile.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/register_file.sv) . This allows us to return
+    instruction   adress into  [regfile.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/rtl/register_file.sv) . This allows us to return
     to that instruction when a `JALR` instruction is called. ([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/9808aba0f717b948281634143a10df9e52e390dd)) 
     
  2. Another multiplexer with `JALR` as the selector bit. When high it will load the ALU
         result value into the PC. This is because we will have the
-        instruction adress from the [regfile.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/register_file.sv) come out of
+        instruction adress from the [regfile.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/rtl/register_file.sv) come out of
         `rd2`-->`srcB`-->`AluResult`. ([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/db4b085839e2e1bcfa5f8dead682b64c299086f9))
     
  3. A third and final multiplexer with `BranchSrc` as the selector bit was added for the branch instructions. `BranchSrc` would be high if a branch instruction was called and the comparison of `SrcA` and `SrcB` was done in the ALU and outputed from the ALU `Branch` Port. For example if we had a `BEQ rd1, rd2, label` instruction. `BranchSrc` Would be `1'b1` and the boolean output of `rd1==rd2` would be outputed from the ALU `branch` port.
