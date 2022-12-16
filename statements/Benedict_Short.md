@@ -79,6 +79,11 @@ Overall, during development I ensured that any bugs found were fixed and design 
 -----
 - We started the integration of the pipelined-cpu with a two-way-associative cache, as this reduces the miss-rate of the cache significantly by providing extra memory for each ‘set’ of eight memory instructions. The evict scheme used was to keep the most recently used memory stored and remove the older piece of memory. On silicon, this would provide a significant speedup as the RAM would use DRAM, which can take multiple read-cycles, along with the cache using expensive SRAM. This would allow the use of much cheaper DRAM to still provide a very high level of performance.
 
+# Mistakes Made:
+---
+- I made the mistake of initially not organising the top-file into a readable layout and working out by hand which signals need to pass through which pipeline-register. This meant that I had to go back and reorganise the top-file and the implementation in order to make it possible to debug. This is an error I will not make again.
+- I also initially made the mistake of not writing test-cases for my modules for all possible conditions. This meant that certain errors would go unnoticed until later on. However I quickly made this change and ensured that the test-cases to test each module before being merged into the main CPU were exhaustive.
+
 # Future Work
 
 
