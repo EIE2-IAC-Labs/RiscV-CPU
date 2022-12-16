@@ -14,8 +14,6 @@
 - ALUResult_o
 - Branch_o
 
-Note: SLT outputs 1 if A < B, 0 otherwise. //CHECK CORRECT
-
 | ALUctrl | operation | Fully Tested? |
 | --- | --- | --- |
 | 0000 | add | y |
