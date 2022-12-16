@@ -51,6 +51,11 @@ int main(int argc, char **argv, char **env) {
       top->addressWord_i = 2883239260;
       top->dataWord_i = 10000;
     }
+    if(simcyc == 6){
+      top->addressWord_i = 2883239260;
+      top->dataWord_i = 10001;
+      top->overwrite_i = 1;
+    }
 
     
 

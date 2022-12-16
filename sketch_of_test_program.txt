@@ -18,3 +18,8 @@ read 12345 from reg 7 way 0
 ADDRESS: ABDABD5C: 2883239260
 DATA IN: 10000
 overwrite reg 7 way 1
+
+ADDRESS: ABDABD5C: 2883239260
+DATA IN: 10001
+overwrite_i = 1
+overwrite reg 7 way 1
