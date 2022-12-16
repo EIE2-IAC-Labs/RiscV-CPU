@@ -64,7 +64,7 @@ LEGEND :       `x` = full responsibility;  `p` = partial contribution;
 | -----------------|-------------|
 | `VERSION-1` | Partially implemented single cycle, Upper immediate and SH, LHU, LH not implemented (do not test)
 | `VERSION-2-SINGLE-CYCLE` | Full implementation of single cycle processor, no AUIPC
-| `VERSION-3-PIPELINED` | Full Pipelined implementation, all instructions
+| `VERSION-3-PIPELINED` | Full Pipelined implementation, all instructions (up to date in main)
 
 ![branches](statements/images/branches.jpg)
 
@@ -113,6 +113,8 @@ Or likewise for the pdf distribution calculation,
 $ ./pdf.sh
 ```
 Please note that there is one test-bench, but the shell scripts will configure it accordingly. 
+
+> I have increased the delay in the F1 slightly to account for it being run on the professor's _super fast_ M1 Silicon. If I have overestimated it and the F1 runs slowly, I do apologise.  
 
 >  When testing the PDF function, the default dataset is the gaussian one. To change this, please go to ram.sv >  line 18 and change it manually. 
 
