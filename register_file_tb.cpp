@@ -30,6 +30,24 @@ int main(int argc, char **argv, char **env) {
       top->clk = !top->clk;
       top->eval ();
     }
+    if(simcyc == 1){
+      top->WE3_i = 1;
+      top->AD3_i = 5;
+      top->WD3_i = 10;
+      top->AD1_i = 0; 
+    }
+    if(simcyc == 2){
+      top->WE3_i = 0;
+      top->AD3_i = 6;
+      top->WD3_i = 10;
+      top->AD1_i = 5; 
+    }
+    if(simcyc == 3){
+      top->WE3_i = 1;
+      top->AD3_i = 0;
+      top->WD3_i = 10;
+      top->AD1_i = 0; 
+    }
 
 
     // either simulation finished, or 'q' is pressed

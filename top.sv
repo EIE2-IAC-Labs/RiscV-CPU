@@ -1,24 +1,33 @@
 module top #(
-    parameter DATAWIDTH = 32
+    parameter ADDRESS_WIDTH = 5,
+                DATA_WIDTH = 32
 )(
-    input logic [DATAWIDTH-1:0]         SrcA_i,
-    input logic [DATAWIDTH-1:0]         SrcB_i,
-    input logic [3:0]                   ALUctrl_i,
-    input logic [2:0]                   BranchCtrl_i,
-    input logic                         clk,
+    input logic                             clk,
+    input logic [ADDRESS_WIDTH-1:0]         AD1_i,
+    input logic [ADDRESS_WIDTH-1:0]         AD2_i,
+    input logic [ADDRESS_WIDTH-1:0]         AD3_i,
+    input logic                             WE3_i,
+    input logic [DATA_WIDTH-1:0]            WD3_i,
+    input logic                             TRIGGER_i,
 
-    output logic [DATAWIDTH-1:0]        ALUResult_o,
-    output logic                        Branch_o
+    output logic [DATA_WIDTH-1:0]           RD1_o,
+    output logic [DATA_WIDTH-1:0]           RD2_o,
+    output logic [DATA_WIDTH-1:0]           a0_o  
 );
 
 
-ALU test_alu(
-    .SrcA_i (SrcA_i),
-    .SrcB_i (SrcB_i),
-    .ALUctrl_i (ALUctrl_i),
-    .BranchCtrl_i (BranchCtrl_i),
-    .ALUResult_o (ALUResult_o),
-    .Branch_o (Branch_o)
+register_file register_file(
+    .clk(clk),
+    .AD1_i(AD1_i),
+    .AD2_i(AD2_i),
+    .AD3_i(AD3_i),
+    .WE3_i(WE3_i),
+    .WD3_i(WD3_i),
+    .TRIGGER_i(TRIGGER_i),
+
+    .RD1_o(RD1_o),
+    .RD2_o(RD2_o),
+    .a0_o(a0_o)
 );
 
 endmodule
