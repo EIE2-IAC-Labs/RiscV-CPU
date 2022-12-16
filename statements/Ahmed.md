@@ -79,7 +79,7 @@ Contribution:
    have caused data hazards and noops for the start of subroutines that would have caused control hazards as we need to flush the code before the jump instruction ([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/98da956e2a5c764276d555b533d8e796e2df4423))
    
  - Rewriting the the f1 program with noops. ([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/e437a59b672d612e43d66d5fe8e737fd576b3cea))
- - Extra: Created a python script that took the initial instruction memory and detected  all register dependency data hazards and produced a new instruction memory with noops added ([commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/documentation/noOp.py))
+ - Extra: Created a python script that took the initial instruction memory and detected  all register dependency data hazards and produced a new instruction memory with noops added ([commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/main/noOp.py))
 
 ## What I learned
 
@@ -88,5 +88,5 @@ I learned a lot by completing the RISC-V processor coursework. By working on the
 
 ## If I had more time
 
-If I had more time I would further optimize the [python script](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/documentation/noOp.py%29) that I wrote for it to add noops to flush instructions for when branches happen. I could have integrated the program in the shell script so that every time we simulate the cpu the script would run and noops would be added and the cpu would use the new instruction memory. Alternatively I could have tried to use hardware methods such as forwading . 
+If I had more time I would further optimize the [python script]([https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/documentation/noOp.py%29](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/main/noOp.py)) that I wrote for it to add noops to flush instructions for when branches happen. I could have integrated the program in the shell script so that every time we simulate the cpu the script would run and noops would be added and the cpu would use the new instruction memory. Alternatively I could have tried to use hardware methods such as forwading . 
  
