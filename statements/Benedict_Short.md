@@ -90,7 +90,8 @@ I would also implement forwarding and a hazard unit to decrease the likelihood o
 
 The implementation of multiply, divide and an FPU to handle floats would make the CPU more usable for real-world applications. The expansion to the 64-bit ISA would allow more addressable memory, however this is unrealistic requirement for the simple test-programs written.
 
-### **************************Commit Appendix**************************
+
+## **************************Commit Appendix**************************
 
 
 | Link Label | Commit |
