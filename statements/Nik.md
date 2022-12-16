@@ -82,7 +82,7 @@ Everyone works at their own pace and it's important to give them enough time to 
 * Decided to both decode and execute the branches in the **ALU**. Since the register values are required to determine if we branch or not, branch comparisons would have to be done in the **ALU / Execute stage**. So if the control unit were to decode the branch instructions then it would still have to send a 3-bit control signal to the **ALU**. This is clearly redundant and it made more sense to us to pass `funct3` directly into the **ALU** and have a `branch` output flag coming out of here. 
 The **Control Unit** would output a `BranchSrc` signal that would give control of `PCsrc` to the **ALU**, see below:
 
-![BranchSrc Explained](statements/images/branchexplained.jpg)
+![BranchSrc Explained](/statements/images/branchexplained.jpg)
 
 > TLDR: Removed `Zero` input to control, dealt with branches in ALU.
 
