@@ -13,7 +13,7 @@ module rom #(
 
     initial begin 
         $display ("Loading rom.");  
-        $readmemh("instructions.mem", rom_array);
+        $readmemh("test/pdf.mem", rom_array);
     end;
 
     always_comb begin 

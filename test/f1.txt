@@ -1,0 +1,62 @@
+addi x13, zero, 1      
+    addi x14, zero, 10     
+    addi x15, zero, 3  
+
+Trigger:
+    beqz x5, Trigger 
+  
+start:
+	srli x16, x15, 5  
+	andi x17, x15, 31              
+	srli x17, x17, 4    
+	xor x11, x16, x17                     
+	andi x11, x11, 1                 
+	slli x15, x15, 1      
+	add x15, x15, x11 #//10
+	andi x15, x15, 63
+    add x12, x15, x0
+
+#/* the eight lights */
+
+	addi x10, x0, 0
+	jal ra, loop
+
+	addi x10, x10, 1   # /* one light on */
+	jal ra, loop
+
+	addi x10, x10, 2  #/* two lights on */
+	jal ra, loop
+
+
+	addi x10, x10, 4 #/* three lights on */
+	jal ra, loop
+
+	addi x10, x10, 8  #/* four lights on */
+	jal ra, loop
+
+	addi x10, x10, 16  #/* five lights on */
+	jal ra, loop
+
+	addi x10, x10, 32  #/* six lights on */
+	jal ra, loop
+
+	addi x10, x10, 64  #/* seven lights on */
+	jal ra, loop 
+
+	addi x10, x10, 128  #/* eight lights on */      // 17
+
+/* the delay */
+	sra x12, x12, x13 #/divide by 2(right shift by 1) because every iteration has 2 cycles/
+	here:
+    	sub x12, x12, x13           
+		bne x12, x0, here 
+		addi x10, x0, 0 #/* turn off lights */
+		li x5, 0
+        j Trigger                          #  //5
+
+loop: 
+	sub x14, x14, x13
+	bne x14, x0, loop 
+	addi x14, x0, 10
+	jalr ra, ra, 0x0        #//4    //36
+    

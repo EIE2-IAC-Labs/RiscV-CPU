@@ -1,8 +1,7 @@
 /.vscode/
 /obj_dir/
 /.DS_Store
-/vbuddy.cfg
-/top.vcd
+top.vcd
 /obj_dir
 register_file.vcd
 
