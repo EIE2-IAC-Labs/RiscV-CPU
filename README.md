@@ -86,7 +86,8 @@ https://user-images.githubusercontent.com/106165200/207968519-64057ab9-2815-4b46
 
 In the `test` folder, you can find copies of the following:
 * The above videos (in case they have not loaded properly)
-*  VCD trace files for both the PDF and F1 programs
+* VCD trace files for both the PDF and F1 programs
+> Please note that in order for GitHub to accept the PDF.vcd file, we had to limit it to 100000 clock cycles which means it doesn't actually reach the maximum count of `0xC8` and the display function cannot be seen in the vcd.
 
 ---
 
