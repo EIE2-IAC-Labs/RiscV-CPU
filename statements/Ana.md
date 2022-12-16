@@ -47,7 +47,7 @@ The RAM was more challenging than the simple ROM. First, I built a RAM `ram.sv`[
 
 I faced a lot of dilemmas like loading a half word at address a, my opinion was that I need to store the halfword at the first half of the corresponding word in the RAM with a[31:2, {2b’0}] or second half  depending on a[1]. After I finished, I was advised that actually the first half of the halfword needs to be stored at a and the second half at a+1 in this case if a[1:0]= 11 means that the second half needs to be stored in the next word in the RAM meaning that I needed to make significant number of changes and implement completely different logic. After attempting to implement the new logic I discussesed with the teaching assistants and we concluded that the initial logic was correct, so I didn’t commit any of the new changes and went back to the last commit followed by some minor changes [link](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/88608017f793ac5570fb26ced41267238975c989).  
 
-![ram_scheme](/images/ram_scheme.jpeg)
+![ram_scheme](/statements/images/ram_scheme.jpeg)
 
 #### Testing:
 
@@ -78,7 +78,7 @@ In the pipelining I took part by drawing the scheme for verification and debuggi
 ### Scheme
 
 
-![pipeliningscheme](/images/pipelining_scheme.jpeg)
+![pipeliningscheme](/statements/images/pipelining_scheme.jpeg)
 
 <div id="Changes"/>
 
@@ -115,16 +115,16 @@ The random numbers are generated with the code by left shifting the previous ran
 #### Testing
 
 When the program couldn't exit a loop:
-![GTK1_pic](/images/GTKcode1.png)
+![GTK1_pic](/statements/images/GTKcode1.png)
 When the jump instruction was not jumping:
-![GTK2_pic](/images/GTKcode2.png)
+![GTK2_pic](/statements/images/GTKcode2.png)
 
 ##### The video with `f1final.mem`:
-![video_obvious](/images/obvious_delay_compressed.mp4)
+![video_obvious](/statements/images/obvious_delay_compressed.mp4)
 ##### The video with `f1final_limited.mem`:
-![limited_video](/images/limited_delay_compressed.mp4)
+![limited_video](/statements/images/limited_delay_compressed.mp4)
 ##### The video with `f1final_limited_trigger.mem`:
-![triggervideo](/images/trigger_compressed.mp4)
+![triggervideo](/statements/images/trigger_compressed.mp4)
 
 4th version of the random number generator
 
@@ -146,7 +146,7 @@ While Nick and Ahmed were improving the pipelining, Benedict and I started worki
 
 #### I tested the 2 way set associative cache after being converted to one data structure:
 
-![GTKcache](/images/cacheGTK.png)
+![GTKcache](/statements/images/cacheGTK.png)
 
 <div id="here"/>
 
