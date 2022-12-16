@@ -3,7 +3,7 @@
 
 ---
 
-# Creating the [top.sv]([https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/top.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/rtl/top.sv)) file
+# Creating the ([top.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/rtl/top.sv)) file
 
 First, Nik and I designed the overall architecture of the CPU, including the registers, the control unit, the instruction and data memory, and the ALU. 
 
