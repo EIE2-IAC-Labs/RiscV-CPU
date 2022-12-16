@@ -65,7 +65,7 @@ When running the test the branch instructions were not working this was expected
 
 ## JAL and JALR Testing
 
-To test JAL and JALR we used the [f1assembly.txt]https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/test/f1.txt).  The program, however, didn't work so Nik and Nik I at the GTKWave and saw that the signextention wasn't working properly. After looking at the RISC-V ISA we noticed that for JALR we need to add `Imm12` not `Imm20` to the PC ([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/7b877d067427cc420918834914f75bd066d8b1dc))
+To test JAL and JALR we used the [f1assembly.txt]https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/test/f1.txt).  The program, however, didn't work so Nik and I looked at the GTKWave and saw that the signextention wasn't working properly. After looking at the RISC-V ISA we noticed that for JALR we need to add `Imm12` not `Imm20` to the PC ([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/7b877d067427cc420918834914f75bd066d8b1dc))
 After all this testing we ran a working F1 Program! ([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/b8d7325772fe518e631ce72a22a6cf0e188b0b3c))
 
 
