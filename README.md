@@ -40,7 +40,7 @@ All Personal Statements are Located in the 'Documentation' Branch.
 | decode_reg_file.sv | |x | |p
 | execute_reg_file.sv | |x | |p
 | mem_reg_file.sv | |x | |
-| top.sv (singlecycle) |x | | |
+| top.sv (singlecycle) |x | |p |
 | top.sv (pipeline) |p |x |x |p
 | cpu_tb.cpp |x | |x |
 | F1Assembly.s |x | | |x
