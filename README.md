@@ -39,7 +39,7 @@ The result of this coursework is two CPUs: a pipelined, and a single-cycle CPU. 
 | execute_reg_file.sv | |x | |p
 | mem_reg_file.sv | |x | |
 | top.sv (singlecycle) |x | | |
-| top.sv (pipeline) |p |x |x |
+| top.sv (pipeline) |p |x |x |p
 | cpu_tb.cpp |x | |x |
 | F1Assembly.s |x | | |x
 
