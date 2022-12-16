@@ -24,6 +24,6 @@ Please also find the ReferenceProgram.vcd trace file for the sine.mem pdf.
 
 ## F1 Program:
 
-Please find inside the evidence folder, 2 videos showing 2 different delays with the F1 program. It was difficult to make this into one video that was lower in size but please observe that the clock count matches up in both of them. F1.vcd is also provided in this repo. 
+Please find inside the evidence folder, 2 videos showing obvious but not that random delay and limited random delay (less than 3 seconds following F1 rules) with the F1 program. It was difficult to make this into one video that was lower in size but please observe that the clock count matches up in both of them. F1.vcd is also provided in this repo. The third video shows the working trigger.
 
 ---
