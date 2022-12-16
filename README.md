@@ -84,7 +84,7 @@ F1:
 
 https://user-images.githubusercontent.com/106165200/207968519-64057ab9-2815-4b46-b02d-79db80c885e3.mp4
 
-In the `evidence` folder, you can find copies of the following:
+In the `test` folder, you can find copies of the following:
 * The above videos (in case they have not loaded properly)
 *  VCD trace files for both the PDF and F1 programs
 
