@@ -88,5 +88,5 @@ I learned a lot by completing the RISC-V processor coursework. By working on the
 
 ## If I had more time
 
-If I had more time I would further optimize the [python script]([https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/documentation/noOp.py%29](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/main/noOp.py)) that I wrote for it to add noops to flush instructions for when branches happen. I could have integrated the program in the shell script so that every time we simulate the cpu the script would run and noops would be added and the cpu would use the new instruction memory. Alternatively I could have tried to use hardware methods such as forwading . 
+If I had more time I would further optimize the [python script](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/main/noOp.py)) that I wrote for it to add noops to flush instructions for when branches happen. I could have integrated the program in the shell script so that every time we simulate the cpu the script would run and noops would be added and the cpu would use the new instruction memory. Alternatively I could have tried to use hardware methods such as forwading . 
  
