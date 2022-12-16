@@ -12,8 +12,6 @@ The result of this coursework is two CPUs: a pipelined, and a single-cycle CPU. 
 
 ## Group Details
 
-All Personal Statements are Located in the 'Documentation' Branch.
-
 | Name           | CID      | GitHub   | Email                     | Link to Personal Statement|
 |----------------|----------|----------|---------------------------|--------------|
 | Nik Lewis      | 02031260 | **nlewxxs**  | nl621@imperial.ac.uk   &nbsp; &nbsp; &nbsp; &nbsp;   | [Nik's Statement](statements/Nik.md)
