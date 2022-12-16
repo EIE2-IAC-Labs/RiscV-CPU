@@ -96,7 +96,7 @@ In the `test` folder, you can find copies of the following:
 
 ## 1. Clone repo and configure _vbuddy.cfg_ file
 
-I will not explain how to do this :)
+This is explained in the guide to set up VBuddy provided at the start of the course.
 
 ## 2. Execute shell script 
 
