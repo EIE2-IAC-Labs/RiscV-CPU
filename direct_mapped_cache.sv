@@ -8,6 +8,7 @@ module direct_mapped_cache #(
     input logic                                 clk,
     input logic [DATA_WIDTH-1:0]                dataWord_i,
     input logic [DATA_WIDTH-1:0]                addressWord_i,
+    input logic				  overwrite_i,
 
     output logic [DATA_WIDTH-1:0]               dataWord_o,
     output logic                                hit_o

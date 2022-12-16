@@ -8,7 +8,38 @@
 - direct mapped cache
 - two_way_associative cache
 
-# TODO:
-- [ ] Check if it all needs to be put into the same 'block' or if it can stay separated
-- [x] Partially test the caches
-- [ ] Fully Test the Caches
+#### direct_mapped_cache
+
+##### input:
+- clk
+- dataWord_i
+- addressWord_i
+- overwrite_i
+
+##### output:
+- dataWord_o
+- hit_o
+
+#### two_way_associative_cache
+
+##### input:
+- clk
+- dataWord_i
+- addressWord_i
+- overwrite_i
+
+##### output:
+- dataWord_o
+- hit_o
+
+## Evidence
+
+### direct_mapped_cache
+
+### two_way_associative_cache
+
+![Test Program Sketch](img/test_program.png?raw=true "Test Program Sketch")
+
+![Test Cases C++](img/test_program.png?raw=true "Test Cases C++")
+
+![GTKWave Output](img/test_program.png?raw=true "GTKWave output of functioning Cache")

@@ -1,5 +1,5 @@
 
-module two_way_associative_cache_version2 #(
+module two_way_associative_cache #(
     parameter SET_WIDTH = 3,
     TAG_WIDTH = 27,
     DATA_WIDTH = 32,

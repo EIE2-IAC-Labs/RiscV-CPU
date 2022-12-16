@@ -10,7 +10,7 @@ module top #(
     output logic                                hit_o   
 );
 
-two_way_associative_cache_version2 two_way_associative_cache_version2(
+two_way_associative_cache two_way_associative_cache(
     .clk (clk),
     .dataWord_i(dataWord_i),
     .addressWord_i(addressWord_i),
