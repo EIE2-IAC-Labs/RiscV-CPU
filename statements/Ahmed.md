@@ -1,15 +1,15 @@
 # Ahmed Elkouny's Personal Statement
-#### CID: 01902185, Github username:Elkouny
+#### CID: 01902185, Github username: Elkouny
 
 ---
 
-# Creating the ([top.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/rtl/top.sv)) file
+# Creating the [top.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/rtl/top.sv) file
 
 First, Nik and I designed the overall architecture of the CPU, including the registers, the control unit, the instruction and data memory, and the ALU. 
 
 ![Single Cycle Cpu Design (Drawn by Nik)](https://i.postimg.cc/cLY7tbgH/image.png)
 
-Using the schematic drawn by Nik I wired all the componented and added the required multiplexers to create the [top.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/top.sv) file.([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/e3098c8abc5a81ea15247dd7d48028411bd814fa)) 
+Using the schematic drawn by Nik I wired all the componented and added the required multiplexers to create the [top.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/rtl/top.sv) file.([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/e3098c8abc5a81ea15247dd7d48028411bd814fa)) 
 
 
 ## Changes compared to the orginal schematic
