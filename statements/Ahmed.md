@@ -79,4 +79,13 @@ Contribution:
    
  - Rewriting the the f1 program with noops. ([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/e437a59b672d612e43d66d5fe8e737fd576b3cea))
  - Extra: Created a python script that took the initial instruction memory and detected  all register dependency data hazards and produced a new instruction memory with noops added ([commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/documentation/noOp.py))
+
+## What I learned
+
+I learned a lot by completing the RISC-V processor coursework. By working on the [top.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/rtl/top.sv) file I gained a deeper understanding of computer architecture and how processors operate at the fundamental level. I learned about the different components of a processor, such as the registers, the control unit, and the arithmetic logic unit, and how they work together to execute instructions. Additionally, I gained practical experience in designing and implementing a processor using the Verilog.  Alongside this, I learned about several useful features of GitHub that helped me to manage and collaborate on my code effectively which was essential for keeping my code up to date and ensuring that I was working with the latest version. 
+
+
+## If I had more time
+
+If I had more time I would further optimize the [python script](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/documentation/noOp.py%29) that I wrote for it to add noops to flush instructions for when branches happen. I could have integrated the program in the shell script so that every time we simulate the cpu the script would run and noops would be added and the cpu would use the new instruction memory. Alternatively I could have tried to use hardware such as a hazard unit or forwading . 
  
