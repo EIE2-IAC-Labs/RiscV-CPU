@@ -1,0 +1,9 @@
+/.vscode/
+/obj_dir/
+/.DS_Store
+/top.vcd
+/obj_dir
+/images
+register_file.vcd
+top.vcd
+
