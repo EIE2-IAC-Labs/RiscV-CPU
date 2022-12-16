@@ -43,6 +43,7 @@ I designed an ALU test program ([commit](https://github.com/EIE2-IAC-Labs/iac-ri
 
 Once again I designed a branch test program and ran it. ([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/tree/VERSION-2-SINGLE-CYCLE/BranchTests)) 
 Test all branches by setting a flag in a3
+
 logic:
 
 a3 == 0 all branches work 
