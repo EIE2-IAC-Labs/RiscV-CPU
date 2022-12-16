@@ -34,12 +34,14 @@
 
 ## Evidence
 
+![Test Program Sketch](img/TestProgram.png?raw=true "Test Program Sketch")
+
+![Test Cases C++](img/TestCases.png?raw=true "Test Cases C++")
+
 ### direct_mapped_cache
+
+![GTKWave Output](img/GTKDirectMappedCache.png?raw=true "GTKWave output of functioning Cache")
 
 ### two_way_associative_cache
 
-![Test Program Sketch](img/test_program.png?raw=true "Test Program Sketch")
-
-![Test Cases C++](img/test_program.png?raw=true "Test Cases C++")
-
-![GTKWave Output](img/test_program.png?raw=true "GTKWave output of functioning Cache")
+![GTKWave Output](img/GTKTwoWayCache.png?raw=true "GTKWave output of functioning Cache")
