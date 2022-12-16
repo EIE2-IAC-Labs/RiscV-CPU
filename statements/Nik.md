@@ -20,7 +20,7 @@ For testing the control module, I created a testbench that would enumerate over 
 
 > Please note that the testbench in the above commit is an intermediate version for the purpose of evidence, for the final version that tests all instructions, please see the control branch. 
 
-As the team member responsible for the control unit, it was important for me to play a part in the debugging as I had a more complete overall understanding of how the different modules interacted. Some of the bugs I identified include: 
+As the team member responsible for the control unit, it was important for me to play a part in the debugging as I had a more complete overall understanding of how the different modules interacted. This work was done mostly in the [playground](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/tree/playground) and [pipelining-playground](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/tree/pipelining-playground) branches. Some of the bugs I identified include: 
 
 * [23b8e19](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/23b8e1976a9074833a7d60bf2cd98b9f2d0123c4): `ALUctrl` misbehaving for only _some_ `ADDI` instructions due to `funct7` not being checked and the cases for R-type and I-type instructions being grouped within control. 
 * [c88e016](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/c88e0162e7579b7ac73fa8e54dbf813ba74996f4): LBU was being performed as LB
@@ -31,7 +31,7 @@ And in debugging the pipeline:
 * [c1f7ad8](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/c1f7ad8b7066b7cc5ab9fd0b341f2d6caa9ecab8): `AUIPC` neglected halfway through pipeline
 * [3eb2664](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/3eb266476a784a51342d2bc410aee3ef67defe29): `incPC` was being plugged in from the wrong pipeline, **JAL** misbehaving as a result
 
-I was also responsible for setting up the structure of the GitHub repository and making sure everyone was happy with using git. This involved countless calls with teammates to help them fix the repo (to which they can attest),   dealing with merges and making sure that the `playground` was always up to date with the most recent features. Towards the end of the project I started doing this using cherry-picks as it was cleaner than merging, or simply by checking out a file using:
+I was also responsible for setting up the structure of the GitHub repository and making sure everyone was happy with using git. This involved several calls with teammates to help them fix the repo (to which they can attest), dealing with merges and making sure that the `playground` was always up to date with the most recent features. Towards the end of the project I started doing this using cherry-picks as it was cleaner than merging, or simply by checking out a file using:
 ```bash
 $ git checkout <branchname> -- <filename>
 ```
