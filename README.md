@@ -16,10 +16,10 @@ All Personal Statements are Located in the 'Documentation' Branch.
 
 | Name           | CID      | GitHub   | Email                     | Link to Personal Statement|
 |----------------|----------|----------|---------------------------|--------------|
-| Nik Lewis      | 02031260 | **nlewxxs**  | nl621@imperial.ac.uk   &nbsp; &nbsp; &nbsp; &nbsp;   |
-| Ana Dimoska    | 02061746 | **ADimoska** | ad2121@imperial.ac.uk     |
-| Benedict Short | 02019656 | **BenShort** | benedictnjshort@gmail.com |
-| Ahmed Elkouny  | 01902185 | **elkouny**  | ahmedelkouny@hotmail.com  |
+| Nik Lewis      | 02031260 | **nlewxxs**  | nl621@imperial.ac.uk   &nbsp; &nbsp; &nbsp; &nbsp;   | [Nik's Statement](statements/Nik.md)
+| Ana Dimoska    | 02061746 | **ADimoska** | ad2121@imperial.ac.uk     | [Ana's Statement](statements/Ana.md)
+| Benedict Short | 02019656 | **BenShort** | benedictnjshort@gmail.com | [Benedict's Statement](statements/Benedict_Short.md)
+| Ahmed Elkouny  | 01902185 | **elkouny**  | ahmedelkouny@hotmail.com  | [Ahmed's Statement](statements/Ahmed.md)
 
 ---
 
