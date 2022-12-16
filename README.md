@@ -19,6 +19,7 @@ The result of this coursework is two CPUs: a pipelined, and a single-cycle CPU. 
 | Benedict Short | 02019656 | **BenShort** | benedictnjshort@gmail.com |
 | Ahmed Elkouny  | 01902185 | **elkouny**  | ahmedelkouny@hotmail.com  |
 
+All Personal Statements are Located in the 'Documentation' Branch.
 ---
 
 ## Work Split 
