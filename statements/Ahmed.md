@@ -9,28 +9,28 @@ First, Nik and I designed the overall architecture of the CPU, including the reg
 
 ![Single Cycle Cpu Design (Drawn by Nik)](https://i.postimg.cc/cLY7tbgH/image.png)
 
-Using the schematic drawn by Nik I wired all the componented and added the required multiplexers to create the [top.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/rtl/top.sv) file.([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/e3098c8abc5a81ea15247dd7d48028411bd814fa)) 
+Using the schematic drawn by Nik I wired all the components and added the required multiplexers to create the [top.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/rtl/top.sv) file.([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/e3098c8abc5a81ea15247dd7d48028411bd814fa)) 
 
 
-## Changes compared to the orginal schematic
+## Changes compared to the original schematic
 
 ![Changes highlighted](https://i.postimg.cc/DzHYVypz/Changes.jpg)
 
  1. A multiplexer with `JAL` as the selector bit. When high it will store our current
-    instruction   adress into  [regfile.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/rtl/register_file.sv) . This allows us to return
+    instruction address into  [regfile.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/rtl/register_file.sv) . This allows us to return
     to that instruction when a `JALR` instruction is called. ([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/9808aba0f717b948281634143a10df9e52e390dd)) 
     
  2. Another multiplexer with `JALR` as the selector bit. When high it will load the ALU
         result value into the PC. This is because we will have the
-        instruction adress from the [regfile.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/rtl/register_file.sv) come out of
+        instruction address from the [regfile.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/rtl/register_file.sv) come out of
         `rd2`-->`srcB`-->`AluResult`. ([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/db4b085839e2e1bcfa5f8dead682b64c299086f9))
     
- 3. A third and final multiplexer with `BranchSrc` as the selector bit was added for the branch instructions. `BranchSrc` would be high if a branch instruction was called and the comparison of `SrcA` and `SrcB` was done in the ALU and outputed from the ALU `Branch` Port. For example if we had a `BEQ rd1, rd2, label` instruction. `BranchSrc` Would be `1'b1` and the boolean output of `rd1==rd2` would be outputed from the ALU `branch` port.
+ 3. A third and final multiplexer with `BranchSrc` as the selector bit was added for the branch instructions. `BranchSrc` would be high if a branch instruction was called and the comparison of `SrcA` and `SrcB` was done in the ALU and outputted from the ALU `Branch` Port. For example, if we had a `BEQ rd1, rd2, label` instruction. `BranchSrc` Would be `1'b1` and the boolean output of `rd1==rd2` would be outputted from the ALU `branch` port.
  4.  `addrselect` was a control signal created for all the load and store instructions.
 
 ## Testing
 
-Making sure the single cycle cpu was fully working was a top prioity as we intended to do the pipelining and cache extension tasks which will be built on top of this CPU. Although each component was tested individually we needed to make sure that the components together worked
+Making sure the single-cycle CPU was fully working was a top priority as we intended to do the pipelining and cache extension tasks which will be built on top of this CPU. Although each component was tested individually we needed to make sure that the components together worked
 
 ## ALU testing
 
@@ -65,8 +65,8 @@ When running the test the branch instructions were not working this was expected
 
 ## JAL and JALR Testing
 
-To test JAL and JALR we used the [f1assembly.txt]https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/test/f1.txt).  The program however didn't work so me and Nik looked at the GTKWave and saw that the signextention wasn't working properly. After looking at the RISC-V isa we noticed that for JALR we need to add `Imm12` not `Imm20` to the PC ([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/7b877d067427cc420918834914f75bd066d8b1dc))
-After all this testing we ran a working F1 Program ! ([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/b8d7325772fe518e631ce72a22a6cf0e188b0b3c))
+To test JAL and JALR we used the [f1assembly.txt]https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/test/f1.txt).  The program, however, didn't work so Nik and Nik I at the GTKWave and saw that the signextention wasn't working properly. After looking at the RISC-V ISA we noticed that for JALR we need to add `Imm12` not `Imm20` to the PC ([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/7b877d067427cc420918834914f75bd066d8b1dc))
+After all this testing we ran a working F1 Program! ([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/b8d7325772fe518e631ce72a22a6cf0e188b0b3c))
 
 
 # Pipelining
@@ -74,19 +74,18 @@ After all this testing we ran a working F1 Program ! ([Commit](https://github.co
 Contribution:
  - Overlooking the [top.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-3-PIPELINED/rtl/top.sv) file rewiring that Ben and Nik worked on with the addition of the registers for each block. 
    
- - Testing the pipelined CPU using the the previous    single cycle
-   assembly code but added noops for register dependancies  that would
+ - Testing the pipelined CPU using the previous    single cycle
+   assembly code but added noops for register dependencies  that would
    have caused data hazards and noops for the start of subroutines that would have caused control hazards as we need to flush the code before the jump instruction ([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/98da956e2a5c764276d555b533d8e796e2df4423))
    
- - Rewriting the the f1 program with noops. ([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/e437a59b672d612e43d66d5fe8e737fd576b3cea))
+ - Rewriting the f1 program with noops. ([Commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/commit/e437a59b672d612e43d66d5fe8e737fd576b3cea))
  - Extra: Created a python script that took the initial instruction memory and detected  all register dependency data hazards and produced a new instruction memory with noops added ([commit](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/main/noOp.py))
 
 ## What I learned
 
-I learned a lot by completing the RISC-V processor coursework. By working on the [top.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/rtl/top.sv) file I gained a deeper understanding of computer architecture and how processors operate at the fundamental level. I learned about the different components of a processor, such as the registers, the control unit, and the arithmetic logic unit, and how they work together to execute instructions. Additionally, I gained practical experience in designing and implementing a processor using the Verilog.  Alongside this, I learned about several useful features of GitHub that helped me to manage and collaborate on my code effectively which was essential for keeping my code up to date and ensuring that I was working with the latest version. 
+I learned a lot by completing the RISC-V processor coursework. By working on the [top.sv](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/VERSION-2-SINGLE-CYCLE/rtl/top.sv) file I gained a deeper understanding of computer architecture and how processors operate at the fundamental level. I learned about the different components of a processor, such as the registers, the control unit, and the arithmetic logic unit, and how they work together to execute instructions. Additionally, I gained practical experience in designing and implementing a processor using Verilog.  Alongside this, I learned about several useful features of GitHub that helped me to manage and collaborate on my code effectively which was essential for keeping my code up to date and ensuring that I was working with the latest version. 
 
 
 ## If I had more time
 
-If I had more time I would further optimize the [python script](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/main/noOp.py)) that I wrote for it to add noops to flush instructions for when branches happen. I could have integrated the program in the shell script so that every time we simulate the cpu the script would run and noops would be added and the cpu would use the new instruction memory. Alternatively I could have tried to use hardware methods such as forwading . 
- 
+If I had more time I would further optimize the [python script](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-14/blob/main/noOp.py) that I wrote for it to add noops to flush instructions for when branches happen. I could have integrated the program in the shell script so that every time we simulate the CPU the script would run and noops would be added and the CPU would use the new instruction memory. Alternatively, I could have tried to use hardware methods such as forwading. 
